@@ -16,7 +16,6 @@
     # ./nvim.nix
   ];
 
-  
   home = {
     username = "paulemeister";
     homeDirectory = "/home/paulemeister";
@@ -24,24 +23,28 @@
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
-  home.packages = with pkgs;[
+  home.packages = with pkgs; [
     steam
     nixd # nix language server
     alejandra # nix formatter
   ];
 
   programs = {
-      
     helix = {
       enable = true;
       settings = {
-        editor.line-number = "relative";
+        #editor.line-number = "relative";
       };
-      languages.language-server.nixd = {
-        formatting.command = ["alejandra"];
-      };
+      languages.language = [
+        {
+          name = "nix";
+          language-servers = ["nixd" "nil"];
+          formatter.command = "alejandra";
+          auto-format = true;
+        }
+      ];
     };
-  
+
     # Enable home-manager and git
     home-manager.enable = true;
     git = {
@@ -57,17 +60,17 @@
   dconf = {
     enable = true;
     settings = {
-#      "org/gnome/desktop/input-sources" = {
-#        show-all-sources = true;
-#        sources = [ (lib.gvariant.mkTuple [ "xkb" "eu" ]) ];
-#        xkb-options = [ ];
-#      };
+      #      "org/gnome/desktop/input-sources" = {
+      #        show-all-sources = true;
+      #        sources = [ (lib.gvariant.mkTuple [ "xkb" "eu" ]) ];
+      #        xkb-options = [ ];
+      #      };
       "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
+        color-scheme = "prefer-dark";
       };
     };
   };
-  
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";
 }
