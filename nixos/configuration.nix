@@ -4,13 +4,39 @@
 {
   config,
   pkgs,
+  pkgs-unstable,
+  inputs,
   ...
-}: {
+}: let
+  # sidewinderd = pkgs.callPackage ./sidewinderd.nix {};
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    #./cosmic.nix
+    # inputs.nixos-cosmic.nixosModules.default
   ];
 
+  security.polkit.enable = true;
+
+  virtualisation.virtualbox.host.enable = true;
+
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+    extraPackages = with pkgs; [
+      gamescope
+    ];
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+    ];
+  };
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+  nixpkgs.overlays = [inputs.sidewinderd.overlays.default];
+  services.sidewinderd.enable = true;
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -85,7 +111,7 @@
   users.users.paulemeister = {
     isNormalUser = true;
     description = "paulemeister";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "vboxusers"];
     packages = with pkgs; [
       #  thunderbird
     ];
@@ -99,8 +125,21 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  ];
+  #environment.systemPackages = with pkgs; [
+  # sidewinderd
+  #];
+
+  #systemd.services.sidewinderd = {
+  #enable = true;
+  #description = "Description=Support for Microsoft SideWinder X4 / X6 and Logitech G105 / G710+";
+  #after = ["multi-user.target"];
+  #wantedBy = ["multi-user.target"];
+  #serviceConfig = {
+  # Type = "simple";
+  #  ExecStart = "${sidewinderd}/bin/sidewinderd";
+  # };
+  #};
+  # services.sidewinderd.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

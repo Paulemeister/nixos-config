@@ -5,6 +5,7 @@
   lib,
   config,
   pkgs,
+  pkgs-unstable,
   ...
 }: {
   # You can import other home-manager modules here
@@ -24,16 +25,19 @@
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
-    steam
     nixd # nix language server
     alejandra # nix formatter
+    pkgs-unstable.neofetch
+    btop
+    uv
+    gh
   ];
 
   programs = {
     helix = {
       enable = true;
       settings = {
-        #editor.line-number = "relative";
+        editor.line-number = "relative";
       };
       languages.language = [
         {
@@ -52,7 +56,13 @@
       userEmail = "annanas6800i@gmail.com";
       userName = "Paulemeister";
     };
-    bash.enable = true;
+    bash = {
+      enable = true;
+      shellAliases = {
+        edit-nix-config = "hx ~/.dotfiles/nixos-config";
+        rebuild-nix-config = "sudo nixos-rebuild --flake ~/.dotfiles/nixos-config switch --show-trace";
+      };
+    };
   };
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
@@ -67,6 +77,26 @@
       #      };
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
+      };
+      "org/gnome/settings-daemon/plugins/media-keys" = {
+        custom-keybindings = [
+          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+        ];
+      };
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+        binding = "<Super>t";
+        command = "kgx";
+        name = "Open Terminal";
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+        binding = "<Super>b";
+        command = "firefox";
+        name = "Open Firefox";
+      };
+      "org/gnome/mutter" = {
+        edge-tiling = true;
       };
     };
   };
