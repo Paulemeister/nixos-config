@@ -8,22 +8,14 @@
   pkgs-unstable,
   ...
 }: {
-  # You can import other home-manager modules here
-  imports = [
-    # If you want to use home-manager modules from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModule
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
-  ];
+  imports = [];
 
   home = {
     username = "paulemeister";
     homeDirectory = "/home/paulemeister";
   };
 
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
+  # Add packages
   home.packages = with pkgs; [
     nixd # nix language server
     alejandra # nix formatter
@@ -31,8 +23,10 @@
     btop
     uv
     gh
+    tlrc
   ];
 
+  # Add programs through modules
   programs = {
     helix = {
       enable = true;
@@ -49,13 +43,14 @@
       ];
     };
 
-    # Enable home-manager and git
     home-manager.enable = true;
+
     git = {
       enable = true;
       userEmail = "annanas6800i@gmail.com";
       userName = "Paulemeister";
     };
+    # Bash aliases
     bash = {
       enable = true;
       shellAliases = {
@@ -64,20 +59,16 @@
       };
     };
   };
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
 
+  # Configure Gnome
   dconf = {
     enable = true;
     settings = {
-      #      "org/gnome/desktop/input-sources" = {
-      #        show-all-sources = true;
-      #        sources = [ (lib.gvariant.mkTuple [ "xkb" "eu" ]) ];
-      #        xkb-options = [ ];
-      #      };
+      # Color scheme
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
       };
+      # Shortuts
       "org/gnome/settings-daemon/plugins/media-keys" = {
         custom-keybindings = [
           "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
@@ -89,18 +80,20 @@
         command = "kgx";
         name = "Open Terminal";
       };
-
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
         binding = "<Super>b";
         command = "firefox";
         name = "Open Firefox";
       };
+      # Misc
       "org/gnome/mutter" = {
         edge-tiling = true;
       };
     };
   };
 
+  # Nicely reload system units when changing configs
+  systemd.user.startServices = "sd-switch";
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";
 }

@@ -2,14 +2,12 @@
   description = "Your new nix config";
 
   inputs = {
-    # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nix-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+    #nix-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     sidewinderd.url = "github:paulemeister/sidewinderd-nix";
-    # Home manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -38,10 +36,11 @@
             config.allowUnfree = true;
           };
         };
-        # > Our main nixos configuration file <
+
         modules = [
-          ./nixos/cosmic.nix
+          #./nixos/cosmic.nix
           sidewinderd.nixosModules.sidewinderd
+          ./nixos/hardware-configuration.nix
           ./nixos/configuration.nix
           home-manager.nixosModules.home-manager
           {

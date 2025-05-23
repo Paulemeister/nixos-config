@@ -1,6 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   config,
   pkgs,
@@ -8,19 +5,19 @@
   inputs,
   ...
 }: let
-  # sidewinderd = pkgs.callPackage ./sidewinderd.nix {};
 in {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    #./cosmic.nix
-    # inputs.nixos-cosmic.nixosModules.default
-  ];
+  imports = [];
+
+  services.desktopManager.cosmic = {
+    enable = true;
+    xwayland.enable = true;
+  };
 
   security.polkit.enable = true;
 
   virtualisation.virtualbox.host.enable = true;
 
+  # Setup for Gaming
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
@@ -35,8 +32,11 @@ in {
     enable = true;
     enable32Bit = true;
   };
+
+  # Siderwinderd Setup
   nixpkgs.overlays = [inputs.sidewinderd.overlays.default];
   services.sidewinderd.enable = true;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -89,7 +89,7 @@ in {
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -112,9 +112,6 @@ in {
     isNormalUser = true;
     description = "paulemeister";
     extraGroups = ["networkmanager" "wheel" "vboxusers"];
-    packages = with pkgs; [
-      #  thunderbird
-    ];
   };
 
   # Install firefox.
@@ -125,21 +122,6 @@ in {
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  #environment.systemPackages = with pkgs; [
-  # sidewinderd
-  #];
-
-  #systemd.services.sidewinderd = {
-  #enable = true;
-  #description = "Description=Support for Microsoft SideWinder X4 / X6 and Logitech G105 / G710+";
-  #after = ["multi-user.target"];
-  #wantedBy = ["multi-user.target"];
-  #serviceConfig = {
-  # Type = "simple";
-  #  ExecStart = "${sidewinderd}/bin/sidewinderd";
-  # };
-  #};
-  # services.sidewinderd.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
