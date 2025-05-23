@@ -4,8 +4,12 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    #nix-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
-    sidewinderd.url = "github:paulemeister/sidewinderd-nix";
+
+    sidewinderd = {
+      url = "github:paulemeister/sidewinderd-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";

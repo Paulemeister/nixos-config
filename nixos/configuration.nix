@@ -8,6 +8,18 @@
 in {
   imports = [];
 
+  services.openssh = {
+    enable = true;
+    ports = [22];
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+      AllowUsers = ["paulemeister"];
+    };
+  };
+  services.fail2ban.enable = true;
+
   services.desktopManager.cosmic = {
     enable = true;
     xwayland.enable = true;
