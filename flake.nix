@@ -21,33 +21,33 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
+    system = "x86_64-linux";
+    pkgs-unstable = import nixpkgs-unstable {
+      inherit system;
+      config.allowUnfree = true;
+    };
   in {
     nixpkgs.config.allowUnfree = true;
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
+      theseus = nixpkgs.lib.nixosSystem rec {
+        inherit system;
 
         specialArgs = {
-          inherit inputs outputs;
-          pkgs-unstable = import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
+          inherit inputs outputs pkgs-unstable;
         };
 
         modules = [
-          #./nixos/cosmic.nix
-          sidewinderd.nixosModules.sidewinderd
           ./nixos/hardware-configuration.nix
           ./nixos/configuration.nix
+          sidewinderd.nixosModules.sidewinderd
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.paulemeister = import ./home-manager/home.nix;
+            home-manager.users.paulemeister = import ./home-manager/paulemeister.nix;
 
             home-manager.extraSpecialArgs = specialArgs;
           }
