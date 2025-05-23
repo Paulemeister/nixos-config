@@ -59,6 +59,16 @@
         rebuild-nix-config = "sudo nixos-rebuild --flake ~/.dotfiles/nixos-config switch --show-trace";
       };
     };
+    # SSH
+    ssh = {
+      enable = true;
+      matchBlocks = {
+        "github" = {
+          hostname = "github.com";
+          identityFile = "~/.ssh/id_ed24419";
+        };
+      };
+    };
   };
 
   # Configure Gnome
