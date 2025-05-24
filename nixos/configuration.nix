@@ -112,6 +112,7 @@ in {
     isNormalUser = true;
     description = "paulemeister";
     extraGroups = ["networkmanager" "wheel" "vboxusers"];
+    hashedPasswordFile = "/persist/passwords/paulemeister";
   };
 
   # Install firefox.
@@ -119,6 +120,23 @@ in {
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  environment.persistence."/persist" = {
+    hideMounts = true;
+    directories = [
+      "/var/log"
+      "/var/lib/bluetooth"
+      "/var/lib/nixos"
+      "/var/lib/systemd/coredump"
+      "/etc/NetworkManager/system-connections"
+      {
+        directory = "/var/lib/colord";
+        user = "colord";
+        group = "colord";
+        mode = "u=rwx,g=rx,o=";
+      }
+    ];
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

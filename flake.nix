@@ -14,6 +14,8 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs = {
@@ -22,6 +24,7 @@
     nixpkgs-unstable,
     home-manager,
     sidewinderd,
+    impermanence,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -45,6 +48,7 @@
         modules = [
           ./nixos/hardware-configuration.nix
           ./nixos/configuration.nix
+          impermanence.nixosModules.impermanence
           sidewinderd.nixosModules.sidewinderd
           home-manager.nixosModules.home-manager
           {

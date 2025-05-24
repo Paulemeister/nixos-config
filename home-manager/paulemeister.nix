@@ -8,11 +8,33 @@
   pkgs-unstable,
   ...
 }: {
-  imports = [];
+  imports = [
+    inputs.impermanence.homeManagerModules.impermanence
+  ];
 
   home = {
     username = "paulemeister";
     homeDirectory = "/home/paulemeister";
+    persistence."/persist/home/paulemeister/" = {
+      directories = [
+        "Downloads"
+        "Music"
+        "Pictures"
+        "Documents"
+        "Videos"
+        "VirtualBox VMs"
+        "Code"
+        ".ssh"
+        ".local/share/keyrings"
+        ".local/share"
+        {
+          directory = ".local/share/Steam";
+          method = "symlink";
+        }
+        ".mozilla"
+      ];
+      allowOther = true;
+    };
   };
 
   # Add packages
@@ -55,21 +77,29 @@
     bash = {
       enable = true;
       shellAliases = {
-        edit-nix-config = "hx ~/.dotfiles/nixos-config";
-        rebuild-nix-config = "sudo nixos-rebuild --flake ~/.dotfiles/nixos-config switch --show-trace";
+        edit-nix-config = "hx ~/Code/nixos-config";
+        rebuild-nix-config = "sudo nixos-rebuild --flake ~/Code/nixos-config switch --show-trace";
       };
     };
     # SSH
     ssh = {
       enable = true;
+      addKeysToAgent = "yes";
       matchBlocks = {
         "github" = {
+          user = "git";
           hostname = "github.com";
-          identityFile = "~/.ssh/id_ed24419";
+          identityFile = "~/.ssh/id_ed25519";
+          extraOptions = {
+            "AddKeysToAgent" = "yes";
+          };
         };
       };
     };
   };
+
+  # SSH agent for remebering ssh key passwords
+  services.ssh-agent.enable = true;
 
   # Configure Gnome
   dconf = {
