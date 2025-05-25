@@ -8,6 +8,12 @@
 in {
   imports = [];
 
+  # Prerequisite for allowOther for impermanence in home-manager for root acces to mounts
+  programs.fuse.userAllowOther = true;
+
+  # Don't lecture on first usage of sudo
+  security.sudo.extraConfig = "Defaults lecture = never";
+
   services.desktopManager.cosmic = {
     enable = true;
     xwayland.enable = true;
@@ -124,6 +130,7 @@ in {
   environment.persistence."/persist" = {
     hideMounts = true;
     directories = [
+      "/nix"
       "/var/log"
       "/var/lib/bluetooth"
       "/var/lib/nixos"

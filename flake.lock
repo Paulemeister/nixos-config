@@ -84,11 +84,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1747346477,
-        "narHash": "sha256-sMb4YOiLaBqAgk2C5Tlr8xlzMniA7VOUx6yiqomsGv8=",
+        "lastModified": 1748176231,
+        "narHash": "sha256-0w+hNv8XZY8S8F7NJ3mcgYKqTXzVIc8TDNSAavGyr5o=",
         "owner": "paulemeister",
         "repo": "sidewinderd-nix",
-        "rev": "1c7d29526ad4cdddfea1bd8d782ad030c56d67ed",
+        "rev": "211129065e111925a133a573b3a60846e2cdd119",
         "type": "github"
       },
       "original": {

@@ -15,7 +15,7 @@
   home = {
     username = "paulemeister";
     homeDirectory = "/home/paulemeister";
-    persistence."/persist/home/paulemeister/" = {
+    persistence."/persist/home/paulemeister" = {
       directories = [
         "Downloads"
         "Music"
@@ -26,7 +26,6 @@
         "Code"
         ".ssh"
         ".local/share/keyrings"
-        ".local/share"
         {
           directory = ".local/share/Steam";
           method = "symlink";

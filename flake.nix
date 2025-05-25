@@ -7,6 +7,7 @@
 
     sidewinderd = {
       url = "github:paulemeister/sidewinderd-nix";
+      #url = "path:/persist/home/paulemeister/Code/sidewinderd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
