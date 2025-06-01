@@ -10,7 +10,20 @@
 }: {
   imports = [
     inputs.impermanence.homeManagerModules.impermanence
+    inputs.cosmic-manager.homeManagerModules.cosmic-manager
+    ./cosmic-manager-settings.nix
+    ./gnome.nix
+    # inputs.sidewinderd.homeManagerModules.sidewinderd
   ];
+
+  # services.sidewinderd = {
+  #   enable = true;
+  #   settings.capture_delays = false;
+  # };
+
+  xsession.numlock.enable = true;
+
+  services.syncthing.enable = true;
 
   home = {
     username = "paulemeister";
@@ -31,6 +44,9 @@
           method = "symlink";
         }
         ".mozilla"
+        ".thunderbird"
+        ".cache"
+        # ".config/sidewinderd"
       ];
       allowOther = true;
     };
@@ -41,14 +57,35 @@
     nixd # nix language server
     alejandra # nix formatter
     pkgs-unstable.neofetch
-    btop
     uv
     gh
     tlrc
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-libav
+    gst_all_1.gst-vaapi
+    obsidian
+    #    clang-tools
   ];
 
   # Add programs through modules
   programs = {
+    btop = {
+      enable = true;
+      settings = {
+        vim_keys = false;
+      };
+    };
+    thunderbird = {
+      enable = true;
+      profiles."Paul Budden" = {
+        isDefault = true;
+      };
+    };
+
     helix = {
       enable = true;
       defaultEditor = true;
@@ -78,6 +115,7 @@
       shellAliases = {
         edit-nix-config = "hx ~/Code/nixos-config";
         rebuild-nix-config = "sudo nixos-rebuild --flake ~/Code/nixos-config switch --show-trace";
+        open = "xdg-open";
       };
     };
     # SSH
@@ -95,42 +133,14 @@
         };
       };
     };
+    mangohud = {
+      enable = true;
+      # enableSessionWide = true;
+    };
   };
 
   # SSH agent for remebering ssh key passwords
   services.ssh-agent.enable = true;
-
-  # Configure Gnome
-  dconf = {
-    enable = true;
-    settings = {
-      # Color scheme
-      "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
-      };
-      # Shortuts
-      "org/gnome/settings-daemon/plugins/media-keys" = {
-        custom-keybindings = [
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
-        ];
-      };
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-        binding = "<Super>t";
-        command = "kgx";
-        name = "Open Terminal";
-      };
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
-        binding = "<Super>b";
-        command = "firefox";
-        name = "Open Firefox";
-      };
-      # Misc
-      "org/gnome/mutter" = {
-        edge-tiling = true;
-      };
-    };
-  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

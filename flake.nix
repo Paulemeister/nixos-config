@@ -6,8 +6,8 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     sidewinderd = {
-      url = "github:paulemeister/sidewinderd-nix";
-      #url = "path:/persist/home/paulemeister/Code/sidewinderd";
+      #url = "github:paulemeister/sidewinderd-nix";
+      url = "path:/persist/home/paulemeister/Code/sidewinderd-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -17,6 +17,14 @@
     };
 
     impermanence.url = "github:nix-community/impermanence";
+
+    cosmic-manager = {
+      url = "github:HeitorAugustoLN/cosmic-manager";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
   };
 
   outputs = {
@@ -26,6 +34,7 @@
     home-manager,
     sidewinderd,
     impermanence,
+    cosmic-manager,
     ...
   } @ inputs: let
     inherit (self) outputs;

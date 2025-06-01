@@ -16,6 +16,7 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
+  boot.supportedFilesystems = ["ntfs"];
 
   fileSystems."/persist" = {
     device = "/dev/disk/by-uuid/e062ead8-30c0-4914-8fcb-20b1a11f23a0";
@@ -33,6 +34,43 @@
     device = "none";
     fsType = "tmpfs";
     options = ["defaults" "size=2G" "mode=755"];
+  };
+
+  # HDD
+  fileSystems."/mnt/d04bb654-941c-4de8-ac86-68126b16227d" = {
+    device = "/dev/disk/by-uuid/d04bb654-941c-4de8-ac86-68126b16227d";
+    fsType = "ext4";
+    options = ["rw" "users" "exec" "suid" "dev" "nofail" "x-gvfs-show" "noauto" "x-gvfs-name=HDD%20Data"];
+  };
+
+  fileSystems."/mnt/55c337dc-1bd5-4447-9861-12e187809f25" = {
+    device = "/dev/disk/by-uuid/55c337dc-1bd5-4447-9861-12e187809f25";
+    fsType = "ext4";
+    options = ["rw" "users" "exec" "suid" "dev" "nofail" "x-gvfs-show" "noauto" "x-gvfs-name=HDD%20Games"];
+  };
+
+  fileSystems."/mnt/0BCEE39470700B7C" = {
+    device = "/dev/disk/by-uuid/0BCEE39470700B7C";
+    fsType = "ntfs-3g";
+    options = ["rw" "users" "exec" "suid" "dev" "nofail" "x-gvfs-show" "noauto" "x-gvfs-name=HDD%20NTFS%20Data"];
+  };
+  # Daten SSD
+  fileSystems."/mnt/a88cc0c3-a13c-43b7-9b9e-5b8654fc9ee0" = {
+    device = "/dev/disk/by-uuid/a88cc0c3-a13c-43b7-9b9e-5b8654fc9ee0";
+    fsType = "ext4";
+    options = ["rw" "users" "exec" "suid" "dev" "nofail" "x-gvfs-show" "x-gvfs-name=Pauls%20Data"];
+  };
+  # Pop!_OS
+  fileSystems."/mnt/e03b51a8-a2c0-4c10-adae-f27c3b443bc2" = {
+    device = "/dev/disk/by-uuid/e03b51a8-a2c0-4c10-adae-f27c3b443bc2";
+    fsType = "ext4";
+    options = ["rw" "users" "exec" "suid" "dev" "nofail" "x-gvfs-show" "noauto" "x-gvfs-name=Pop%21_OS"];
+  };
+  # Windows
+  fileSystems."/mnt/C6A801B2A801A253" = {
+    device = "/dev/disk/by-uuid/C6A801B2A801A253";
+    fsType = "ntfs-3g";
+    options = ["rw" "users" "exec" "suid" "dev" "nofail" "x-gvfs-show" "noauto" "x-gvfs-name=Windows"];
   };
 
   swapDevices = [
