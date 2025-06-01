@@ -19,6 +19,7 @@ in {
     done
   '';
 
+  networking.firewall.checkReversePath = false;
   environment.systemPackages = with pkgs; [wl-clipboard];
 
   hardware.xpadneo.enable = true;
@@ -201,6 +202,20 @@ in {
     extraGroups = ["networkmanager" "wheel" "vboxusers" "plugdev" "input"];
     hashedPasswordFile = "/persist/passwords/paulemeister";
   };
+
+  system.activationScripts.script.text = let
+    name = "paulemeister";
+  in ''
+    mkdir -p /var/lib/AccountsService/{icons,users}
+    cp ${../home-manager/dotfiles/paulemeister-icon} /var/lib/AccountsService/icons/${name}
+    echo -e "[User]\nIcon=/var/lib/AccountsService/icons/${name}\n" > /var/lib/AccountsService/users/${name}
+
+    chown root:root /var/lib/AccountsService/users/${name}
+    chmod 0600 /var/lib/AccountsService/users/${name}
+
+    chown root:root /var/lib/AccountsService/icons/${name}
+    chmod 0444 /var/lib/AccountsService/icons/${name}
+  '';
 
   # Install firefox.
   programs.firefox.enable = true;

@@ -46,6 +46,9 @@
         ".mozilla"
         ".thunderbird"
         ".cache"
+        ".config/obsidian"
+        ".config/eduvpn"
+        ".local/state/syncthing"
         # ".config/sidewinderd"
       ];
       allowOther = true;
