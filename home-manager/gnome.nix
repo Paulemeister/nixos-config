@@ -8,6 +8,7 @@
     vertical-workspaces
     forge
     dash-to-dock
+    appindicator
     # add dconf editor
     pkgs.dconf-editor
   ];
@@ -26,6 +27,7 @@
           "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/"
           "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser/"
           "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/files/"
+          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/mail/"
         ];
       };
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal" = {
@@ -40,8 +42,13 @@
       };
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/files" = {
         binding = "<Super>f";
-        command = "nautilus";
+        command = "nautilus -w";
         name = "Open File Manager";
+      };
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/mail" = {
+        binding = "<Super>e";
+        command = "thunderbird";
+        name = "Open E-Mail Client";
       };
       # Set apps in dock
       "org/gnome/shell" = {
@@ -87,6 +94,7 @@
           vertical-workspaces.extensionUuid
           forge.extensionUuid
           dash-to-dock.extensionUuid
+          appindicator.extensionUuid
         ];
       };
       # Configure vertical workspaces

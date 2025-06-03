@@ -140,6 +140,7 @@ in {
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  # services.pulseaudio.extraConfig = "load-module libpipewire-module-loopback";
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -155,13 +156,14 @@ in {
         context.modules = [
           {
             name = "libpipewire-module-loopback";
+            matches = [{device.name = "alsa_input.usb-BurrBrown_from_Texas_Instruments_USB_AUDIO_CODEC-00.analog-stereo";}];
             args = {
               node.description = "M-Audio M-Track Duo Channel 1";
               node.name = "m-track_ch_1";
               capture.props = {
                 audio.position = ["FL"];
                 stream.dont-remix = true;
-                target.object = "alsa_input.usb-BurrBrown_from_Texas_Instruments_USB_AUDIO_CODEC-00.pro-input-0";
+                target.object = "alsa_input.usb-BurrBrown_from_Texas_Instruments_USB_AUDIO_CODEC-00.analog-stereo";
                 node.passive = true;
               };
               playback.props = {
@@ -172,13 +174,14 @@ in {
           }
           {
             name = "libpipewire-module-loopback";
+            matches = [{device.name = "alsa_input.usb-BurrBrown_from_Texas_Instruments_USB_AUDIO_CODEC-00.analog-stereo";}];
             args = {
               node.description = "M-Audio M-Track Duo Channel 2";
               node.name = "m-track_ch_2";
               capture.props = {
                 audio.position = ["FR"];
                 stream.dont-remix = true;
-                target.object = "alsa_input.usb-BurrBrown_from_Texas_Instruments_USB_AUDIO_CODEC-00.pro-input-0";
+                target.object = "alsa_input.usb-BurrBrown_from_Texas_Instruments_USB_AUDIO_CODEC-00.analog-stereo";
                 node.passive = true;
               };
               playback.props = {
@@ -199,7 +202,7 @@ in {
   users.users.paulemeister = {
     isNormalUser = true;
     description = "paulemeister";
-    extraGroups = ["networkmanager" "wheel" "vboxusers" "plugdev" "input"];
+    extraGroups = ["networkmanager" "wheel" "vboxusers" "plugdev" "input" "audio"];
     hashedPasswordFile = "/persist/passwords/paulemeister";
   };
 

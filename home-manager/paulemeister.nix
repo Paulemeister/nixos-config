@@ -48,6 +48,7 @@
         ".cache"
         ".config/obsidian"
         ".config/eduvpn"
+        ".config/Signal"
         ".local/state/syncthing"
         # ".config/sidewinderd"
       ];
@@ -71,6 +72,7 @@
     gst_all_1.gst-libav
     gst_all_1.gst-vaapi
     obsidian
+    signal-desktop
     #    clang-tools
   ];
 
