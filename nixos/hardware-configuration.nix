@@ -17,6 +17,7 @@
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
   boot.supportedFilesystems = ["ntfs"];
+  boot.kernelParams = ["amd_pstate=passive" "amd_pstate.shared_mem=1"];
 
   fileSystems."/persist" = {
     device = "/dev/disk/by-uuid/e062ead8-30c0-4914-8fcb-20b1a11f23a0";

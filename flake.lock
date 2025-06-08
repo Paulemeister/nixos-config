@@ -130,14 +130,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1748296972,
-        "narHash": "sha256-yzwYTdy91fV/BynbX9DnWDnjP6RypUAVAs3cwcnfYr4=",
-        "path": "/persist/home/paulemeister/Code/sidewinderd-nix",
-        "type": "path"
+        "lastModified": 1749393587,
+        "narHash": "sha256-HnBnkG9t57zLTfXHYRrTGJ5BEXIVprDqxJvJQujeCHc=",
+        "owner": "paulemeister",
+        "repo": "sidewinderd-nix",
+        "rev": "6dea7fcf456559a4a1bf73a1cf461378448a34cb",
+        "type": "github"
       },
       "original": {
-        "path": "/persist/home/paulemeister/Code/sidewinderd-nix",
-        "type": "path"
+        "owner": "paulemeister",
+        "repo": "sidewinderd-nix",
+        "type": "github"
       }
     }
   },

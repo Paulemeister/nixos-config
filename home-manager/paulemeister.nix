@@ -13,6 +13,7 @@
     inputs.cosmic-manager.homeManagerModules.cosmic-manager
     ./cosmic-manager-settings.nix
     ./gnome.nix
+    ./easyeffects.nix
     # inputs.sidewinderd.homeManagerModules.sidewinderd
   ];
 
@@ -51,6 +52,8 @@
         ".config/Signal"
         ".local/state/syncthing"
         # ".config/sidewinderd"
+        ".config/easyeffects"
+        ".config/discord"
       ];
       allowOther = true;
     };
@@ -73,6 +76,7 @@
     gst_all_1.gst-vaapi
     obsidian
     signal-desktop
+    discord
     #    clang-tools
   ];
 

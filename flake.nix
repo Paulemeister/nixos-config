@@ -6,8 +6,8 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     sidewinderd = {
-      #url = "github:paulemeister/sidewinderd-nix";
-      url = "path:/persist/home/paulemeister/Code/sidewinderd-nix";
+      url = "github:paulemeister/sidewinderd-nix";
+      #url = "path:/persist/home/paulemeister/Code/sidewinderd-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
