@@ -14,6 +14,7 @@
     ./cosmic-manager-settings.nix
     ./gnome.nix
     ./easyeffects.nix
+    ./daw.nix
     # inputs.sidewinderd.homeManagerModules.sidewinderd
   ];
 
@@ -54,12 +55,18 @@
         # ".config/sidewinderd"
         ".config/easyeffects"
         ".config/discord"
+        ".config/obsidian"
       ];
       allowOther = true;
+      files = [
+        ".bash_history"
+        ".config/monitors.xml" # Gnome refresh rate
+      ];
     };
   };
 
   # Add packages
+
   home.packages = with pkgs; [
     nixd # nix language server
     alejandra # nix formatter
@@ -74,9 +81,17 @@
     gst_all_1.gst-plugins-ugly
     gst_all_1.gst-libav
     gst_all_1.gst-vaapi
-    obsidian
     signal-desktop
     discord
+    (obsidian.overrideAttrs
+      (p: rec {
+        desktopItem = p.desktopItem.override (q: {
+          # Use german local for proper date time picker in german (doesnt respect locale properly)
+          exec = "env LANG=de_DE.UTF-8 LANGUAGE=de ${q.exec}";
+        });
+
+        installPhase = builtins.replaceStrings ["${p.desktopItem}"] ["${desktopItem}"] p.installPhase;
+      }))
     #    clang-tools
   ];
 
