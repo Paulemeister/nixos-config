@@ -164,6 +164,10 @@
       enable = true;
       # enableSessionWide = true;
     };
+    nh = {
+      enable = true;
+      flake = "/home/paulemeister/Code/nixos-config";
+    };
   };
 
   # SSH agent for remebering ssh key passwords
