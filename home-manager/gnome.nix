@@ -87,6 +87,10 @@
       # Disable dconf-editor startup warning
       "ca/desrt/dconf-editor".show-warning = false;
 
+      "org/gnome/desktop/peripherals/keyboard" = {
+        numlock-state = true;
+      };
+
       # Enable extensions
       "org/gnome/shell" = {
         disable-user-extensions = false;

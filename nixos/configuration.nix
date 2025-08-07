@@ -28,6 +28,12 @@ in {
   # Prerequisite for allowOther for impermanence in home-manager for root acces to mounts
   programs.fuse.userAllowOther = true;
 
+  # Enable dynamic linking fix
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # dynamic libs go here
+  ];
+
   # Don't lecture on first usage of sudo
   security.sudo.extraConfig = "Defaults lecture = never";
 
@@ -54,6 +60,8 @@ in {
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    # Add OpenCL Support (for CPU-X)
+    extraPackages = with pkgs; [rocmPackages.clr.icd];
   };
 
   # Siderwinderd Setup

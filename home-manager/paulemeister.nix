@@ -92,6 +92,9 @@
 
         installPhase = builtins.replaceStrings ["${p.desktopItem}"] ["${desktopItem}"] p.installPhase;
       }))
+    nix-output-monitor
+    clinfo
+    cpu-x
     #    clang-tools
   ];
 
