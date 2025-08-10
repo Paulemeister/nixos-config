@@ -17,7 +17,7 @@
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
   boot.supportedFilesystems = ["ntfs"];
-  boot.kernelParams = ["amd_pstate=passive" "amd_pstate.shared_mem=1"];
+  boot.kernelParams = ["amd_pstate=passive" "amd_pstate.shared_mem=1" "video=1920x1080"]; # video mode not supported (by motherboard?)
 
   fileSystems."/persist" = {
     device = "/dev/disk/by-uuid/e062ead8-30c0-4914-8fcb-20b1a11f23a0";

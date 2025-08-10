@@ -2,6 +2,7 @@
   config,
   pkgs,
   pkgs-unstable,
+  pkgs-chaotic,
   inputs,
   ...
 }: let
@@ -18,6 +19,20 @@ in {
       /bin/setleds -D +num < $tty
     done
   '';
+
+  # nix.settings = {
+  #   substituters = [
+  #     "https://chaotic-nyx.cachix.org"
+  #     "https://nix-community.cachix.org"
+  #   ];
+
+  #   trusted-public-keys = [
+  #     "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+  #     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+  #   ];
+  # };
+
+  # boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
   networking.firewall.checkReversePath = false;
   environment.systemPackages = with pkgs; [wl-clipboard];
@@ -79,6 +94,7 @@ in {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 0;
+  boot.loader.systemd-boot.consoleMode = "max";
 
   networking.hostName = "theseus"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

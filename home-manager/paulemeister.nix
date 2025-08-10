@@ -10,8 +10,8 @@
 }: {
   imports = [
     inputs.impermanence.homeManagerModules.impermanence
-    inputs.cosmic-manager.homeManagerModules.cosmic-manager
-    ./cosmic-manager-settings.nix
+    # inputs.cosmic-manager.homeManagerModules.cosmic-manager
+    # ./cosmic-manager-settings.nix
     ./gnome.nix
     ./easyeffects.nix
     ./daw.nix
@@ -56,6 +56,7 @@
         ".config/easyeffects"
         ".config/discord"
         ".config/obsidian"
+        ".config/cosmic" # give up on cosmic-manager, as it has bugs when reloading home-manager -> dissapearing panels
       ];
       allowOther = true;
       files = [
@@ -141,7 +142,8 @@
       enable = true;
       shellAliases = {
         edit-nix-config = "hx ~/Code/nixos-config";
-        rebuild-nix-config = "sudo nixos-rebuild --flake ~/Code/nixos-config switch --show-trace";
+        # rebuild-nix-config = "sudo nixos-rebuild --flake ~/Code/nixos-config switch --show-trace";
+        rebuild-nix-config = "nh os switch";
         open = "xdg-open";
       };
     };
