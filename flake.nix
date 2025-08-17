@@ -4,11 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     sidewinderd = {
       url = "github:paulemeister/sidewinderd-nix";
-      #url = "path:/persist/home/paulemeister/Code/sidewinderd-nix";
+      #url = "path:/persist/home/paulemeister/Code/sidewinderd-nix"; # for local developement
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -32,7 +31,6 @@
     self,
     nixpkgs,
     nixpkgs-unstable,
-    nixpkgs-chaotic,
     home-manager,
     sidewinderd,
     impermanence,
@@ -45,11 +43,8 @@
       inherit system;
       config.allowUnfree = true;
     };
-    pkgs-chaotic = nixpkgs-chaotic.legacyPackages.${system};
   in {
     nixpkgs.config.allowUnfree = true;
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       theseus = nixpkgs.lib.nixosSystem rec {
         inherit system;
@@ -61,9 +56,6 @@
         modules = [
           ./nixos/hardware-configuration.nix
           ./nixos/configuration.nix
-          # nixpkgs-chaotic.nixosModules.nyx-cache
-          # nixpkgs-chaotic.nixosModules.nyx-registry
-          # nixpkgs-chaotic.nixosModules.nyx-overlay
           impermanence.nixosModules.impermanence
           sidewinderd.nixosModules.sidewinderd
           home-manager.nixosModules.home-manager

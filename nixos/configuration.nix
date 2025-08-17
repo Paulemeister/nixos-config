@@ -2,37 +2,11 @@
   config,
   pkgs,
   pkgs-unstable,
-  pkgs-chaotic,
   inputs,
   ...
 }: let
 in {
   imports = [];
-
-  # Enable num lock early on boot
-  boot.initrd.extraUtilsCommands = ''
-    copy_bin_and_libs ${pkgs.kbd}/bin/setleds
-  '';
-  boot.initrd.preDeviceCommands = ''
-    INITTY=/dev/tty[1-6]
-    for tty in $INITTY; do
-      /bin/setleds -D +num < $tty
-    done
-  '';
-
-  # nix.settings = {
-  #   substituters = [
-  #     "https://chaotic-nyx.cachix.org"
-  #     "https://nix-community.cachix.org"
-  #   ];
-
-  #   trusted-public-keys = [
-  #     "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
-  #     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-  #   ];
-  # };
-
-  # boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
   networking.firewall.checkReversePath = false;
   environment.systemPackages = with pkgs; [wl-clipboard];
@@ -81,14 +55,12 @@ in {
 
   # Siderwinderd Setup
   nixpkgs.overlays = [inputs.sidewinderd.overlays.default];
-  # services.sidewinderd.enable = true;
   services.sidewinderd = {
     enable = true;
     settings = {
       capture_delays = false;
     };
   };
-  # services.sidewinderd.addUdevRule = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -96,7 +68,7 @@ in {
   boot.loader.timeout = 0;
   boot.loader.systemd-boot.consoleMode = "max";
 
-  networking.hostName = "theseus"; # Define your hostname.
+  networking.hostName = "theseus";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -173,51 +145,6 @@ in {
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    extraConfig.pipewire = {
-      "split-m-track-duo" = {
-        context.modules = [
-          {
-            name = "libpipewire-module-loopback";
-            matches = [{device.name = "alsa_input.usb-BurrBrown_from_Texas_Instruments_USB_AUDIO_CODEC-00.analog-stereo";}];
-            args = {
-              node.description = "M-Audio M-Track Duo Channel 1";
-              node.name = "m-track_ch_1";
-              capture.props = {
-                audio.position = ["FL"];
-                stream.dont-remix = true;
-                target.object = "alsa_input.usb-BurrBrown_from_Texas_Instruments_USB_AUDIO_CODEC-00.analog-stereo";
-                node.passive = true;
-              };
-              playback.props = {
-                media.class = "Audio/Source";
-                audio.position = ["MONO"];
-              };
-            };
-          }
-          {
-            name = "libpipewire-module-loopback";
-            matches = [{device.name = "alsa_input.usb-BurrBrown_from_Texas_Instruments_USB_AUDIO_CODEC-00.analog-stereo";}];
-            args = {
-              node.description = "M-Audio M-Track Duo Channel 2";
-              node.name = "m-track_ch_2";
-              capture.props = {
-                audio.position = ["FR"];
-                stream.dont-remix = true;
-                target.object = "alsa_input.usb-BurrBrown_from_Texas_Instruments_USB_AUDIO_CODEC-00.analog-stereo";
-                node.passive = true;
-              };
-              playback.props = {
-                media.class = "Audio/Source";
-                audio.position = ["MONO"];
-              };
-            };
-          }
-        ];
-      };
-    };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -231,6 +158,7 @@ in {
     hashedPasswordFile = "/persist/passwords/paulemeister";
   };
 
+  # Set account picture
   system.activationScripts.script.text = let
     name = "paulemeister";
   in ''

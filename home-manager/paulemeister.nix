@@ -172,7 +172,7 @@
     };
   };
 
-  # SSH agent for remebering ssh key passwords
+  # SSH agent for remembering ssh key passwords
   services.ssh-agent.enable = true;
 
   # Nicely reload system units when changing configs
