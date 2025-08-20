@@ -5,6 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
     sidewinderd = {
       url = "github:paulemeister/sidewinderd-nix";
       #url = "path:/persist/home/paulemeister/Code/sidewinderd-nix"; # for local developement
@@ -31,6 +33,7 @@
     self,
     nixpkgs,
     nixpkgs-unstable,
+    chaotic,
     home-manager,
     sidewinderd,
     impermanence,
@@ -56,6 +59,9 @@
         modules = [
           ./nixos/hardware-configuration.nix
           ./nixos/configuration.nix
+          chaotic.nixosModules.nyx-cache
+          chaotic.nixosModules.nyx-overlay
+          chaotic.nixosModules.nyx-registry
           impermanence.nixosModules.impermanence
           sidewinderd.nixosModules.sidewinderd
           home-manager.nixosModules.home-manager

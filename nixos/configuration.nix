@@ -8,6 +8,8 @@
 in {
   imports = [];
 
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+
   networking.firewall.checkReversePath = false;
   environment.systemPackages = with pkgs; [wl-clipboard];
 
