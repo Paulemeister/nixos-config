@@ -46,6 +46,7 @@
       inherit system;
       config.allowUnfree = true;
     };
+    pkgs-chaotic = chaotic.legacyPackages.${system};
   in {
     nixpkgs.config.allowUnfree = true;
     nixosConfigurations = {
@@ -53,14 +54,14 @@
         inherit system;
 
         specialArgs = {
-          inherit inputs outputs pkgs-unstable;
+          inherit inputs outputs pkgs-unstable pkgs-chaotic;
         };
 
         modules = [
           ./nixos/hardware-configuration.nix
           ./nixos/configuration.nix
           chaotic.nixosModules.nyx-cache
-          chaotic.nixosModules.nyx-overlay
+          # chaotic.nixosModules.nyx-overlay
           chaotic.nixosModules.nyx-registry
           impermanence.nixosModules.impermanence
           sidewinderd.nixosModules.sidewinderd

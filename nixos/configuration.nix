@@ -2,13 +2,15 @@
   config,
   pkgs,
   pkgs-unstable,
+  pkgs-chaotic,
   inputs,
   ...
 }: let
 in {
   imports = [];
 
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  boot.kernelPackages = pkgs-chaotic.linuxPackages_cachyos;
+  services.scx.enable = true;
 
   networking.firewall.checkReversePath = false;
   environment.systemPackages = with pkgs; [wl-clipboard];
