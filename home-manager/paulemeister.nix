@@ -15,6 +15,7 @@
     ./gnome.nix
     ./easyeffects.nix
     ./daw.nix
+    ./gaming.nix
     # inputs.sidewinderd.homeManagerModules.sidewinderd
   ];
 
