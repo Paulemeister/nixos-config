@@ -27,6 +27,14 @@ in {
     # dynamic libs go here
   ];
 
+  programs.ausweisapp = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  # Open port for packet (quick share)
+  networking.firewall.allowedTCPPorts = [9300];
+
   # Don't lecture on first usage of sudo
   security.sudo.extraConfig = "Defaults lecture = never";
 

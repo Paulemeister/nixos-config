@@ -58,6 +58,7 @@
         ".config/discord"
         ".config/obsidian"
         ".config/cosmic" # give up on cosmic-manager, as it has bugs when reloading home-manager -> dissapearing panels
+        ".config/AusweisApp"
       ];
       allowOther = true;
       files = [
@@ -97,6 +98,7 @@
     nix-output-monitor
     clinfo
     cpu-x
+    packet
     #    clang-tools
   ];
 
@@ -171,6 +173,11 @@
       enable = true;
       flake = "/home/paulemeister/Code/nixos-config";
     };
+  };
+
+  # setup packet (quick share)
+  dconf.settings = {
+    "io/github/nozwock/Packet"."enable-static-port" = true;
   };
 
   # SSH agent for remembering ssh key passwords
