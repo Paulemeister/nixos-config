@@ -9,7 +9,24 @@
 in {
   imports = [];
 
-  boot.kernelPackages = pkgs-chaotic.linuxPackages_cachyos;
+  services.hardware.openrgb = {
+    enable = true;
+    motherboard = "amd";
+  };
+
+  hardware.i2c.enable = true;
+  services.udev.packages = [pkgs.openrgb];
+
+  # systemd.services.no-rgb = {
+  #   description = "no-rgb";
+  #   serviceConfig = {
+  #     ExecStart = "${pkgs.openrgb}/bin/openrgb --mode static --color 000000";
+  #     Type = "oneshot";
+  #   };
+  #   wantedBy = ["multi-user.target"];
+  # };
+
+  # boot.kernelPackages = pkgs-chaotic.linuxPackages_cachyos;
   services.scx.enable = true;
 
   networking.firewall.checkReversePath = false;
@@ -109,7 +126,10 @@ in {
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  services.xserver = {
+    enable = true;
+    excludePackages = [pkgs.xterm];
+  };
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
@@ -165,8 +185,8 @@ in {
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.paulemeister = {
     isNormalUser = true;
-    description = "paulemeister";
-    extraGroups = ["networkmanager" "wheel" "vboxusers" "plugdev" "input" "audio"];
+    description = "Paulemeister";
+    extraGroups = ["networkmanager" "wheel" "vboxusers" "plugdev" "input" "audio" "i2c"];
     hashedPasswordFile = "/persist/passwords/paulemeister";
   };
 

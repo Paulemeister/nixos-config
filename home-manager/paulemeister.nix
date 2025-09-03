@@ -16,6 +16,8 @@
     ./easyeffects.nix
     ./daw.nix
     ./gaming.nix
+    ./programming.nix
+    # ./openrgb.nix
     # inputs.sidewinderd.homeManagerModules.sidewinderd
   ];
 
@@ -59,6 +61,7 @@
         ".config/obsidian"
         ".config/cosmic" # give up on cosmic-manager, as it has bugs when reloading home-manager -> dissapearing panels
         ".config/AusweisApp"
+        ".config/OpenRGB"
       ];
       allowOther = true;
       files = [
@@ -73,7 +76,7 @@
   home.packages = with pkgs; [
     nixd # nix language server
     alejandra # nix formatter
-    pkgs-unstable.neofetch
+    fastfetch
     uv
     gh
     tlrc
