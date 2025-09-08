@@ -9,6 +9,8 @@
 in {
   imports = [];
 
+  services.fwupd.enable = true;
+
   services.hardware.openrgb = {
     enable = true;
     motherboard = "amd";
@@ -26,7 +28,7 @@ in {
   #   wantedBy = ["multi-user.target"];
   # };
 
-  # boot.kernelPackages = pkgs-chaotic.linuxPackages_cachyos;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   services.scx.enable = true;
 
   networking.firewall.checkReversePath = false;
