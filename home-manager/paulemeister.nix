@@ -102,8 +102,14 @@
     clinfo
     cpu-x
     packet
-    #    clang-tools
+    nerd-fonts.fira-code
+    # fira-co
   ];
+
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts.monospace = ["Fira Code"];
+  };
 
   # Add programs through modules
   programs = {
@@ -176,6 +182,7 @@
       enable = true;
       flake = "/home/paulemeister/Code/nixos-config";
     };
+    yazi.enable = true;
   };
 
   # setup packet (quick share)
