@@ -7,6 +7,11 @@
 
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
+    stylix = {
+      url = "github:nix-community/stylix/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     sidewinderd = {
       url = "github:paulemeister/sidewinderd-nix";
       #url = "path:/persist/home/paulemeister/Code/sidewinderd-nix"; # for local developement
@@ -35,6 +40,7 @@
     nixpkgs-unstable,
     chaotic,
     home-manager,
+    stylix,
     sidewinderd,
     impermanence,
     cosmic-manager,
@@ -63,12 +69,14 @@
           chaotic.nixosModules.nyx-cache
           # chaotic.nixosModules.nyx-overlay
           chaotic.nixosModules.nyx-registry
+          stylix.nixosModules.stylix
           impermanence.nixosModules.impermanence
           sidewinderd.nixosModules.sidewinderd
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = ".bak";
 
             home-manager.users.paulemeister = import ./home-manager/paulemeister.nix;
 

@@ -17,6 +17,8 @@
     ./daw.nix
     ./gaming.nix
     ./programming.nix
+    ./hyprland.nix
+    ./cli-tools.nix
     # ./openrgb.nix
     # inputs.sidewinderd.homeManagerModules.sidewinderd
   ];
@@ -102,14 +104,15 @@
     clinfo
     cpu-x
     packet
-    nerd-fonts.fira-code
+    gnome-terminal
+    # nerd-fonts.fira-code
     # fira-co
   ];
 
-  fonts.fontconfig = {
-    enable = true;
-    defaultFonts.monospace = ["Fira Code"];
-  };
+  # fonts.fontconfig = {
+  #   enable = true;
+  #   defaultFonts.monospace = ["Fira Code"];
+  # };
 
   # Add programs through modules
   programs = {
@@ -183,6 +186,10 @@
       flake = "/home/paulemeister/Code/nixos-config";
     };
     yazi.enable = true;
+    # gnome-terminal = {
+    #   enable = true;
+    #   package = pkgs.gnome-terminal;
+    # };
   };
 
   # setup packet (quick share)

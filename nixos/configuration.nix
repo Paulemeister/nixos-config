@@ -4,11 +4,48 @@
   pkgs-unstable,
   pkgs-chaotic,
   inputs,
+  lib,
   ...
 }: let
 in {
   imports = [];
 
+  # services.open-webui = {
+  #   enable = true;
+  # };
+
+  services.ollama = {
+    enable = true;
+    acceleration = "rocm";
+    # package = pkgs.ollama-rocm;
+    rocmOverrideGfx = "10.3.0";
+  };
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  services.urserver.enable = true;
+
+  systemd.user.services.urserver.wantedBy = lib.mkForce [];
+
+  stylix = {
+    enable = true;
+    polarity = "dark";
+    base16Scheme = "${pkgs-unstable.base16-schemes}/share/themes/default-dark.yaml";
+    fonts = {
+      sansSerif = {
+        package = pkgs.fira-sans;
+        name = "Fira Sans";
+      };
+      serif = config.stylix.fonts.sansSerif;
+      monospace = {
+        package = pkgs.nerd-fonts.fira-mono;
+        name = "Fira Mono";
+      };
+    };
+  };
   networking = {
     nameservers = ["127.0.0.1" "::1"];
     # If using NetworkManager:
@@ -109,6 +146,11 @@ in {
       proton-ge-bin
     ];
   };
+
+  services.journald = {
+    extraConfig = "SystemMaxUse=1G";
+  };
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -163,6 +205,7 @@ in {
   services.xserver = {
     enable = true;
     excludePackages = [pkgs.xterm];
+    videoDrivers = ["amdgpu"];
   };
 
   # Enable the GNOME Desktop Environment.
@@ -261,6 +304,17 @@ in {
         mode = "u=rwx,g=rx,o=";
       }
       "/var/lib/sidewinderd" # sidewinder configs
+      {
+        directory = "/var/lib/private/ollama";
+        mode = "0700";
+      }
+      "/var/lib/private/open-webui"
+    ];
+    files = [
+      # used by journald, regenerating doesn't assosiate logs
+      # from previous boots together, even if the logs are
+      # persistent
+      "/etc/machine-id"
     ];
   };
 

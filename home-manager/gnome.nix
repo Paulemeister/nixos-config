@@ -124,15 +124,15 @@
     };
   };
   # Add styling for forge
-  xdg.configFile."forge/stylesheet/forge/stylesheet.css" = {
-    source = ./dotfiles/forge/stylesheet.css;
-    force = true;
-    # onChange = ''
-    #   rm -f ${config.xdg.configHome}/forge/stylesheet/forge/stylesheet.css
-    #   cp ${config.xdg.configHome}/forge/stylesheet/forge/stylesheet_init.css ${config.xdg.configHome}/forge/stylesheet/forge/stylesheet.css
-    #   chmod 0666 ${config.xdg.configHome}/forge/stylesheet/forge/stylesheet.css
-    # '';
-  };
+  # xdg.configFile."forge/stylesheet/forge/stylesheet.css" = {
+  #   source = ./dotfiles/forge/stylesheet.css;
+  #   force = true;
+  # onChange = ''
+  #   rm -f ${config.xdg.configHome}/forge/stylesheet/forge/stylesheet.css
+  #   cp ${config.xdg.configHome}/forge/stylesheet/forge/stylesheet_init.css ${config.xdg.configHome}/forge/stylesheet/forge/stylesheet.css
+  #   chmod 0666 ${config.xdg.configHome}/forge/stylesheet/forge/stylesheet.css
+  # '';
+  # };
   xdg.configFile."forge/config/windows.json" = {
     source = ./dotfiles/forge/windows.json;
     force = true;
