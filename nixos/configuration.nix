@@ -13,6 +13,7 @@ in {
   # services.open-webui = {
   #   enable = true;
   # };
+  nix.settings.trusted-users = ["root" "paulemeister"];
 
   services.ollama = {
     enable = true;
@@ -52,7 +53,7 @@ in {
     networkmanager.dns = "none";
   };
 
-  services.dnscrypt-proxy2 = {
+  services.dnscrypt-proxy = {
     enable = true;
     # Settings reference:
     # https://github.com/DNSCrypt/dnscrypt-proxy/blob/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
@@ -159,7 +160,9 @@ in {
   };
 
   # Siderwinderd Setup
-  nixpkgs.overlays = [inputs.sidewinderd.overlays.default];
+  nixpkgs.overlays = [
+    inputs.sidewinderd.overlays.default
+  ];
   services.sidewinderd = {
     enable = true;
     settings = {
@@ -209,8 +212,8 @@ in {
   };
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
   environment.gnome.excludePackages = with pkgs; [
     gnome-maps
     gnome-clocks
@@ -292,6 +295,7 @@ in {
     hideMounts = true;
     directories = [
       "/nix"
+      "/var/tmp"
       "/var/log"
       "/var/lib/bluetooth"
       "/var/lib/nixos"

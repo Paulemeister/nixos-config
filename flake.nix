@@ -1,14 +1,16 @@
 {
-  description = "Your new nix config";
+  description = "Paulemeisters Flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     stylix = {
-      url = "github:nix-community/stylix/release-25.05";
+      # url = "github:nix-community/stylix/release-25.05";
+      url = "github:nix-community/stylix/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -19,7 +21,8 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      # url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -70,6 +73,7 @@
           # chaotic.nixosModules.nyx-overlay
           chaotic.nixosModules.nyx-registry
           stylix.nixosModules.stylix
+          ./overlays/kgx-stylix-patch.nix
           impermanence.nixosModules.impermanence
           sidewinderd.nixosModules.sidewinderd
           home-manager.nixosModules.home-manager

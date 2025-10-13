@@ -1,0 +1,147 @@
+diff --git a/src/kgx-livery-manager.c b/src/kgx-livery-manager.c
+index 34a60a1..b45c811 100644
+--- a/src/kgx-livery-manager.c
++++ b/src/kgx-livery-manager.c
+@@ -125,32 +125,32 @@ standard_livery (void)
+   g_autoptr (KgxPalette) night = NULL;
+   g_autoptr (KgxPalette) day = NULL;
+   GdkRGBA night_colours[16] = {
+-    GDK_RGBA ("241f31"), /* Black          */
+-    GDK_RGBA ("c01c28"), /* Red            */
+-    GDK_RGBA ("2ec27e"), /* Green          */
+-    GDK_RGBA ("f5c211"), /* Yellow         */
+-    GDK_RGBA ("1e78e4"), /* Blue           */
+-    GDK_RGBA ("9841bb"), /* Magenta        */
+-    GDK_RGBA ("0ab9dc"), /* Cyan           */
+-    GDK_RGBA ("c0bfbc"), /* White          */
+-    GDK_RGBA ("5e5c64"), /* Bright Black   */
+-    GDK_RGBA ("ed333b"), /* Bright Red     */
+-    GDK_RGBA ("57e389"), /* Bright Green   */
+-    GDK_RGBA ("f8e45c"), /* Bright Yellow  */
+-    GDK_RGBA ("51a1ff"), /* Bright Blue    */
+-    GDK_RGBA ("c061cb"), /* Bright Magenta */
+-    GDK_RGBA ("4fd2fd"), /* Bright Cyan    */
+-    GDK_RGBA ("f6f5f4"), /* Bright White   */
++    GDK_RGBA ("#DARK_COLOR_00#"), /* Black          */
++    GDK_RGBA ("#DARK_COLOR_08#"), /* Red            */
++    GDK_RGBA ("#DARK_COLOR_11#"), /* Green          */
++    GDK_RGBA ("#DARK_COLOR_10#"), /* Yellow         */
++    GDK_RGBA ("#DARK_COLOR_13#"), /* Blue           */
++    GDK_RGBA ("#DARK_COLOR_14#"), /* Magenta        */
++    GDK_RGBA ("#DARK_COLOR_12#"), /* Cyan           */
++    GDK_RGBA ("#DARK_COLOR_05#"), /* White          */
++    GDK_RGBA ("#DARK_COLOR_04#"), /* Bright Black   */
++    GDK_RGBA ("#DARK_COLOR_08#"), /* Bright Red     */
++    GDK_RGBA ("#DARK_COLOR_11#"), /* Bright Green   */
++    GDK_RGBA ("#DARK_COLOR_10#"), /* Bright Yellow  */
++    GDK_RGBA ("#DARK_COLOR_13#"), /* Bright Blue    */
++    GDK_RGBA ("#DARK_COLOR_14#"), /* Bright Magenta */
++    GDK_RGBA ("#DARK_COLOR_12#"), /* Bright Cyan    */
++    GDK_RGBA ("#DARK_COLOR_05#"), /* Bright White   */
+   };
+ 
+-  night = kgx_palette_new (&((GdkRGBA) { 1.0, 1.0, 1.0, 1.0 }),
+-                           &((GdkRGBA) { 0.11, 0.11, 0.12, 1.0 }),
++  night = kgx_palette_new (&((GdkRGBA) { #DARK_FOREGRND_R#, #DARK_FOREGRND_G#, #DARK_FOREGRND_B#, #DARK_FOREGRND_A# }),
++                           &((GdkRGBA) { #DARK_BACKGRND_R#, #DARK_BACKGRND_G#, #DARK_BACKGRND_B#, #DARK_BACKGRND_A# }),
+                            0.04,
+                            G_N_ELEMENTS (night_colours),
+                            night_colours);
+ 
+-  day = kgx_palette_new (&((GdkRGBA) { 0.0, 0.0, 0.0, 1.0 }),
+-                         &((GdkRGBA) { 1.0, 1.0, 1.0, 1.0 }),
++  day = kgx_palette_new (&((GdkRGBA) { #LIGHT_FOREGRND_R#, #LIGHT_FOREGRND_G#, #LIGHT_FOREGRND_B#, #LIGHT_FOREGRND_A# }),
++                         &((GdkRGBA) { #LIGHT_BACKGRND_R#, #LIGHT_BACKGRND_G#, #LIGHT_BACKGRND_B#, #LIGHT_BACKGRND_A# }),
+                          0.01,
+                          /* TODO: Have some day colours */
+                          G_N_ELEMENTS (night_colours),
+@@ -165,26 +165,26 @@ linux_livery (void)
+ {
+   g_autoptr (KgxPalette) night = NULL;
+   GdkRGBA colours[16] = {
+-    GDK_RGBA ("000000"), /* Black          */
+-    GDK_RGBA ("aa0000"), /* Red            */
+-    GDK_RGBA ("00aa00"), /* Green          */
+-    GDK_RGBA ("aa5500"), /* Yellow         */
+-    GDK_RGBA ("0000aa"), /* Blue           */
+-    GDK_RGBA ("aa00aa"), /* Magenta        */
+-    GDK_RGBA ("00aaaa"), /* Cyan           */
+-    GDK_RGBA ("aaaaaa"), /* White          */
+-    GDK_RGBA ("555555"), /* Bright Black   */
+-    GDK_RGBA ("ff5555"), /* Bright Red     */
+-    GDK_RGBA ("55ff55"), /* Bright Green   */
+-    GDK_RGBA ("ffff55"), /* Bright Yellow  */
+-    GDK_RGBA ("5555ff"), /* Bright Blue    */
+-    GDK_RGBA ("ff55ff"), /* Bright Magenta */
+-    GDK_RGBA ("55ffff"), /* Bright Cyan    */
+-    GDK_RGBA ("ffffff"), /* Bright White   */
++    GDK_RGBA ("#DARK_COLOR_00#"), /* Black          */
++    GDK_RGBA ("#DARK_COLOR_08#"), /* Red            */
++    GDK_RGBA ("#DARK_COLOR_11#"), /* Green          */
++    GDK_RGBA ("#DARK_COLOR_10#"), /* Yellow         */
++    GDK_RGBA ("#DARK_COLOR_13#"), /* Blue           */
++    GDK_RGBA ("#DARK_COLOR_14#"), /* Magenta        */
++    GDK_RGBA ("#DARK_COLOR_12#"), /* Cyan           */
++    GDK_RGBA ("#DARK_COLOR_05#"), /* White          */
++    GDK_RGBA ("#DARK_COLOR_04#"), /* Bright Black   */
++    GDK_RGBA ("#DARK_COLOR_08#"), /* Bright Red     */
++    GDK_RGBA ("#DARK_COLOR_11#"), /* Bright Green   */
++    GDK_RGBA ("#DARK_COLOR_10#"), /* Bright Yellow  */
++    GDK_RGBA ("#DARK_COLOR_13#"), /* Bright Blue    */
++    GDK_RGBA ("#DARK_COLOR_14#"), /* Bright Magenta */
++    GDK_RGBA ("#DARK_COLOR_12#"), /* Bright Cyan    */
++    GDK_RGBA ("#DARK_COLOR_05#"), /* Bright White   */
+   };
+ 
+-  night = kgx_palette_new (&((GdkRGBA) { 1.0, 1.0, 1.0, 1.0 }),
+-                           &((GdkRGBA) { 0.0, 0.0, 0.0, 1.0 }),
++  night = kgx_palette_new (&((GdkRGBA) { #DARK_FOREGRND_R#, #DARK_FOREGRND_G#, #DARK_FOREGRND_B#, #DARK_FOREGRND_A# }),
++                           &((GdkRGBA) { #DARK_BACKGRND_R#, #DARK_BACKGRND_G#, #DARK_BACKGRND_B#, #DARK_BACKGRND_A# }),
+                            0.0,
+                            G_N_ELEMENTS (colours),
+                            colours);
+@@ -202,26 +202,26 @@ xterm_livery (void)
+   g_autoptr (KgxPalette) night = NULL;
+   g_autoptr (KgxPalette) day = NULL;
+   GdkRGBA night_colours[16] = {
+-    GDK_RGBA ("000000"), /* Black          */
+-    GDK_RGBA ("cd0000"), /* Red            */
+-    GDK_RGBA ("00cd00"), /* Green          */
+-    GDK_RGBA ("cdcd00"), /* Yellow         */
+-    GDK_RGBA ("0000ee"), /* Blue           */
+-    GDK_RGBA ("cd00cd"), /* Magenta        */
+-    GDK_RGBA ("00cdcd"), /* Cyan           */
+-    GDK_RGBA ("e5e5e5"), /* White          */
+-    GDK_RGBA ("7f7f7f"), /* Bright Black   */
+-    GDK_RGBA ("ff0000"), /* Bright Red     */
+-    GDK_RGBA ("00ff00"), /* Bright Green   */
+-    GDK_RGBA ("ffff00"), /* Bright Yellow  */
+-    GDK_RGBA ("5c5cff"), /* Bright Blue    */
+-    GDK_RGBA ("ff00ff"), /* Bright Magenta */
+-    GDK_RGBA ("00ffff"), /* Bright Cyan    */
+-    GDK_RGBA ("ffffff"), /* Bright White   */
++    GDK_RGBA ("#DARK_COLOR_00#"), /* Black          */
++    GDK_RGBA ("#DARK_COLOR_08#"), /* Red            */
++    GDK_RGBA ("#DARK_COLOR_11#"), /* Green          */
++    GDK_RGBA ("#DARK_COLOR_10#"), /* Yellow         */
++    GDK_RGBA ("#DARK_COLOR_13#"), /* Blue           */
++    GDK_RGBA ("#DARK_COLOR_14#"), /* Magenta        */
++    GDK_RGBA ("#DARK_COLOR_12#"), /* Cyan           */
++    GDK_RGBA ("#DARK_COLOR_05#"), /* White          */
++    GDK_RGBA ("#DARK_COLOR_04#"), /* Bright Black   */
++    GDK_RGBA ("#DARK_COLOR_08#"), /* Bright Red     */
++    GDK_RGBA ("#DARK_COLOR_11#"), /* Bright Green   */
++    GDK_RGBA ("#DARK_COLOR_10#"), /* Bright Yellow  */
++    GDK_RGBA ("#DARK_COLOR_13#"), /* Bright Blue    */
++    GDK_RGBA ("#DARK_COLOR_14#"), /* Bright Magenta */
++    GDK_RGBA ("#DARK_COLOR_12#"), /* Bright Cyan    */
++    GDK_RGBA ("#DARK_COLOR_05#"), /* Bright White   */
+   };
+ 
+-  night = kgx_palette_new (&((GdkRGBA) { 1.0, 1.0, 1.0, 1.0 }),
+-                           &((GdkRGBA) { 0.0, 0.0, 0.0, 1.0 }),
++  night = kgx_palette_new (&((GdkRGBA) { #DARK_FOREGRND_R#, #DARK_FOREGRND_G#, #DARK_FOREGRND_B#, #DARK_FOREGRND_A# }),
++                           &((GdkRGBA) { #DARK_BACKGRND_R#, #DARK_BACKGRND_G#, #DARK_BACKGRND_B#, #DARK_BACKGRND_A# }),
+                            0.0,
+                            G_N_ELEMENTS (night_colours),
+                            night_colours);

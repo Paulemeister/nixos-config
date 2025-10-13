@@ -64,6 +64,8 @@
         ".config/cosmic" # give up on cosmic-manager, as it has bugs when reloading home-manager -> dissapearing panels
         ".config/AusweisApp"
         ".config/OpenRGB"
+        ".config/spotify"
+        ".local/share/applications" # persist custom .desktop entries (quick-webapps)
       ];
       allowOther = true;
       files = [
@@ -105,9 +107,22 @@
     cpu-x
     packet
     gnome-terminal
+    quick-webapps
+    spotify
     # nerd-fonts.fira-code
     # fira-co
   ];
+
+  # set default app for .zip
+  xdg = {
+    enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "application/zip" = ["org.gnome.FileRoller.desktop"];
+      };
+    };
+  };
 
   # fonts.fontconfig = {
   #   enable = true;
@@ -165,7 +180,7 @@
     # SSH
     ssh = {
       enable = true;
-      addKeysToAgent = "yes";
+      enableDefaultConfig = false;
       matchBlocks = {
         "github" = {
           user = "git";
@@ -174,6 +189,19 @@
           extraOptions = {
             "AddKeysToAgent" = "yes";
           };
+        };
+        "*" = {
+          # Default Values
+          forwardAgent = false;
+          addKeysToAgent = "yes"; # Not Default
+          compression = false;
+          serverAliveInterval = 0;
+          serverAliveCountMax = 3;
+          hashKnownHosts = false;
+          userKnownHostsFile = "~/.ssh/known_hosts";
+          controlMaster = "no";
+          controlPath = "~/.ssh/master-%r@%n:%p";
+          controlPersist = "no";
         };
       };
     };
