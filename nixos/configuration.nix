@@ -15,12 +15,12 @@ in {
   # };
   nix.settings.trusted-users = ["root" "paulemeister"];
 
-  services.ollama = {
-    enable = true;
-    acceleration = "rocm";
-    # package = pkgs.ollama-rocm;
-    rocmOverrideGfx = "10.3.0";
-  };
+  # services.ollama = {
+  #   enable = true;
+  #   acceleration = "rocm";
+  #   # package = pkgs.ollama-rocm;
+  #   rocmOverrideGfx = "10.3.0";
+  # };
 
   programs.hyprland = {
     enable = true;
