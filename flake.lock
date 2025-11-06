@@ -261,6 +261,26 @@
         "type": "github"
       }
     },
+    "hyprcorners": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1762119582,
+        "narHash": "sha256-t73rd5aEE+yhFrhAXnuv0Mcnf98w+ElIcw4tx8zh/5A=",
+        "owner": "paulemeister",
+        "repo": "hyprcorners-nix",
+        "rev": "511793c019c07e2a8182867fb41ecf9a10ae8e98",
+        "type": "github"
+      },
+      "original": {
+        "owner": "paulemeister",
+        "repo": "hyprcorners-nix",
+        "type": "github"
+      }
+    },
     "impermanence": {
       "locked": {
         "lastModified": 1737831083,
@@ -399,6 +419,7 @@
         "chaotic": "chaotic",
         "cosmic-manager": "cosmic-manager",
         "home-manager": "home-manager_2",
+        "hyprcorners": "hyprcorners",
         "impermanence": "impermanence",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",

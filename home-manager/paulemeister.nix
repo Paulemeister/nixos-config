@@ -28,9 +28,15 @@
   #   settings.capture_delays = false;
   # };
 
+  # services.blueman-applet.enable = true;
   xsession.numlock.enable = true;
 
   services.syncthing.enable = true;
+
+  # systemd.user.services.wireplumber.unitConfig = {
+  #   After = ["bluetooth.service"];
+  #   Wants = ["bluetooth.service"];
+  # };
 
   home = {
     username = "paulemeister";
@@ -66,6 +72,9 @@
         ".config/OpenRGB"
         ".config/spotify"
         ".local/share/applications" # persist custom .desktop entries (quick-webapps)
+        ".local/share/uv"
+        ".local/bin"
+        ".vscode"
       ];
       allowOther = true;
       files = [

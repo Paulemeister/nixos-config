@@ -10,17 +10,22 @@
 in {
   imports = [];
 
+  nix.settings = {
+    trusted-users = ["root" "paulemeister"];
+    # build-dir = /var/tmp/nix;
+  };
+
+  environment.localBinInPath = true;
   # services.open-webui = {
   #   enable = true;
   # };
-  nix.settings.trusted-users = ["root" "paulemeister"];
-
   # services.ollama = {
   #   enable = true;
   #   acceleration = "rocm";
   #   # package = pkgs.ollama-rocm;
   #   rocmOverrideGfx = "10.3.0";
   # };
+  # services.blueman.enable = true;
 
   programs.hyprland = {
     enable = true;
@@ -34,7 +39,9 @@ in {
   stylix = {
     enable = true;
     polarity = "dark";
-    base16Scheme = "${pkgs-unstable.base16-schemes}/share/themes/default-dark.yaml";
+    image = ../misc/wallpaper.jpg;
+    base16Scheme = "${pkgs-unstable.base16-schemes}/share/themes/0x96f.yaml";
+    # base16Scheme = "${pkgs-unstable.base16-schemes}/share/themes/default-dark.yaml";
     fonts = {
       sansSerif = {
         package = pkgs.fira-sans;
@@ -162,6 +169,7 @@ in {
   # Siderwinderd Setup
   nixpkgs.overlays = [
     inputs.sidewinderd.overlays.default
+    inputs.hyprcorners.overlays.default
   ];
   services.sidewinderd = {
     enable = true;
@@ -248,6 +256,24 @@ in {
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
+
+  services.blueman.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    # settings = {
+    #   General = {
+    #     Enable = "Source,Sink,Media,Socket";
+    #     Experimental = true;
+    #   };
+    #   Policy = {
+    #     ReconnectAttemps = 7;
+    #     ReconnectIntervals = "1,2,4,8,16,64";
+    #     ReconnectUUIDs = "0000110d-0000-1000-8000-00805f9b34fb,0000110e-0000-1000-8000-00805f9b34fb";
+    #   };
+    # };
+  };
+
   security.rtkit.enable = true;
   # services.pulseaudio.extraConfig = "load-module libpipewire-module-loopback";
   services.pipewire = {
@@ -255,6 +281,54 @@ in {
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
+    # extraConfig.pipewire."92-bluez-monitor" = {
+    #   "bluez5.codecs" = ["sbc" "aac" "aptx" "aptx_hd" "ldac"];
+    #   "bluez5.roles" = ["a2dp_sink" "a2dp_source"];
+    # };
+    # wireplumber.extraConfig = {
+    #   "log-level-debug" = {
+    #     "context.properties" = {
+    #       # Output Debug log messages as opposed to only the default level (Notice)
+    #       "log.level" = "D";
+    #     };
+    #   };
+    #   "93-auto-reload" = {
+    #     "monitor.bluez.properties" = {
+    #       "rescan-on-startup" = true;
+    #       "rescan-interval-sec" = 10;
+    #     };
+    #   };
+    #   "94-force-a2dp" = {
+    #     "monitor.bluez.rules" = [
+    #       {
+    #         matches = [
+    #           {
+    #             "device.name" = "~bluez_card.*";
+    #           }
+    #         ];
+    #         actions = {
+    #           update-props = {
+    #             # Set quality to high quality instead of the default of auto
+    #             # "bluez5.a2dp.ldac.quality" = "hq";
+    #             "bluez5.default.profile" = "a2dp-sink";
+    #             "bluez5.profile-lock" = true;
+    #           };
+    #         };
+    #       }
+    #     ];
+    #   };
+    #   "95-prefer-a2dp" = {
+    #     "monitor.bluez.properties" = {
+    #       "PreferAudioProfile" = "a2dp-sink";
+    #     };
+    #   };
+    #   "96-bluetooth-policy" = {
+    #     "wireplumber.settings" = {
+    #       "bluetooth.autoswitch-to-headset-profile" = false;
+    #     };
+    #   };
+    # };
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
   };

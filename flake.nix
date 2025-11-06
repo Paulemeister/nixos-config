@@ -20,6 +20,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprcorners = {
+      url = "github:paulemeister/hyprcorners-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       # url = "github:nix-community/home-manager/release-25.05";
       url = "github:nix-community/home-manager/";
