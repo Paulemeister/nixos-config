@@ -75,6 +75,8 @@
         ".local/share/uv"
         ".local/bin"
         ".vscode"
+        ".config/Code"
+        ".config/gh"
       ];
       allowOther = true;
       files = [
@@ -185,6 +187,11 @@
         rebuild-nix-config = "nh os switch";
         open = "xdg-open";
       };
+      # make bash reload home manager session variables
+      initExtra = ''
+        # include .profile if it exists
+        [[ -f ~/.profile ]] && . ~/.profile
+      '';
     };
     # SSH
     ssh = {
