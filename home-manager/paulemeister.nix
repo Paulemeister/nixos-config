@@ -190,7 +190,11 @@
       # make bash reload home manager session variables
       initExtra = ''
         # include .profile if it exists
-        [[ -f ~/.profile ]] && . ~/.profile
+        if [ -f "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh" ]; then
+          unset __HM_SESS_VARS_SOURCED
+          source "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
+        fi
+        bind -s 'set completion-ignore-case on'
       '';
     };
     # SSH

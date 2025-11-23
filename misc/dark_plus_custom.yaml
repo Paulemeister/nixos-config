@@ -1,0 +1,65 @@
+scheme: "Dark Plus Tinted"
+author: "Generated from Helix Dark+ palette"
+
+# Base16 index:
+# 00 = darkest bg
+# 07 = brightest fg
+# 08..0F = accents
+
+base00: "1e1e1e"   # background (dark_gray2)
+base01: "282828"   # subtle bg (dark_gray3)
+base02: "404040"   # selection/dimmer bg (dark_gray4)
+base03: "858585"   # comments / weak fg (dark_gray)
+base04: "c6c6c6"   # secondary fg (light_gray2)
+base05: "d4d4d4"   # normal fg (light_gray)
+base06: "eeeeee"   # bright fg (light_gray3)
+base07: "ffffff"   # white
+
+# Accents
+base08: "ff1212"   # red
+base09: "ce9178"   # orange
+base0A: "d7ba7d"   # gold
+base0B: "6a9955"   # green
+base0C: "75beff"   # aqua / cyan
+base0D: "569cd6"   # blue
+base0E: "6796e6"   # violet / bluish-purple
+base0F: "f14c4c"   # warning red/orange
+
+# Extended palette (optional, useful for terminals that support it)
+# extension:
+#   gold2:      "cca700"
+#   pale_green: "b5cea8"
+#   dark_green2:"487e02"
+#   dark_gray5: "8b949e"
+#   blue4:      "1b81a8"
+#   light_blue: "75beff"
+#   dark_blue:  "264f78"
+#   dark_blue2: "094771"
+#   orange_red: "f14c4c"
+
+# # Suggested UI colors for terminal emulators (informational only):
+# ui:
+#   background: "1e1e1e"
+#   foreground: "d4d4d4"
+#   cursor:     "a6a6a6"
+#   selection:  "404040"
+#   border:     "323232"
+#   widget:     "252526"
+
+# # Optional semantic colors for languages, shells, editors
+# syntax:
+#   variable:       "9CDCFE"
+#   constant:       "4FC1FF"
+#   fn_declaration: "DCDCAA"
+#   type:           "4EC9B0"
+#   special:        "C586C0"
+#   string:         "ce9178"
+#   number:         "b5cea8"
+#   keyword:        "569CD6"
+#   comment:        "6A9955"
+
+# # Optional rainbow parens (common in terminals that support 256-color):
+# rainbow:
+#   - "#FFD700"
+#   - "#DA70D6"
+#   - "#179FFF"
