@@ -7,17 +7,32 @@
   pkgs,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd" "i2c-dev"];
-  boot.extraModulePackages = [];
-  boot.supportedFilesystems = ["ntfs"];
-  boot.kernelParams = ["amd_pstate=passive" "amd_pstate.shared_mem=1" "video=1920x1080"]; # video mode not supported (by motherboard?)
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "ahci"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [
+    "kvm-amd"
+    "i2c-dev"
+  ];
+  boot.extraModulePackages = [ ];
+  boot.supportedFilesystems = [ "ntfs" ];
+  boot.kernelParams = [
+    "amd_pstate=passive"
+    "amd_pstate.shared_mem=1"
+    "video=1920x1080"
+  ]; # video mode not supported (by motherboard?)
 
   fileSystems."/persist" = {
     device = "/dev/disk/by-uuid/e062ead8-30c0-4914-8fcb-20b1a11f23a0";
@@ -28,54 +43,120 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/F147-99A5";
     fsType = "vfat";
-    options = ["fmask=0077" "dmask=0077"];
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
   };
 
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
-    options = ["defaults" "size=2G" "mode=755"];
+    options = [
+      "defaults"
+      "size=2G"
+      "mode=755"
+    ];
   };
 
   # HDD
   fileSystems."/mnt/d04bb654-941c-4de8-ac86-68126b16227d" = {
     device = "/dev/disk/by-uuid/d04bb654-941c-4de8-ac86-68126b16227d";
     fsType = "ext4";
-    options = ["rw" "users" "exec" "suid" "dev" "nofail" "x-gvfs-show" "noauto" "x-gvfs-name=HDD%20Data"];
+    options = [
+      "rw"
+      "users"
+      "exec"
+      "suid"
+      "dev"
+      "nofail"
+      "x-gvfs-show"
+      "noauto"
+      "x-gvfs-name=HDD%20Data"
+    ];
   };
 
   fileSystems."/mnt/55c337dc-1bd5-4447-9861-12e187809f25" = {
     device = "/dev/disk/by-uuid/55c337dc-1bd5-4447-9861-12e187809f25";
     fsType = "ext4";
-    options = ["rw" "users" "exec" "suid" "dev" "nofail" "x-gvfs-show" "noauto" "x-gvfs-name=HDD%20Games"];
+    options = [
+      "rw"
+      "users"
+      "exec"
+      "suid"
+      "dev"
+      "nofail"
+      "x-gvfs-show"
+      "noauto"
+      "x-gvfs-name=HDD%20Games"
+    ];
   };
 
   fileSystems."/mnt/0BCEE39470700B7C" = {
     device = "/dev/disk/by-uuid/0BCEE39470700B7C";
     fsType = "ntfs-3g";
-    options = ["rw" "users" "exec" "suid" "dev" "nofail" "x-gvfs-show" "noauto" "x-gvfs-name=HDD%20NTFS%20Data"];
+    options = [
+      "rw"
+      "users"
+      "exec"
+      "suid"
+      "dev"
+      "nofail"
+      "x-gvfs-show"
+      "noauto"
+      "x-gvfs-name=HDD%20NTFS%20Data"
+    ];
   };
   # Daten SSD
   fileSystems."/mnt/a88cc0c3-a13c-43b7-9b9e-5b8654fc9ee0" = {
     device = "/dev/disk/by-uuid/a88cc0c3-a13c-43b7-9b9e-5b8654fc9ee0";
     fsType = "ext4";
-    options = ["rw" "users" "exec" "suid" "dev" "nofail" "x-gvfs-show" "x-gvfs-name=Pauls%20Data"];
+    options = [
+      "rw"
+      "users"
+      "exec"
+      "suid"
+      "dev"
+      "nofail"
+      "x-gvfs-show"
+      "x-gvfs-name=Pauls%20Data"
+    ];
   };
   # Pop!_OS
   fileSystems."/mnt/e03b51a8-a2c0-4c10-adae-f27c3b443bc2" = {
     device = "/dev/disk/by-uuid/e03b51a8-a2c0-4c10-adae-f27c3b443bc2";
     fsType = "ext4";
-    options = ["rw" "users" "exec" "suid" "dev" "nofail" "x-gvfs-show" "noauto" "x-gvfs-name=Pop%21_OS"];
+    options = [
+      "rw"
+      "users"
+      "exec"
+      "suid"
+      "dev"
+      "nofail"
+      "x-gvfs-show"
+      "noauto"
+      "x-gvfs-name=Pop%21_OS"
+    ];
   };
   # Windows
   fileSystems."/mnt/C6A801B2A801A253" = {
     device = "/dev/disk/by-uuid/C6A801B2A801A253";
     fsType = "ntfs-3g";
-    options = ["rw" "users" "exec" "suid" "dev" "nofail" "x-gvfs-show" "noauto" "x-gvfs-name=Windows"];
+    options = [
+      "rw"
+      "users"
+      "exec"
+      "suid"
+      "dev"
+      "nofail"
+      "x-gvfs-show"
+      "noauto"
+      "x-gvfs-name=Windows"
+    ];
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/9d9c717f-7aff-41e7-941c-79a7979701d7";}
+    { device = "/dev/disk/by-uuid/9d9c717f-7aff-41e7-941c-79a7979701d7"; }
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

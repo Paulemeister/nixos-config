@@ -6,12 +6,17 @@
   inputs,
   lib,
   ...
-}: let
-in {
-  imports = [];
+}:
+let
+in
+{
+  imports = [ ];
 
   nix.settings = {
-    trusted-users = ["root" "paulemeister"];
+    trusted-users = [
+      "root"
+      "paulemeister"
+    ];
     substituters = [
       "https://lan-mouse.cachix.org/"
       "https://cache.nixos.org/"
@@ -30,7 +35,10 @@ in {
   # services.xserver.desktopManager.gnome.sessionPath = [pkgs.gnomeExtensions.pop-shell];
   environment.localBinInPath = true;
   # for desktop portals
-  environment.pathsToLink = ["/share/xdg-desktop-portal" "/share/applications"];
+  environment.pathsToLink = [
+    "/share/xdg-desktop-portal"
+    "/share/applications"
+  ];
   # services.open-webui = {
   #   enable = true;
   # };
@@ -49,7 +57,7 @@ in {
 
   services.urserver.enable = true;
 
-  systemd.user.services.urserver.wantedBy = lib.mkForce [];
+  systemd.user.services.urserver.wantedBy = lib.mkForce [ ];
 
   stylix = {
     enable = true;
@@ -111,7 +119,10 @@ in {
     };
   };
   networking = {
-    nameservers = ["127.0.0.1" "::1"];
+    nameservers = [
+      "127.0.0.1"
+      "::1"
+    ];
     # If using NetworkManager:
     networkmanager.dns = "none";
   };
@@ -150,7 +161,7 @@ in {
   };
 
   hardware.i2c.enable = true;
-  services.udev.packages = [pkgs.openrgb];
+  services.udev.packages = [ pkgs.openrgb ];
 
   # systemd.services.no-rgb = {
   #   description = "no-rgb";
@@ -165,7 +176,7 @@ in {
   services.scx.enable = true;
 
   networking.firewall.checkReversePath = false;
-  environment.systemPackages = with pkgs; [wl-clipboard];
+  environment.systemPackages = with pkgs; [ wl-clipboard ];
 
   hardware.xpadneo.enable = true;
   services.flatpak.enable = true;
@@ -195,7 +206,10 @@ in {
   };
 
   # Open port for packet (quick share), lan-mouse
-  networking.firewall.allowedTCPPorts = [9300 4242];
+  networking.firewall.allowedTCPPorts = [
+    9300
+    4242
+  ];
 
   # Don't lecture on first usage of sudo
   security.sudo.extraConfig = "Defaults lecture = never";
@@ -229,7 +243,7 @@ in {
     enable = true;
     enable32Bit = true;
     # Add OpenCL Support (for CPU-X)
-    extraPackages = with pkgs; [rocmPackages.clr.icd];
+    extraPackages = with pkgs; [ rocmPackages.clr.icd ];
   };
 
   # Siderwinderd Setup
@@ -281,8 +295,8 @@ in {
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    excludePackages = [pkgs.xterm];
-    videoDrivers = ["amdgpu"];
+    excludePackages = [ pkgs.xterm ];
+    videoDrivers = [ "amdgpu" ];
   };
 
   # Enable the GNOME Desktop Environment.
@@ -318,7 +332,10 @@ in {
   services.printing.enable = false;
 
   # Enable Flakes
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -406,24 +423,34 @@ in {
   users.users.paulemeister = {
     isNormalUser = true;
     description = "Paulemeister";
-    extraGroups = ["networkmanager" "wheel" "vboxusers" "plugdev" "input" "audio" "i2c"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "vboxusers"
+      "plugdev"
+      "input"
+      "audio"
+      "i2c"
+    ];
     hashedPasswordFile = "/persist/passwords/paulemeister";
   };
 
   # Set account picture
-  system.activationScripts.script.text = let
-    name = "paulemeister";
-  in ''
-    mkdir -p /var/lib/AccountsService/{icons,users}
-    cp ${../home-manager/dotfiles/paulemeister-icon} /var/lib/AccountsService/icons/${name}
-    echo -e "[User]\nSession=cosmic\nIcon=/var/lib/AccountsService/icons/${name}\n" > /var/lib/AccountsService/users/${name}
+  system.activationScripts.script.text =
+    let
+      name = "paulemeister";
+    in
+    ''
+      mkdir -p /var/lib/AccountsService/{icons,users}
+      cp ${../home-manager/dotfiles/paulemeister-icon} /var/lib/AccountsService/icons/${name}
+      echo -e "[User]\nSession=cosmic\nIcon=/var/lib/AccountsService/icons/${name}\n" > /var/lib/AccountsService/users/${name}
 
-    chown root:root /var/lib/AccountsService/users/${name}
-    chmod 0600 /var/lib/AccountsService/users/${name}
+      chown root:root /var/lib/AccountsService/users/${name}
+      chmod 0600 /var/lib/AccountsService/users/${name}
 
-    chown root:root /var/lib/AccountsService/icons/${name}
-    chmod 0444 /var/lib/AccountsService/icons/${name}
-  '';
+      chown root:root /var/lib/AccountsService/icons/${name}
+      chmod 0444 /var/lib/AccountsService/icons/${name}
+    '';
 
   # Install firefox.
   programs.firefox.enable = true;

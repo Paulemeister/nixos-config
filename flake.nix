@@ -47,57 +47,65 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    nixpkgs-unstable,
-    chaotic,
-    home-manager,
-    stylix,
-    sidewinderd,
-    impermanence,
-    cosmic-manager,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    system = "x86_64-linux";
-    pkgs-unstable = import nixpkgs-unstable {
-      inherit system;
-      config.allowUnfree = true;
-    };
-    pkgs-chaotic = chaotic.legacyPackages.${system};
-  in {
-    nixpkgs.config.allowUnfree = true;
-    nixosConfigurations = {
-      theseus = nixpkgs.lib.nixosSystem rec {
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      chaotic,
+      home-manager,
+      stylix,
+      sidewinderd,
+      impermanence,
+      cosmic-manager,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      system = "x86_64-linux";
+      pkgs-unstable = import nixpkgs-unstable {
         inherit system;
+        config.allowUnfree = true;
+      };
+      pkgs-chaotic = chaotic.legacyPackages.${system};
+    in
+    {
+      nixpkgs.config.allowUnfree = true;
+      nixosConfigurations = {
+        theseus = nixpkgs.lib.nixosSystem rec {
+          inherit system;
 
-        specialArgs = {
-          inherit inputs outputs pkgs-unstable pkgs-chaotic;
+          specialArgs = {
+            inherit
+              inputs
+              outputs
+              pkgs-unstable
+              pkgs-chaotic
+              ;
+          };
+
+          modules = [
+            ./nixos/hardware-configuration.nix
+            ./nixos/configuration.nix
+            chaotic.nixosModules.nyx-cache
+            # chaotic.nixosModules.nyx-overlay
+            chaotic.nixosModules.nyx-registry
+            stylix.nixosModules.stylix
+            ./overlays/kgx-stylix-patch.nix
+            impermanence.nixosModules.impermanence
+            sidewinderd.nixosModules.sidewinderd
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = ".bak";
+
+              home-manager.users.paulemeister = import ./home-manager/paulemeister.nix;
+
+              home-manager.extraSpecialArgs = specialArgs;
+            }
+          ];
         };
-
-        modules = [
-          ./nixos/hardware-configuration.nix
-          ./nixos/configuration.nix
-          chaotic.nixosModules.nyx-cache
-          # chaotic.nixosModules.nyx-overlay
-          chaotic.nixosModules.nyx-registry
-          stylix.nixosModules.stylix
-          ./overlays/kgx-stylix-patch.nix
-          impermanence.nixosModules.impermanence
-          sidewinderd.nixosModules.sidewinderd
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = ".bak";
-
-            home-manager.users.paulemeister = import ./home-manager/paulemeister.nix;
-
-            home-manager.extraSpecialArgs = specialArgs;
-          }
-        ];
       };
     };
-  };
 }

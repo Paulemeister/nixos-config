@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   # myScript = pkgs.writeShellScriptBin "set-mouse-rgb" ''
   #   #!/usr/bin/env bash
   #   set -euo pipefail
@@ -31,14 +32,15 @@
   #   echo "Führe aus: ''\${CMD[*]}"
   #   "''\${CMD[@]}"
   # '';
-in {
+in
+{
   # home.packages = [myScript];
 
   # systemd user service
   systemd.user.services.setMouseRGB = {
     Unit = {
       Description = "Setzt Maus RGB bei Login";
-      After = ["graphical-session.target"];
+      After = [ "graphical-session.target" ];
     };
     Service = {
       ExecStart = "${pkgs.openrgb}/bin/openrgb -vv -p ~/.config/OpenRGB/mouse_only.orp";
@@ -50,7 +52,7 @@ in {
       ];
     };
     Install = {
-      WantedBy = ["graphical-session.target"];
+      WantedBy = [ "graphical-session.target" ];
     };
   };
 }

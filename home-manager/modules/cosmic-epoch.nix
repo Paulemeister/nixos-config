@@ -1,14 +1,15 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # services.ssh-agent.enable = true;
   # services.gnome-keyring = {
   #   enable = true;
   #   components = ["secrets" "pkcs11"];
   # };
-home.persistence."/persist/home/paulemeister".directories= [
-    
-  ".config/cosmic" # give up on cosmic-manager, as it has bugs when reloading home-manager -> dissapearing panels
-];  
-  
+  home.persistence."/persist/home/paulemeister".directories = [
+
+    ".config/cosmic" # give up on cosmic-manager, as it has bugs when reloading home-manager -> dissapearing panels
+  ];
+
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
@@ -25,8 +26,8 @@ home.persistence."/persist/home/paulemeister".directories= [
   systemd.user.services.hotcorner = {
     Unit = {
       Description = "Service for the hotcorner on cosmic-epoch";
-      After = ["graphical-session-post.target"];
-      BindsTo = ["cosmic-session.target"];
+      After = [ "graphical-session-post.target" ];
+      BindsTo = [ "cosmic-session.target" ];
     };
     Service = {
       # ExecCondition = "${pkgs.procps}/bin/pgrep -xf cosmic-workspaces";
@@ -38,7 +39,7 @@ home.persistence."/persist/home/paulemeister".directories= [
       # Type = "oneshot";
     };
     Install = {
-      WantedBy = ["default.target"];
+      WantedBy = [ "default.target" ];
     };
   };
 

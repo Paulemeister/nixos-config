@@ -3,7 +3,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   # add shell extensions packages
   home.packages = with pkgs.gnomeExtensions; [
     vertical-workspaces
@@ -25,64 +26,91 @@
         color-scheme = lib.mkDefault "prefer-dark";
       };
       "org/gnome/desktop/wm/keybindings" = {
-        close = lib.mkDefault ["<Super>q" "<Alt>F4"];
-        minimize = lib.mkDefault ["<Super>comma"];
-        toggle-maximized = lib.mkDefault ["<Super>m"];
-        move-to-monitor-left = lib.mkDefault [];
-        move-to-monitor-right = lib.mkDefault [];
-        move-to-monitor-up = lib.mkDefault [];
-        move-to-monitor-down = lib.mkDefault [];
-        move-to-workspace-down = lib.mkDefault [];
-        move-to-workspace-up = lib.mkDefault [];
-        switch-to-workspace-down = lib.mkDefault ["<Ctrl><Super>Down"];
-        switch-to-workspace-up = lib.mkDefault ["<Ctrl><Super>Up"];
-        switch-to-workspace-left = lib.mkDefault [];
-        switch-to-workspace-right = lib.mkDefault [];
-        maximize = lib.mkDefault [];
-        unmaximize = lib.mkDefault [];
+        close = lib.mkDefault [
+          "<Super>q"
+          "<Alt>F4"
+        ];
+        minimize = lib.mkDefault [ "<Super>comma" ];
+        toggle-maximized = lib.mkDefault [ "<Super>m" ];
+        move-to-monitor-left = lib.mkDefault [ ];
+        move-to-monitor-right = lib.mkDefault [ ];
+        move-to-monitor-up = lib.mkDefault [ ];
+        move-to-monitor-down = lib.mkDefault [ ];
+        move-to-workspace-down = lib.mkDefault [ ];
+        move-to-workspace-up = lib.mkDefault [ ];
+        switch-to-workspace-down = lib.mkDefault [ "<Ctrl><Super>Down" ];
+        switch-to-workspace-up = lib.mkDefault [ "<Ctrl><Super>Up" ];
+        switch-to-workspace-left = lib.mkDefault [ ];
+        switch-to-workspace-right = lib.mkDefault [ ];
+        maximize = lib.mkDefault [ ];
+        unmaximize = lib.mkDefault [ ];
       };
 
       "org/gnome/shell/keybindings" = {
-        open-application-menu = lib.mkDefault [];
-        toggle-message-tray = lib.mkDefault ["<Super>v"];
-        toggle-overview = lib.mkDefault [];
+        open-application-menu = lib.mkDefault [ ];
+        toggle-message-tray = lib.mkDefault [ "<Super>v" ];
+        toggle-overview = lib.mkDefault [ ];
       };
 
       "org/gnome/mutter/keybindings" = {
-        toggle-tiled-left = lib.mkDefault [];
-        toggle-tiled-right = lib.mkDefault [];
+        toggle-tiled-left = lib.mkDefault [ ];
+        toggle-tiled-right = lib.mkDefault [ ];
       };
 
       "org/gnome/mutter/wayland/keybindings" = {
-        restore-shortcuts = lib.mkDefault [];
+        restore-shortcuts = lib.mkDefault [ ];
       };
 
       "org/gnome/settings-daemon/plugins/media-keys" = {
-        screensaver = lib.mkDefault ["<Super>Escape"];
-        home = lib.mkDefault ["<Super>f"];
-        www = lib.mkDefault ["<Super>b"];
+        screensaver = lib.mkDefault [ "<Super>Escape" ];
+        home = lib.mkDefault [ "<Super>f" ];
+        www = lib.mkDefault [ "<Super>b" ];
         # terminal = lib.mkDefault ["<Super>t"]; # doesn't seem to work
-        email = lib.mkDefault ["<Super>e"];
-        rotate-video-lock-static = lib.mkDefault [];
+        email = lib.mkDefault [ "<Super>e" ];
+        rotate-video-lock-static = lib.mkDefault [ ];
       };
 
       "org/gnome/shell/extensions/pop-shell" = {
-        toggle-tiling = lib.mkDefault ["<Super>y"];
-        toggle-floating = lib.mkDefault ["<Super>g"];
-        tile-enter = lib.mkDefault ["<Super>Return"];
-        tile-accept = lib.mkDefault ["Return"];
-        tile-reject = lib.mkDefault ["Escape"];
-        toggle-stacking-global = lib.mkDefault ["<Super>s"];
-        pop-workspace-down = lib.mkDefault ["<Shift><Super>Down" "<Shift><Super>j"];
-        pop-workspace-up = lib.mkDefault ["<Shift><Super>Up" "<Shift><Super>k"];
-        pop-monitor-left = lib.mkDefault ["<Shift><Super>Left" "<Shift><Super>h"];
-        pop-monitor-right = lib.mkDefault ["<Shift><Super>Right" "<Shift><Super>l"];
-        pop-monitor-down = lib.mkDefault [];
-        pop-monitor-up = lib.mkDefault [];
-        focus-left = lib.mkDefault ["<Super>Left" "<Super>h"];
-        focus-down = lib.mkDefault ["<Super>Down" "<Super>j"];
-        focus-up = lib.mkDefault ["<Super>Up" "<Super>k"];
-        focus-right = lib.mkDefault ["<Super>Right" "<Super>l"];
+        toggle-tiling = lib.mkDefault [ "<Super>y" ];
+        toggle-floating = lib.mkDefault [ "<Super>g" ];
+        tile-enter = lib.mkDefault [ "<Super>Return" ];
+        tile-accept = lib.mkDefault [ "Return" ];
+        tile-reject = lib.mkDefault [ "Escape" ];
+        toggle-stacking-global = lib.mkDefault [ "<Super>s" ];
+        pop-workspace-down = lib.mkDefault [
+          "<Shift><Super>Down"
+          "<Shift><Super>j"
+        ];
+        pop-workspace-up = lib.mkDefault [
+          "<Shift><Super>Up"
+          "<Shift><Super>k"
+        ];
+        pop-monitor-left = lib.mkDefault [
+          "<Shift><Super>Left"
+          "<Shift><Super>h"
+        ];
+        pop-monitor-right = lib.mkDefault [
+          "<Shift><Super>Right"
+          "<Shift><Super>l"
+        ];
+        pop-monitor-down = lib.mkDefault [ ];
+        pop-monitor-up = lib.mkDefault [ ];
+        focus-left = lib.mkDefault [
+          "<Super>Left"
+          "<Super>h"
+        ];
+        focus-down = lib.mkDefault [
+          "<Super>Down"
+          "<Super>j"
+        ];
+        focus-up = lib.mkDefault [
+          "<Super>Up"
+          "<Super>k"
+        ];
+        focus-right = lib.mkDefault [
+          "<Super>Right"
+          "<Super>l"
+        ];
       };
 
       ########### Shortcuts ############
@@ -117,7 +145,10 @@
       # };
       # Set apps in dock
       "org/gnome/shell" = {
-        favorite-apps = lib.mkDefault ["firefox.desktop" "org.gnome.Console.desktop"];
+        favorite-apps = lib.mkDefault [
+          "firefox.desktop"
+          "org.gnome.Console.desktop"
+        ];
       };
       # # Window management
       # "org/gnome/desktop/wm/keybindings" = {
@@ -141,7 +172,7 @@
       };
       # Disable screensaver shortcut (frees up pop shell vim keybinds)
       "org/gnome/settings-daemon/plugin/media-keys" = {
-        screensaver = lib.mkDefault [];
+        screensaver = lib.mkDefault [ ];
       };
       "org/gnome/settings-daemon/plugins/housekeeping" = {
         donation-reminder-enabled = lib.mkDefault false;
@@ -198,7 +229,7 @@
       # Configure dash to dock
       "org/gnome/shell/extensions/dash-to-dock" = {
         show-trash = lib.mkDefault false;
-        shortcut = lib.mkDefault [];
+        shortcut = lib.mkDefault [ ];
       };
     };
   };

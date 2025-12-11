@@ -1,4 +1,5 @@
-{cosmicLib, ...}: {
+{ cosmicLib, ... }:
+{
   wayland.desktopManager.cosmic = {
     enable = true;
     configFile = {
@@ -10,8 +11,12 @@
           output = cosmicLib.cosmic.mkRON "raw" "All";
           autohover_delay_ms = cosmicLib.cosmic.mkRON "optional" 500;
           exclusive_zone = false;
-          autohide = cosmicLib.cosmic.mkRON "optional" (cosmicLib.cosmic.mkRON "raw" "(\n    wait_time: 500,\n    transition_time: 200,\n    handle_size: 2,\n)");
-          plugins_center = cosmicLib.cosmic.mkRON "optional" (cosmicLib.cosmic.mkRON "raw" "[\n    \"com.system76.CosmicPanelLauncherButton\",\n    \"com.system76.CosmicPanelWorkspacesButton\",\n    \"com.system76.CosmicPanelAppButton\",\n    \"com.system76.CosmicAppList\",\n    \"com.system76.CosmicAppletMinimize\",\n]");
+          autohide = cosmicLib.cosmic.mkRON "optional" (
+            cosmicLib.cosmic.mkRON "raw" "(\n    wait_time: 500,\n    transition_time: 200,\n    handle_size: 2,\n)"
+          );
+          plugins_center = cosmicLib.cosmic.mkRON "optional" (
+            cosmicLib.cosmic.mkRON "raw" "[\n    \"com.system76.CosmicPanelLauncherButton\",\n    \"com.system76.CosmicPanelWorkspacesButton\",\n    \"com.system76.CosmicPanelAppButton\",\n    \"com.system76.CosmicAppList\",\n    \"com.system76.CosmicAppletMinimize\",\n]"
+          );
           anchor = cosmicLib.cosmic.mkRON "raw" "Bottom";
           size = cosmicLib.cosmic.mkRON "raw" "L";
           border_radius = 12;
@@ -75,11 +80,15 @@
         version = 1;
         entries = {
           anchor = cosmicLib.cosmic.mkRON "raw" "Bottom";
-          plugins_center = cosmicLib.cosmic.mkRON "optional" (cosmicLib.cosmic.mkRON "raw" "[\n    \"com.system76.CosmicAppList\",\n    \"com.system76.CosmicAppletMinimize\",\n]");
+          plugins_center = cosmicLib.cosmic.mkRON "optional" (
+            cosmicLib.cosmic.mkRON "raw" "[\n    \"com.system76.CosmicAppList\",\n    \"com.system76.CosmicAppletMinimize\",\n]"
+          );
           anchor_gap = true;
           size = cosmicLib.cosmic.mkRON "raw" "XL";
           layer = cosmicLib.cosmic.mkRON "raw" "Top";
-          autohide = cosmicLib.cosmic.mkRON "optional" (cosmicLib.cosmic.mkRON "raw" "(\n    wait_time: 500,\n    transition_time: 200,\n    handle_size: 2,\n)");
+          autohide = cosmicLib.cosmic.mkRON "optional" (
+            cosmicLib.cosmic.mkRON "raw" "(\n    wait_time: 500,\n    transition_time: 200,\n    handle_size: 2,\n)"
+          );
           opacity = 1.0;
           plugins_wings = cosmicLib.cosmic.mkRON "optional" null;
           spacing = 4;
@@ -108,11 +117,15 @@
           size_center = cosmicLib.cosmic.mkRON "optional" null;
           opacity = 1.0;
           border_radius = 0;
-          plugins_wings = cosmicLib.cosmic.mkRON "optional" (cosmicLib.cosmic.mkRON "raw" "([\n    \"com.system76.CosmicPanelWorkspacesButton\",\n    \"com.system76.CosmicPanelAppButton\",\n], [\n    \"com.system76.CosmicAppletInputSources\",\n    \"com.system76.CosmicAppletA11y\",\n    \"com.system76.CosmicAppletStatusArea\",\n    \"com.system76.CosmicAppletTiling\",\n    \"com.system76.CosmicAppletAudio\",\n    \"com.system76.CosmicAppletBluetooth\",\n    \"com.system76.CosmicAppletNetwork\",\n    \"com.system76.CosmicAppletBattery\",\n    \"com.system76.CosmicAppletNotifications\",\n    \"com.system76.CosmicAppletPower\",\n])");
+          plugins_wings = cosmicLib.cosmic.mkRON "optional" (
+            cosmicLib.cosmic.mkRON "raw" "([\n    \"com.system76.CosmicPanelWorkspacesButton\",\n    \"com.system76.CosmicPanelAppButton\",\n], [\n    \"com.system76.CosmicAppletInputSources\",\n    \"com.system76.CosmicAppletA11y\",\n    \"com.system76.CosmicAppletStatusArea\",\n    \"com.system76.CosmicAppletTiling\",\n    \"com.system76.CosmicAppletAudio\",\n    \"com.system76.CosmicAppletBluetooth\",\n    \"com.system76.CosmicAppletNetwork\",\n    \"com.system76.CosmicAppletBattery\",\n    \"com.system76.CosmicAppletNotifications\",\n    \"com.system76.CosmicAppletPower\",\n])"
+          );
           spacing = 2;
           margin = 0;
           anchor = cosmicLib.cosmic.mkRON "raw" "Top";
-          plugins_center = cosmicLib.cosmic.mkRON "optional" (cosmicLib.cosmic.mkRON "raw" "[\n    \"com.system76.CosmicAppletTime\",\n]");
+          plugins_center = cosmicLib.cosmic.mkRON "optional" (
+            cosmicLib.cosmic.mkRON "raw" "[\n    \"com.system76.CosmicAppletTime\",\n]"
+          );
           name = "\"Panel\"";
           size_wings = cosmicLib.cosmic.mkRON "optional" null;
           layer = cosmicLib.cosmic.mkRON "raw" "Top";
@@ -196,7 +209,9 @@
           corner_radii = cosmicLib.cosmic.mkRON "raw" "(\n    radius_0: (0.0, 0.0, 0.0, 0.0),\n    radius_xs: (4.0, 4.0, 4.0, 4.0),\n    radius_s: (8.0, 8.0, 8.0, 8.0),\n    radius_m: (16.0, 16.0, 16.0, 16.0),\n    radius_l: (32.0, 32.0, 32.0, 32.0),\n    radius_xl: (160.0, 160.0, 160.0, 160.0),\n)";
           gaps = cosmicLib.cosmic.mkRON "raw" "(0, 0)";
           active_hint = 0;
-          accent = cosmicLib.cosmic.mkRON "optional" (cosmicLib.cosmic.mkRON "raw" "(\n    red: 0.7921569,\n    green: 0.7294118,\n    blue: 0.7058824,\n)");
+          accent = cosmicLib.cosmic.mkRON "optional" (
+            cosmicLib.cosmic.mkRON "raw" "(\n    red: 0.7921569,\n    green: 0.7294118,\n    blue: 0.7058824,\n)"
+          );
         };
       };
       "com.system76.CosmicAppList" = {

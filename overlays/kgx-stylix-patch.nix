@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   colors = config.lib.stylix.colors;
 
   patchTemplate = ./kgx.patch;
@@ -24,20 +25,12 @@
   #     )
   #     (lib.range 0 15));
 
-  lightColors =
-    lib.concatStringsSep " "
-    (lib.imap0 (
-        i: base:
-          subst "#LIGHT_COLOR_${lib.strings.fixedWidthNumber 2 i}#" base
-      )
-      (colors.toList));
-  darkColors =
-    lib.concatStringsSep " "
-    (lib.imap0 (
-        i: base:
-          subst "#DARK_COLOR_${lib.strings.fixedWidthNumber 2 i}#" base
-      )
-      (colors.toList));
+  lightColors = lib.concatStringsSep " " (
+    lib.imap0 (i: base: subst "#LIGHT_COLOR_${lib.strings.fixedWidthNumber 2 i}#" base) (colors.toList)
+  );
+  darkColors = lib.concatStringsSep " " (
+    lib.imap0 (i: base: subst "#DARK_COLOR_${lib.strings.fixedWidthNumber 2 i}#" base) (colors.toList)
+  );
 
   # Foreground/Background (hier einzeln, da RGBA-Struct)
   rgbaSubsts = lib.concatStringsSep " " [
@@ -60,15 +53,16 @@
     (subst "#DARK_BACKGRND_A#" "1.0")
   ];
 
-  patchWithColors = pkgs.runCommand "kgx-theme-patch" {} ''
+  patchWithColors = pkgs.runCommand "kgx-theme-patch" { } ''
     sed ${lightColors} ${darkColors} ${rgbaSubsts} \
       ${patchTemplate} > $out
   '';
-in {
+in
+{
   nixpkgs.overlays = [
     (self: super: {
       gnome-console = super.gnome-console.overrideAttrs (old: {
-        patches = (old.patches or []) ++ [patchWithColors];
+        patches = (old.patches or [ ]) ++ [ patchWithColors ];
       });
     })
   ];

@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   home.packages = with pkgs; [
     waybar
     hyprcorners
@@ -15,7 +16,10 @@
     enable = true;
     package = pkgs.hyprland;
     xwayland.enable = true;
-    plugins = with pkgs.hyprlandPlugins; [hyprexpo hyprbars];
+    plugins = with pkgs.hyprlandPlugins; [
+      hyprexpo
+      hyprbars
+    ];
     settings = {
       exec-once = [
         "${pkgs.waybar}/bin/waybar &"
@@ -128,8 +132,13 @@
     enable = true;
     settings = {
       mainBar = {
-        modules-center = ["clock"];
-        modules-right = ["tray" "bluetooth" "network" "wireplumber"];
+        modules-center = [ "clock" ];
+        modules-right = [
+          "tray"
+          "bluetooth"
+          "network"
+          "wireplumber"
+        ];
 
         bluetooth = {
           format = "󰂯";
@@ -155,7 +164,9 @@
           tooltip-format-disconnected = "Disconnected";
           interval = 3;
           nospacing = 1;
-          on-click = with pkgs; "${kitty}/bin/kitty -e bash -c '${networkmanager}/bin/nmcli | ${less}/bin/less'";
+          on-click =
+            with pkgs;
+            "${kitty}/bin/kitty -e bash -c '${networkmanager}/bin/nmcli | ${less}/bin/less'";
         };
         wireplumber = {
           # Changed from "pulseaudio"

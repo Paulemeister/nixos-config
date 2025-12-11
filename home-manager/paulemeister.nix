@@ -7,7 +7,8 @@
   pkgs,
   pkgs-unstable,
   ...
-}: {
+}:
+{
   imports = [
     inputs.impermanence.homeManagerModules.impermanence
     # inputs.cosmic-manager.homeManagerModules.cosmic-manager
@@ -25,13 +26,11 @@
     # inputs.sidewinderd.homeManagerModules.sidewinderd
     inputs.lan-mouse.homeManagerModules.default
   ];
-  
+
   programs.lan-mouse = {
     enable = true;
     package = pkgs.lan-mouse;
   };
-
-
 
   xsession.numlock.enable = true;
   services.syncthing.enable = true;
@@ -55,7 +54,7 @@
         "Code"
         ".ssh"
         ".local/share/keyrings"
-        
+
         ".mozilla"
         ".thunderbird"
         ".cache"
@@ -67,14 +66,12 @@
         ".config/easyeffects"
         ".config/discord"
         ".config/obsidian"
-        
+
         ".config/AusweisApp"
         ".config/OpenRGB"
         ".config/spotify"
         ".local/share/applications" # persist custom .desktop entries (quick-webapps)
 
-
-        
       ];
       allowOther = true;
       files = [
@@ -96,15 +93,14 @@
     gst_all_1.gst-vaapi
     signal-desktop
     discord
-    (obsidian.overrideAttrs
-      (p: rec {
-        desktopItem = p.desktopItem.override (q: {
-          # Use german local for proper date time picker in german (doesnt respect locale properly)
-          exec = "env LANG=de_DE.UTF-8 LANGUAGE=de ${q.exec}";
-        });
+    (obsidian.overrideAttrs (p: rec {
+      desktopItem = p.desktopItem.override (q: {
+        # Use german local for proper date time picker in german (doesnt respect locale properly)
+        exec = "env LANG=de_DE.UTF-8 LANGUAGE=de ${q.exec}";
+      });
 
-        installPhase = builtins.replaceStrings ["${p.desktopItem}"] ["${desktopItem}"] p.installPhase;
-      }))
+      installPhase = builtins.replaceStrings [ "${p.desktopItem}" ] [ "${desktopItem}" ] p.installPhase;
+    }))
     clinfo
     cpu-x
     packet
@@ -121,7 +117,7 @@
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "application/zip" = ["org.gnome.FileRoller.desktop"];
+        "application/zip" = [ "org.gnome.FileRoller.desktop" ];
       };
     };
     configFile."cosmic-initial-setup-done".text = "";
@@ -135,18 +131,13 @@
   # Add programs through modules
   programs = {
     home-manager.enable = true;
-    
-    
-  
+
     thunderbird = {
       enable = true;
       profiles."Paul Budden" = {
         isDefault = true;
       };
     };
-
-    
-
 
     git = {
       enable = true;
@@ -207,7 +198,7 @@
         };
       };
     };
-    
+
     # gnome-terminal = {
     #   enable = true;
     #   package = pkgs.gnome-terminal;

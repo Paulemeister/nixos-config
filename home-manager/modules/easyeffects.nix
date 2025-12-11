@@ -2,13 +2,14 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   services.easyeffects = {
     enable = true;
     extraPresets = {
       m-track_duo = {
         input = {
-          "blocklist" = [];
+          "blocklist" = [ ];
           "plugins_order" = [
             "stereo_tools#0"
             "autogain#0"
