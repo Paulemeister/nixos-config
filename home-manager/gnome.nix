@@ -1,86 +1,158 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: {
   # add shell extensions packages
   home.packages = with pkgs.gnomeExtensions; [
     vertical-workspaces
-    forge
+    # forge
     dash-to-dock
     appindicator
-    # add dconf editor
+
+    pop-shell # add dconf editor
+
     pkgs.dconf-editor
   ];
   # Configure dconf settings for gnome
   dconf = {
     enable = true;
     settings = {
+      ############# from github: for pop-shell #################
       # Color scheme
       "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
+        color-scheme = lib.mkDefault "prefer-dark";
       };
+      "org/gnome/desktop/wm/keybindings" = {
+        close = lib.mkDefault ["<Super>q" "<Alt>F4"];
+        minimize = lib.mkDefault ["<Super>comma"];
+        toggle-maximized = lib.mkDefault ["<Super>m"];
+        move-to-monitor-left = lib.mkDefault [];
+        move-to-monitor-right = lib.mkDefault [];
+        move-to-monitor-up = lib.mkDefault [];
+        move-to-monitor-down = lib.mkDefault [];
+        move-to-workspace-down = lib.mkDefault [];
+        move-to-workspace-up = lib.mkDefault [];
+        switch-to-workspace-down = lib.mkDefault ["<Ctrl><Super>Down"];
+        switch-to-workspace-up = lib.mkDefault ["<Ctrl><Super>Up"];
+        switch-to-workspace-left = lib.mkDefault [];
+        switch-to-workspace-right = lib.mkDefault [];
+        maximize = lib.mkDefault [];
+        unmaximize = lib.mkDefault [];
+      };
+
+      "org/gnome/shell/keybindings" = {
+        open-application-menu = lib.mkDefault [];
+        toggle-message-tray = lib.mkDefault ["<Super>v"];
+        toggle-overview = lib.mkDefault [];
+      };
+
+      "org/gnome/mutter/keybindings" = {
+        toggle-tiled-left = lib.mkDefault [];
+        toggle-tiled-right = lib.mkDefault [];
+      };
+
+      "org/gnome/mutter/wayland/keybindings" = {
+        restore-shortcuts = lib.mkDefault [];
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys" = {
+        screensaver = lib.mkDefault ["<Super>Escape"];
+        home = lib.mkDefault ["<Super>f"];
+        www = lib.mkDefault ["<Super>b"];
+        # terminal = lib.mkDefault ["<Super>t"]; # doesn't seem to work
+        email = lib.mkDefault ["<Super>e"];
+        rotate-video-lock-static = lib.mkDefault [];
+      };
+
+      "org/gnome/shell/extensions/pop-shell" = {
+        toggle-tiling = lib.mkDefault ["<Super>y"];
+        toggle-floating = lib.mkDefault ["<Super>g"];
+        tile-enter = lib.mkDefault ["<Super>Return"];
+        tile-accept = lib.mkDefault ["Return"];
+        tile-reject = lib.mkDefault ["Escape"];
+        toggle-stacking-global = lib.mkDefault ["<Super>s"];
+        pop-workspace-down = lib.mkDefault ["<Shift><Super>Down" "<Shift><Super>j"];
+        pop-workspace-up = lib.mkDefault ["<Shift><Super>Up" "<Shift><Super>k"];
+        pop-monitor-left = lib.mkDefault ["<Shift><Super>Left" "<Shift><Super>h"];
+        pop-monitor-right = lib.mkDefault ["<Shift><Super>Right" "<Shift><Super>l"];
+        pop-monitor-down = lib.mkDefault [];
+        pop-monitor-up = lib.mkDefault [];
+        focus-left = lib.mkDefault ["<Super>Left" "<Super>h"];
+        focus-down = lib.mkDefault ["<Super>Down" "<Super>j"];
+        focus-up = lib.mkDefault ["<Super>Up" "<Super>k"];
+        focus-right = lib.mkDefault ["<Super>Right" "<Super>l"];
+      };
+
       ########### Shortcuts ############
       # Launching Applications
       "org/gnome/settings-daemon/plugins/media-keys" = {
-        custom-keybindings = [
+        custom-keybindings = lib.mkDefault [
           "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/"
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser/"
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/files/"
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/mail/"
+          #     "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser/"
+          #     "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/files/"
+          #     "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/mail/"
         ];
       };
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal" = {
-        binding = "<Super>t";
-        command = "kgx";
-        name = "Open Terminal";
+        binding = lib.mkDefault "<Super>t";
+        command = lib.mkDefault "kgx";
+        name = lib.mkDefault "Open Terminal";
       };
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser" = {
-        binding = "<Super>b";
-        command = "firefox";
-        name = "Open Firefox";
-      };
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/files" = {
-        binding = "<Super>f";
-        command = "nautilus -w";
-        name = "Open File Manager";
-      };
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/mail" = {
-        binding = "<Super>e";
-        command = "thunderbird";
-        name = "Open E-Mail Client";
-      };
+      # "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser" = {
+      #   binding = lib.mkDefault "<Super>b";
+      #   command = lib.mkDefault "firefox";
+      #   name = lib.mkDefault "Open Firefox";
+      # };
+      # "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/files" = {
+      #   binding = lib.mkDefault "<Super>f";
+      #   command = lib.mkDefault "nautilus -w";
+      #   name = lib.mkDefault "Open File Manager";
+      # };
+      # "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/mail" = {
+      #   binding = lib.mkDefault "<Super>e";
+      #   command = lib.mkDefault "thunderbird";
+      #   name = lib.mkDefault "Open E-Mail Client";
+      # };
       # Set apps in dock
       "org/gnome/shell" = {
-        favorite-apps = ["firefox.desktop" "org.gnome.Console.desktop"];
+        favorite-apps = lib.mkDefault ["firefox.desktop" "org.gnome.Console.desktop"];
       };
-      # Window management
-      "org/gnome/desktop/wm/keybindings" = {
-        switch-to-workspace-left = ["<Super><Control>Left"];
-        switch-to-workspace-right = ["<Super><Control>Right"];
-        switch-to-workspace-up = ["<Super><Control>Up"];
-        switch-to-workspace-down = ["<Super><Control>Down"];
-        move-to-workspace-left = ["<Super><Ctrl><Shift>Left"];
-        move-to-workspace-right = ["<Super><Ctrl><Shift>Right"];
-        move-to-workspace-up = ["<Super><Ctrl><Shift>Up"];
-        move-to-workspace-down = ["<Super><Ctrl><Shift>Down"];
-        minimize = ["<Super><Shift>m"];
-        maximize = [];
-        toggle-maximized = ["<Super>m"]; # opens calendar on top?
-        close = ["<Super>q"];
-      };
+      # # Window management
+      # "org/gnome/desktop/wm/keybindings" = {
+      #   switch-to-workspace-left = lib.mkDefault ["<Super><Control>Left"];
+      #   switch-to-workspace-right = lib.mkDefault ["<Super><Control>Right"];
+      #   switch-to-workspace-up = lib.mkDefault ["<Super><Control>Up"];
+      #   switch-to-workspace-down = lib.mkDefault ["<Super><Control>Down"];
+      #   move-to-workspace-left = lib.mkDefault ["<Super><Ctrl><Shift>Left"];
+      #   move-to-workspace-right = lib.mkDefault ["<Super><Ctrl><Shift>Right"];
+      #   move-to-workspace-up = lib.mkDefault ["<Super><Ctrl><Shift>Up"];
+      #   move-to-workspace-down = lib.mkDefault ["<Super><Ctrl><Shift>Down"];
+      #   minimize = lib.mkDefault ["<Super><Shift>m"];
+      #   maximize = lib.mkDefault [];
+      #   toggle-maximized = lib.mkDefault ["<Super>m"]; # opens calendar on top?
+      #   close = lib.mkDefault ["<Super>q"];
+      # };
       ############ Misc ###############
       # Enable night light
       "org/gnome/settings-daemon/plugins/color" = {
-        night-light-enabled = true;
+        night-light-enabled = lib.mkDefault true;
+      };
+      # Disable screensaver shortcut (frees up pop shell vim keybinds)
+      "org/gnome/settings-daemon/plugin/media-keys" = {
+        screensaver = lib.mkDefault [];
+      };
+      "org/gnome/settings-daemon/plugins/housekeeping" = {
+        donation-reminder-enabled = lib.mkDefault false;
       };
       # Enable window snapping
       # "org/gnome/mutter" = {
-      #   edge-tiling = true;
+      #   edge-tiling = lib.mkDefault true;
       # };
       # Disable greeting
       "org/gnome/shell" = {
-        welcome-dialog-last-shown-version = pkgs.gnome-shell.version;
+        welcome-dialog-last-shown-version = lib.mkDefault pkgs.gnome-shell.version;
       };
       # Make EurKey show up / usable
       "org/gnome/desktop/input-sources".show-all-sources = true;
@@ -88,38 +160,45 @@
       "ca/desrt/dconf-editor".show-warning = false;
 
       "org/gnome/desktop/peripherals/keyboard" = {
-        numlock-state = true;
+        numlock-state = lib.mkDefault true;
       };
 
       # Enable extensions
       "org/gnome/shell" = {
-        disable-user-extensions = false;
+        disable-user-extensions = lib.mkDefault false;
         enabled-extensions = with pkgs.gnomeExtensions; [
           vertical-workspaces.extensionUuid
-          forge.extensionUuid
+          # forge.extensionUuid
           dash-to-dock.extensionUuid
           appindicator.extensionUuid
+          pop-shell.extensionUuid
         ];
+      };
+      # Configure pop-shell
+      "org/gnome/shell/extensions/pop-shell" = {
+        gap-inner = lib.mkDefault 1;
+        gap-outer = lib.mkDefault 1;
+        tile-by-default = lib.mkDefault true;
       };
       # Configure vertical workspaces
       "org/gnome/shell/extensions/vertical-workspaces" = {
-        center-dash-to-ws = false;
-        dash-position = 2;
-        dash-position-adjust = 0;
-        show-app-icon-position = 2;
-        startup-state = 1;
-        wst-position-adjust = 0;
+        center-dash-to-ws = lib.mkDefault false;
+        dash-position = lib.mkDefault 2;
+        dash-position-adjust = lib.mkDefault 0;
+        show-app-icon-position = lib.mkDefault 2;
+        startup-state = lib.mkDefault 1;
+        wst-position-adjust = lib.mkDefault 0;
       };
       # Configure forge (auto tiling)
-      "org/gnome/shell/extensions/forge" = {
-        dns-center-layout = "tabbed";
-        stacked-tiling-mode-enabled = false;
-        window-gap-size = 0;
-      };
+      # "org/gnome/shell/extensions/forge" = {
+      #   dns-center-layout = lib.mkDefault "tabbed";
+      #   stacked-tiling-mode-enabled = lib.mkDefault false;
+      #   window-gap-size = lib.mkDefault 0;
+      # };
       # Configure dash to dock
       "org/gnome/shell/extensions/dash-to-dock" = {
-        show-trash = false;
-        shortcut = [];
+        show-trash = lib.mkDefault false;
+        shortcut = lib.mkDefault [];
       };
     };
   };

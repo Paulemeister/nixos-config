@@ -12,10 +12,25 @@ in {
 
   nix.settings = {
     trusted-users = ["root" "paulemeister"];
-    # build-dir = /var/tmp/nix;
+    substituters = [
+      "https://lan-mouse.cachix.org/"
+      "https://cache.nixos.org/"
+    ];
+    trusted-public-keys = [
+      "lan-mouse.cachix.org-1:KlE2AEZUgkzNKM7BIzMQo8w9yJYqUpor1CAUNRY6OyM="
+    ];
   };
+  # build-dir = /var/tmp/nix;
 
+  # services.gnome.gnome-keyring = {
+  #   enable = lib.mkForce false;
+  #   # components = ["secrets" "pkcs11"];
+  # };
+
+  # services.xserver.desktopManager.gnome.sessionPath = [pkgs.gnomeExtensions.pop-shell];
   environment.localBinInPath = true;
+  # for desktop portals
+  environment.pathsToLink = ["/share/xdg-desktop-portal" "/share/applications"];
   # services.open-webui = {
   #   enable = true;
   # };
@@ -41,8 +56,8 @@ in {
     polarity = "dark";
     image = ../misc/wallpaper.jpg;
     # base16Scheme = "${pkgs-unstable.base16-schemes}/share/themes/0x96f.yaml";
-    # base16Scheme = "${pkgs-unstable.base16-schemes}/share/themes/default-dark.yaml";
-    base16Scheme = ../misc/dark_plus_custom.yaml;
+    base16Scheme = "${pkgs-unstable.base16-schemes}/share/themes/default-dark.yaml";
+    # base16Scheme = ../misc/dark_plus_custom.yaml;
     # base16Scheme = {
     #   "scheme" = "OneDarker";
     #   "author" = "guill (based on 256-color onedark.vim)";
@@ -162,6 +177,16 @@ in {
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     # dynamic libs go here
+    dbus # libdbus-1.so.3
+    fontconfig # libfontconfig.so.1
+    freetype # libfreetype.so.6
+    libGL # libGL.so.1
+    libxkbcommon # libxkbcommon.so.0
+    xorg.libX11 # libX11.so.6
+    wayland
+
+    glib # libglib-2.0.so.0
+    zstd # libzstd.so.1
   ];
 
   programs.ausweisapp = {
@@ -169,8 +194,8 @@ in {
     openFirewall = true;
   };
 
-  # Open port for packet (quick share)
-  networking.firewall.allowedTCPPorts = [9300];
+  # Open port for packet (quick share), lan-mouse
+  networking.firewall.allowedTCPPorts = [9300 4242];
 
   # Don't lecture on first usage of sudo
   security.sudo.extraConfig = "Defaults lecture = never";
@@ -298,7 +323,7 @@ in {
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
 
-  services.blueman.enable = true;
+  # services.blueman.enable = true;
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -391,7 +416,7 @@ in {
   in ''
     mkdir -p /var/lib/AccountsService/{icons,users}
     cp ${../home-manager/dotfiles/paulemeister-icon} /var/lib/AccountsService/icons/${name}
-    echo -e "[User]\nIcon=/var/lib/AccountsService/icons/${name}\n" > /var/lib/AccountsService/users/${name}
+    echo -e "[User]\nSession=cosmic\nIcon=/var/lib/AccountsService/icons/${name}\n" > /var/lib/AccountsService/users/${name}
 
     chown root:root /var/lib/AccountsService/users/${name}
     chmod 0600 /var/lib/AccountsService/users/${name}

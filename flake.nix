@@ -2,15 +2,15 @@
   description = "Paulemeisters Flake";
 
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     stylix = {
-      # url = "github:nix-community/stylix/release-25.05";
-      url = "github:nix-community/stylix/";
+      url = "github:nix-community/stylix/release-25.11";
+      # url = "github:nix-community/stylix/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -20,14 +20,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    lan-mouse = {
+      url = "github:feschber/lan-mouse";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hyprcorners = {
       url = "github:paulemeister/hyprcorners-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
-      # url = "github:nix-community/home-manager/release-25.05";
-      url = "github:nix-community/home-manager/";
+      url = "github:nix-community/home-manager/release-25.11";
+      # url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
