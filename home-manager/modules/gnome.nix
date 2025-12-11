@@ -213,7 +213,7 @@
   # '';
   # };
   xdg.configFile."forge/config/windows.json" = {
-    source = ./dotfiles/forge/windows.json;
+    source = ../dotfiles/forge/windows.json;
     force = true;
   };
 }

@@ -11,84 +11,29 @@
   imports = [
     inputs.impermanence.homeManagerModules.impermanence
     # inputs.cosmic-manager.homeManagerModules.cosmic-manager
-    # ./cosmic-manager-settings.nix
-    ./gnome.nix
-    ./easyeffects.nix
-    ./daw.nix
-    ./gaming.nix
-    ./programming.nix
-    ./hyprland.nix
-    ./cli-tools.nix
-    # ./openrgb.nix
+    # ./modules/cosmic-manager-settings.nix
+    ./modules/gnome.nix
+    ./modules/easyeffects.nix
+    ./modules/daw.nix
+    ./modules/gaming.nix
+    ./modules/programming.nix
+    ./modules/hyprland.nix
+    ./modules/cli-tools.nix
+    ./modules/cosmic-epoch.nix
+    ./modules/nix-tools.nix
+    # ./modules/openrgb.nix
     # inputs.sidewinderd.homeManagerModules.sidewinderd
     inputs.lan-mouse.homeManagerModules.default
   ];
-  # services.ssh-agent.enable = true;
-  # services.gnome-keyring = {
-  #   enable = true;
-  #   components = ["secrets" "pkcs11"];
-  # };
+  
   programs.lan-mouse = {
     enable = true;
     package = pkgs.lan-mouse;
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gnome
-      xdg-desktop-portal-cosmic
-      xdg-desktop-portal
-    ];
-    configPackages = with pkgs; [
-      xdg-desktop-portal-gnome
-      xdg-desktop-portal-cosmic
-      xdg-desktop-portal
-    ];
-  };
-  systemd.user.services.hotcorner = {
-    Unit = {
-      Description = "Service for the hotcorner on cosmic-epoch";
-      After = ["graphical-session-post.target"];
-      BindsTo = ["cosmic-session.target"];
-    };
-    Service = {
-      # ExecCondition = "${pkgs.procps}/bin/pgrep -xf cosmic-workspaces";
-      ExecStart = "${pkgs.waycorner}/bin/waycorner";
-      # ExecStart = "${pkgs.coreutils}/bin/env";
-      ExecStartPre = "${pkgs.procps}/bin/pgrep -xf cosmic-workspaces";
-      Restart = "on-failure";
-      RestartSec = 2;
-      # Type = "oneshot";
-    };
-    Install = {
-      WantedBy = ["default.target"];
-    };
-  };
 
-  xdg.configFile."waycorner/config.toml".text = ''
-    [main-monitor]
-    enter_command = [  "${pkgs.cosmic-workspaces-epoch}/bin/cosmic-workspaces" ]
-    # enter_command = [  "${pkgs.firefox}/bin/firefox" ]
-    locations = [ "top_left"]  # default
-    size = 10  # default
-    margin = 20  # default
-    timeout_ms = 0  # default
-    color = "#FFFF0000"  # default
-  '';
 
-  # home.activation.resetPanels = lib.hm.dag.entryAfter ["configureCosmic"] ''
-  #   exec ${pkgs.procps}/bin/pkill cosmic-panel
-  # '';
-  # programs.cosmic-manager.enable = true;
-  # services.sidewinderd = {
-  #   enable = true;
-  #   settings.capture_delays = false;
-  # };
-
-  # services.blueman-applet.enable = true;
   xsession.numlock.enable = true;
-
   services.syncthing.enable = true;
 
   # systemd.user.services.wireplumber.unitConfig = {
@@ -110,10 +55,7 @@
         "Code"
         ".ssh"
         ".local/share/keyrings"
-        {
-          directory = ".local/share/Steam";
-          method = "symlink";
-        }
+        
         ".mozilla"
         ".thunderbird"
         ".cache"
@@ -125,16 +67,14 @@
         ".config/easyeffects"
         ".config/discord"
         ".config/obsidian"
-        ".config/cosmic" # give up on cosmic-manager, as it has bugs when reloading home-manager -> dissapearing panels
+        
         ".config/AusweisApp"
         ".config/OpenRGB"
         ".config/spotify"
         ".local/share/applications" # persist custom .desktop entries (quick-webapps)
-        ".local/share/uv"
-        ".local/bin"
-        ".vscode"
-        ".config/Code"
-        ".config/gh"
+
+
+        
       ];
       allowOther = true;
       files = [
@@ -147,12 +87,6 @@
   # Add packages
 
   home.packages = with pkgs; [
-    nixd # nix language server
-    alejandra # nix formatter
-    fastfetch
-    uv
-    gh
-    tlrc
     gst_all_1.gstreamer
     gst_all_1.gst-plugins-base
     gst_all_1.gst-plugins-good
@@ -171,7 +105,6 @@
 
         installPhase = builtins.replaceStrings ["${p.desktopItem}"] ["${desktopItem}"] p.installPhase;
       }))
-    nix-output-monitor
     clinfo
     cpu-x
     packet
@@ -201,12 +134,10 @@
 
   # Add programs through modules
   programs = {
-    btop = {
-      enable = true;
-      settings = {
-        vim_keys = false;
-      };
-    };
+    home-manager.enable = true;
+    
+    
+  
     thunderbird = {
       enable = true;
       profiles."Paul Budden" = {
@@ -214,23 +145,8 @@
       };
     };
 
-    helix = {
-      enable = true;
-      defaultEditor = true;
-      settings = {
-        editor.line-number = "relative";
-      };
-      languages.language = [
-        {
-          name = "nix";
-          language-servers = ["nixd" "nil"];
-          formatter.command = "alejandra";
-          auto-format = true;
-        }
-      ];
-    };
+    
 
-    home-manager.enable = true;
 
     git = {
       enable = true;
@@ -291,15 +207,7 @@
         };
       };
     };
-    mangohud = {
-      enable = true;
-      # enableSessionWide = true;
-    };
-    nh = {
-      enable = true;
-      flake = "/home/paulemeister/Code/nixos-config";
-    };
-    yazi.enable = true;
+    
     # gnome-terminal = {
     #   enable = true;
     #   package = pkgs.gnome-terminal;
