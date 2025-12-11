@@ -12,7 +12,7 @@
   home.persistence."/persist/home/paulemeister".directories = [
     ".local/share/uv"
     ".config/gh"
-    ".local/bin" # make uv binaries detectable
+    ".local/bin" # make uv binaries persistent
     ".vscode"
     ".config/Code"
   ];
