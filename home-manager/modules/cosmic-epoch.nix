@@ -5,11 +5,16 @@
   #   enable = true;
   #   components = ["secrets" "pkcs11"];
   # };
-  home.persistence."/persist/home/paulemeister".directories = [
+  home.persistence."/persist".directories = [
 
     ".config/cosmic" # give up on cosmic-manager, as it has bugs when reloading home-manager -> dissapearing panels
   ];
 
+  home.packages = with pkgs; [
+    adwaita-icon-theme-legacy
+    adwaita-icon-theme
+    hicolor-icon-theme
+  ];
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [

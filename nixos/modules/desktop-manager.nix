@@ -42,6 +42,7 @@
     gnome-characters
     gnome-user-docs
     gnome-browser-connector
+    gnome-console
     cheese
     epiphany
     geary

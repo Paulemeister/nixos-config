@@ -93,6 +93,7 @@ in
     description = "Paulemeister";
     extraGroups = [
       "networkmanager"
+      "dialout" # tilp
       "wheel"
       "vboxusers"
       "plugdev"

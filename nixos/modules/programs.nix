@@ -11,8 +11,10 @@
   };
 
   # Open port for packet (quick share), lan-mouse
-  networking.firewall.allowedTCPPorts = [
-    9300 # Quick Share
-    4242 # Lan-mouse
-  ];
+  networking.firewall = {
+    allowedTCPPorts = [
+      9300 # Quick Share
+    ];
+    allowedUDPPorts = [ 4242 ]; # Lan-Mouse
+  };
 }

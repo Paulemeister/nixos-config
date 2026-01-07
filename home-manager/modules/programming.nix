@@ -9,7 +9,7 @@
     #alejandra # nix formatter
     nixfmt # nix formatter
   ];
-  home.persistence."/persist/home/paulemeister".directories = [
+  home.persistence."/persist".directories = [
     ".local/share/uv"
     ".config/gh"
     ".local/bin" # make uv binaries persistent

@@ -5,6 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
@@ -52,6 +53,7 @@
       self,
       nixpkgs,
       nixpkgs-unstable,
+      nixpkgs-master,
       chaotic,
       home-manager,
       stylix,
@@ -64,6 +66,10 @@
       inherit (self) outputs;
       system = "x86_64-linux";
       pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      pkgs-master = import nixpkgs-master {
         inherit system;
         config.allowUnfree = true;
       };
@@ -80,6 +86,7 @@
               inputs
               outputs
               pkgs-unstable
+              pkgs-master
               pkgs-chaotic
               ;
           };

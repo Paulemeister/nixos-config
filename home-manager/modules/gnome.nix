@@ -124,7 +124,7 @@
       };
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal" = {
         binding = lib.mkDefault "<Super>t";
-        command = lib.mkDefault "kgx";
+        command = lib.mkDefault "${pkgs.kitty}/bin/kitty";
         name = lib.mkDefault "Open Terminal";
       };
       # "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser" = {
@@ -146,7 +146,8 @@
       "org/gnome/shell" = {
         favorite-apps = lib.mkDefault [
           "firefox.desktop"
-          "org.gnome.Console.desktop"
+          # "org.gnome.Console.desktop"
+          "kitty.desktop"
         ];
       };
       # # Window management

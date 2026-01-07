@@ -4,10 +4,10 @@
     prismlauncher
   ];
 
-  home.persistence."/persist/home/paulemeister".directories = [
+  home.persistence."/persist".directories = [
     {
       directory = ".local/share/Steam";
-      method = "symlink";
+      # method = "symlink";
     }
   ];
   programs = {

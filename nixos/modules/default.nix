@@ -14,6 +14,8 @@
     ./sound.nix
     ./stylix.nix
     ./theseus-peripherals.nix
+    ./virtualization.nix
+    ./appimages.nix
   ];
 
 }

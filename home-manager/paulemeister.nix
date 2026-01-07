@@ -8,7 +8,7 @@
 }:
 {
   imports = [
-    inputs.impermanence.homeManagerModules.impermanence
+    # inputs.impermanence.homeManagerModules.impermanence
     # inputs.cosmic-manager.homeManagerModules.cosmic-manager
     # ./modules/cosmic-manager-settings.nix
     ./modules/gnome.nix
@@ -41,7 +41,7 @@
   home = {
     username = "paulemeister";
     homeDirectory = "/home/paulemeister";
-    persistence."/persist/home/paulemeister" = {
+    persistence."/persist" = {
       directories = [
         "Downloads"
         "Music"
@@ -56,7 +56,6 @@
         ".mozilla"
         ".thunderbird"
         ".cache"
-        ".config/obsidian"
         ".config/eduvpn"
         ".config/Signal"
         ".local/state/syncthing"
@@ -71,7 +70,7 @@
         ".local/share/applications" # persist custom .desktop entries (quick-webapps)
 
       ];
-      allowOther = true;
+      # allowOther = true;
       files = [
         ".bash_history"
         ".config/monitors.xml" # Gnome refresh rate
@@ -102,7 +101,7 @@
     clinfo
     cpu-x
     packet
-    gnome-terminal
+    # gnome-terminal
     quick-webapps
     spotify
     # nerd-fonts.fira-code

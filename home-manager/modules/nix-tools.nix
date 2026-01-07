@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-master, ... }:
 {
   home.packages = with pkgs; [
     nixfmt
@@ -8,6 +8,7 @@
     nh = {
       enable = true;
       flake = "/home/paulemeister/Code/nixos-config";
+      package = pkgs-master.nh;
     };
   };
 }
