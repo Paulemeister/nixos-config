@@ -138,8 +138,10 @@
 
     git = {
       enable = true;
-      userEmail = "annanas6800i@gmail.com";
-      userName = "Paulemeister";
+      settings.user = {
+        email = "annanas6800i@gmail.com";
+        name = "Paulemeister";
+      };
     };
     # Bash aliases
     bash = {
