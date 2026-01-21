@@ -125,6 +125,7 @@
     extraConfig = ''
       map ctrl+[ send_text all \x1b
       confirm_os_window_close -2
+      hide_window_decorations yes
     '';
     shellIntegration.mode = "disabled";
   };

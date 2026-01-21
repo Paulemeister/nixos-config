@@ -10,18 +10,9 @@
   imports = [
     # inputs.impermanence.homeManagerModules.impermanence
     # inputs.cosmic-manager.homeManagerModules.cosmic-manager
-    # ./modules/cosmic-manager-settings.nix
-    ./modules/gnome.nix
-    ./modules/easyeffects.nix
-    ./modules/daw.nix
-    ./modules/gaming.nix
-    ./modules/programming.nix
-    ./modules/hyprland.nix
-    ./modules/cli-tools.nix
-    ./modules/cosmic-epoch.nix
-    ./modules/nix-tools.nix
-    # ./modules/openrgb.nix
     # inputs.sidewinderd.homeManagerModules.sidewinderd
+
+    ./modules/default.nix
     inputs.lan-mouse.homeManagerModules.default
   ];
 
@@ -147,9 +138,10 @@
     bash = {
       enable = true;
       shellAliases = {
-        edit-nix-config = "hx ~/Code/nixos-config";
+        edit-nix-config = "hx $NH_FLAKE";
         # rebuild-nix-config = "sudo nixos-rebuild --flake ~/Code/nixos-config switch --show-trace";
         rebuild-nix-config = "nh os switch";
+        sw-nix-config = "cd $NH_FLAKE && git status";
         open = "xdg-open";
       };
       # make bash reload home manager session variables
