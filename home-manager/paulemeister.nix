@@ -159,6 +159,9 @@
             export SSH_AUTH_SOCK="$sock"
           fi
         fi
+        # use ble.sh
+        source ${pkgs.blesh}/share/blesh/ble.sh
+        bleopt term_index_colors='0'
       '';
     };
     # SSH
