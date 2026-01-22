@@ -4,10 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    # chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     stylix = {
       url = "github:nix-community/stylix/release-25.11";
@@ -52,9 +52,9 @@
     {
       self,
       nixpkgs,
-      nixpkgs-unstable,
-      nixpkgs-master,
-      chaotic,
+      # nixpkgs-unstable,
+      # nixpkgs-master,
+      # chaotic,
       home-manager,
       stylix,
       sidewinderd,
@@ -65,15 +65,15 @@
     let
       inherit (self) outputs;
       system = "x86_64-linux";
-      pkgs-unstable = import nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-      };
-      pkgs-master = import nixpkgs-master {
-        inherit system;
-        config.allowUnfree = true;
-      };
-      pkgs-chaotic = chaotic.legacyPackages.${system};
+      # pkgs-unstable = import nixpkgs-unstable {
+      #   inherit system;
+      #   config.allowUnfree = true;
+      # };
+      # pkgs-master = import nixpkgs-master {
+      #   inherit system;
+      #   config.allowUnfree = true;
+      # };
+      # pkgs-chaotic = chaotic.legacyPackages.${system};
     in
     {
       nixpkgs.config.allowUnfree = true;
@@ -85,18 +85,18 @@
             inherit
               inputs
               outputs
-              pkgs-unstable
-              pkgs-master
-              pkgs-chaotic
+              # pkgs-unstable
+              # pkgs-master
+              # pkgs-chaotic
               ;
           };
 
           modules = [
             ./nixos/hardware-configuration.nix
             ./nixos/configuration.nix
-            chaotic.nixosModules.nyx-cache
+            # chaotic.nixosModules.nyx-cache
             # chaotic.nixosModules.nyx-overlay
-            chaotic.nixosModules.nyx-registry
+            # chaotic.nixosModules.nyx-registry
             stylix.nixosModules.stylix
             ./overlays/kgx-stylix-patch.nix
             impermanence.nixosModules.impermanence
