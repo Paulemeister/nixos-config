@@ -8,4 +8,11 @@
   environment.persistence."/persist".directories = [
     "/var/lib/waydroid"
   ];
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
+
+  environment.systemPackages = [ pkgs.distrobox ];
 }

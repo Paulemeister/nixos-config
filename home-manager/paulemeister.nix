@@ -21,6 +21,13 @@
     package = pkgs.lan-mouse;
   };
 
+  xdg.terminal-exec = {
+    enable = true;
+    settings = {
+      default = [ "kitty.desktop" ];
+    };
+  };
+
   xsession.numlock.enable = true;
   services.syncthing.enable = true;
 
@@ -48,12 +55,9 @@
         ".thunderbird"
         ".cache"
         ".config/eduvpn"
-        ".config/Signal"
         ".local/state/syncthing"
         # ".config/sidewinderd"
         ".config/easyeffects"
-        ".config/discord"
-        ".config/obsidian"
 
         ".config/AusweisApp"
         ".config/OpenRGB"
@@ -79,16 +83,6 @@
     gst_all_1.gst-plugins-ugly
     gst_all_1.gst-libav
     gst_all_1.gst-vaapi
-    signal-desktop
-    discord
-    (obsidian.overrideAttrs (p: rec {
-      desktopItem = p.desktopItem.override (q: {
-        # Use german local for proper date time picker in german (doesnt respect locale properly)
-        exec = "env LANG=de_DE.UTF-8 LANGUAGE=de ${q.exec}";
-      });
-
-      installPhase = builtins.replaceStrings [ "${p.desktopItem}" ] [ "${desktopItem}" ] p.installPhase;
-    }))
     clinfo
     cpu-x
     packet
@@ -151,7 +145,9 @@
           unset __HM_SESS_VARS_SOURCED
           source "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
         fi
+
         bind -s 'set completion-ignore-case on'
+
         # fix for cosmic: get right socket (uses  /1000/keyring/ssh which doesnt exist)
         if command -v systemctl >/dev/null 2>&1; then
           sock="$(systemctl --user show-environment | grep '^SSH_AUTH_SOCK=' | cut -d= -f2-)"
@@ -159,6 +155,7 @@
             export SSH_AUTH_SOCK="$sock"
           fi
         fi
+
         # use ble.sh
         source ${pkgs.blesh}/share/blesh/ble.sh
         bleopt term_index_colors='0'
