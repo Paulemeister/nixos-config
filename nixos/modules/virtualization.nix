@@ -14,5 +14,4 @@
     dockerCompat = true;
   };
 
-  environment.systemPackages = [ pkgs.distrobox ];
 }

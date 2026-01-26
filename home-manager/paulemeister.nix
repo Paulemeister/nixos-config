@@ -40,6 +40,7 @@
     username = "paulemeister";
     homeDirectory = "/home/paulemeister";
     persistence."/persist" = {
+      hideMounts = true;
       directories = [
         "Downloads"
         "Music"

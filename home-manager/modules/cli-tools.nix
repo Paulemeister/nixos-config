@@ -6,6 +6,13 @@
     killall
     fastfetch
     tlrc
+    (writeShellApplication {
+      name = "where";
+      runtimeInputs = [ pkgs.coreutils ];
+      text = ''
+        which "$1" | xargs realpath
+      '';
+    })
   ];
   programs = {
     bat.enable = true;

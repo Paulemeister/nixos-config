@@ -13,5 +13,6 @@
     ./nix-tools.nix
     ./office.nix
     # ./openrgb.nix
+    ./distrobox.nix
   ];
 }

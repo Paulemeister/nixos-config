@@ -4,6 +4,18 @@
   ...
 }:
 {
+
+  home.persistence."/persist" = {
+    files = [
+      ".config/gtk-3.0/bookmarks"
+      # {
+      #   file = ".config/gtk-4.0/servers";
+      #   # method = "symlink";
+      # }
+    ];
+    directories = [ ".config/gtk-4.0" ];
+  };
+
   # add shell extensions packages
   home.packages = with pkgs.gnomeExtensions; [
     vertical-workspaces
