@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   home.packages = with pkgs; [
     nvtopPackages.amd
@@ -13,6 +13,7 @@
         which "$1" | xargs realpath
       '';
     })
+    inputs.pdfcat.packages.${pkgs.system}.default
   ];
   programs = {
     bat.enable = true;
@@ -43,5 +44,4 @@
     };
     # don't forget you're using blesh in bash.initExtra !!
   };
-
 }

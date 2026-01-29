@@ -31,6 +31,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    pdfcat = {
+      url = "github:paulemeister/pdfcat-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       # url = "github:nix-community/home-manager/";
@@ -57,9 +62,7 @@
       # chaotic,
       home-manager,
       stylix,
-      sidewinderd,
       impermanence,
-      cosmic-manager,
       ...
     }@inputs:
     let
@@ -100,7 +103,7 @@
             stylix.nixosModules.stylix
             ./overlays/kgx-stylix-patch.nix
             impermanence.nixosModules.impermanence
-            sidewinderd.nixosModules.sidewinderd
+            inputs.sidewinderd.nixosModules.sidewinderd
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
