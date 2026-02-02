@@ -40,6 +40,8 @@
           ms-python.black-formatter
           ms-toolsai.jupyter
           jnoortheen.nix-ide
+          rust-lang.rust-analyzer
+          vadimcn.vscode-lldb
         ];
         enableExtensionUpdateCheck = false;
         enableUpdateCheck = false;

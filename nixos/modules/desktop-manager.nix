@@ -6,6 +6,11 @@
 {
   environment.systemPackages = with pkgs; [ wl-clipboard ];
 
+  programs.nautilus-open-any-terminal = {
+    enable = true;
+    terminal = "kitty";
+  };
+
   nixpkgs.overlays = [
     inputs.hyprcorners.overlays.default
   ];
