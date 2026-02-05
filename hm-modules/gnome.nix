@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  self,
   ...
 }:
 {
@@ -256,7 +257,7 @@
   # '';
   # };
   xdg.configFile."forge/config/windows.json" = {
-    source = ../dotfiles/forge/windows.json;
+    source = "${self}/misc/dotfiles/forge/windows.json";
     force = true;
   };
 }

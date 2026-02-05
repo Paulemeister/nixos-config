@@ -1,11 +1,18 @@
 {
+  self,
+  inputs,
   pkgs,
   ...
 }:
 let
 in
 {
-  imports = [ ./modules/default.nix ];
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+    "${self}/hosts/common"
+    inputs.sidewinderd.nixosModules.sidewinderd
+    ./hardware-configuration.nix
+  ];
 
   environment.localBinInPath = true;
 
@@ -86,23 +93,6 @@ in
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.paulemeister = {
-    isNormalUser = true;
-    description = "Paulemeister";
-    extraGroups = [
-      "networkmanager"
-      "dialout" # tilp
-      "wheel"
-      "vboxusers"
-      "plugdev"
-      "input"
-      "audio"
-      "i2c"
-    ];
-    hashedPasswordFile = "/persist/passwords/paulemeister";
-  };
 
   environment.persistence."/persist" = {
     hideMounts = true;

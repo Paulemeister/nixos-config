@@ -2,13 +2,14 @@
   pkgs,
   # pkgs-unstable,
   config,
+  self,
   ...
 }:
 {
   stylix = {
     enable = true;
     polarity = "dark";
-    image = ../../misc/wallpaper.jpg;
+    image = "${self}/misc/wallpaper.jpg";
     # base16Scheme = "${pkgs-unstable.base16-schemes}/share/themes/0x96f.yaml";
     base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
     # base16Scheme = ../misc/dark_plus_custom.yaml;

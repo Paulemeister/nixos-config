@@ -60,9 +60,9 @@
       # nixpkgs-unstable,
       # nixpkgs-master,
       # chaotic,
-      home-manager,
-      stylix,
-      impermanence,
+      #home-manager,
+      #stylix,
+      #impermanence,
       ...
     }@inputs:
     let
@@ -88,6 +88,7 @@
             inherit
               inputs
               outputs
+              self
               # pkgs-unstable
               # pkgs-master
               # pkgs-chaotic
@@ -95,25 +96,19 @@
           };
 
           modules = [
-            ./nixos/hardware-configuration.nix
-            ./nixos/configuration.nix
+            ./hosts/theseus/configuration.nix
+
             # chaotic.nixosModules.nyx-cache
             # chaotic.nixosModules.nyx-overlay
             # chaotic.nixosModules.nyx-registry
-            stylix.nixosModules.stylix
-            ./overlays/kgx-stylix-patch.nix
-            impermanence.nixosModules.impermanence
-            inputs.sidewinderd.nixosModules.sidewinderd
-            home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = ".bak";
 
-              home-manager.users.paulemeister = import ./home-manager/paulemeister.nix;
-
               home-manager.extraSpecialArgs = specialArgs;
             }
+
           ];
         };
       };

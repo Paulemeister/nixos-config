@@ -4,6 +4,7 @@
   inputs,
   config,
   pkgs,
+  self,
   ...
 }:
 {
@@ -11,8 +12,7 @@
     # inputs.impermanence.homeManagerModules.impermanence
     # inputs.cosmic-manager.homeManagerModules.cosmic-manager
     # inputs.sidewinderd.homeManagerModules.sidewinderd
-
-    ./modules/default.nix
+    "${self}/users/common/home.nix"
     inputs.lan-mouse.homeManagerModules.default
   ];
 

@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  self,
   ...
 }:
 {
@@ -60,8 +61,8 @@
     in
     ''
       mkdir -p /var/lib/AccountsService/{icons,users}
-      cp ${../../home-manager/dotfiles/paulemeister-icon} /var/lib/AccountsService/icons/${name}
-      echo -e "[User]\nSession=cosmic\nIcon=/var/lib/AccountsService/icons/${name}\n" > /var/lib/AccountsService/users/${name}
+      cp ${self}/misc/configfiles/paulemeister-icon /var/lib/AccountsService/icons/${name}
+      echo -e "[User]\nSession=gnome\nIcon=/var/lib/AccountsService/icons/${name}\n" > /var/lib/AccountsService/users/${name}
 
       chown root:root /var/lib/AccountsService/users/${name}
       chmod 0600 /var/lib/AccountsService/users/${name}
