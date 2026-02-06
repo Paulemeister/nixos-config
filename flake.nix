@@ -60,9 +60,9 @@
       # nixpkgs-unstable,
       # nixpkgs-master,
       # chaotic,
-      #home-manager,
-      #stylix,
-      #impermanence,
+      # home-manager,
+      # stylix,
+      # impermanence,
       ...
     }@inputs:
     let
@@ -81,7 +81,7 @@
     {
       nixpkgs.config.allowUnfree = true;
       nixosConfigurations = {
-        theseus = nixpkgs.lib.nixosSystem rec {
+        theseus = nixpkgs.lib.nixosSystem {
           inherit system;
 
           specialArgs = {
@@ -97,18 +97,6 @@
 
           modules = [
             ./hosts/theseus/configuration.nix
-
-            # chaotic.nixosModules.nyx-cache
-            # chaotic.nixosModules.nyx-overlay
-            # chaotic.nixosModules.nyx-registry
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = ".bak";
-
-              home-manager.extraSpecialArgs = specialArgs;
-            }
-
           ];
         };
       };

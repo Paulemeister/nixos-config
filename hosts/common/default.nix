@@ -1,10 +1,15 @@
-{ self, inputs, ... }:
+{
+  self,
+  ...
+}:
 {
   imports = [
-    inputs.stylix.nixosModules.stylix
-    "${self}/overlays/kgx-stylix-patch.nix"
-    inputs.impermanence.nixosModules.impermanence
     "${self}/users/common"
     "${self}/nixos-modules"
+    # inputs.chaotic.nixosModules.nyx-cache
+    # inputs.chaotic.nixosModules.nyx-overlay
+    # inputs.chaotic.nixosModules.nyx-registry
+
   ];
+
 }

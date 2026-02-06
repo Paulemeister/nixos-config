@@ -13,7 +13,7 @@
         which "$1" | xargs realpath
       '';
     })
-    inputs.pdfcat.packages.${pkgs.system}.default
+    inputs.pdfcat.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
   programs = {
     bat.enable = true;
@@ -34,7 +34,6 @@
         add_newline = false;
         command_timeout = 1300;
         scan_timeout = 50;
-        # format = "$all$nix_shell$nodejs$lua$golang$rust$php$git_branch$git_commit$git_state$git_status\n$username$hostname$directory";
         format = "$all";
         character = {
           success_symbol = "[](bold green) ";
