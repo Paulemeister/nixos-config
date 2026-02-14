@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
     prismlauncher
@@ -13,7 +13,11 @@
   programs = {
     mangohud = {
       enable = true;
-      # enableSessionWide = true;
     };
+  };
+
+  stylix.targets.mangohud = {
+    fonts.enable = false;
+    opacity.enable = false;
   };
 }

@@ -42,6 +42,7 @@
           jnoortheen.nix-ide
           rust-lang.rust-analyzer
           vadimcn.vscode-lldb
+          arrterian.nix-env-selector
         ];
         enableExtensionUpdateCheck = false;
         enableUpdateCheck = false;

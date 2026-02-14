@@ -7,6 +7,11 @@
   # Setup for Gaming
   programs.steam = {
     enable = true;
+    package = pkgs.steam.override {
+      extraProfile = ''
+        export MANGOHUD=1
+      '';
+    };
     gamescopeSession.enable = true;
     extraPackages = with pkgs; [
       gamescope

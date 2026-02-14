@@ -25,4 +25,5 @@
   #   wantedBy = ["multi-user.target"];
   # };
 
+  programs.coolercontrol.enable = true;
 }
