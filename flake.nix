@@ -51,6 +51,7 @@
         home-manager.follows = "home-manager";
       };
     };
+    nixos-hardware.url = "github:NixOs/nixos-hardware/master";
   };
 
   outputs =
@@ -97,6 +98,24 @@
 
           modules = [
             ./hosts/theseus/configuration.nix
+          ];
+        };
+        nothung = nixpkgs.lib.nixosSystem {
+          inherit system;
+
+          specialArgs = {
+            inherit
+              inputs
+              outputs
+              self
+              # pkgs-unstable
+              # pkgs-master
+              # pkgs-chaotic
+              ;
+          };
+
+          modules = [
+            ./hosts/nothung/configuration.nix
           ];
         };
       };

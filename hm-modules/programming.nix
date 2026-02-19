@@ -43,6 +43,7 @@
           rust-lang.rust-analyzer
           vadimcn.vscode-lldb
           arrterian.nix-env-selector
+          tamasfe.even-better-toml
         ];
         enableExtensionUpdateCheck = false;
         enableUpdateCheck = false;

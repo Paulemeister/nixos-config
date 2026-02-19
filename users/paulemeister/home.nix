@@ -64,6 +64,8 @@
         ".config/OpenRGB"
         ".config/spotify"
         ".local/share/applications" # persist custom .desktop entries (quick-webapps)
+        ".local/share/icons/QuickWebApps"
+        ".local/share/quick-webapps"
 
       ];
       # allowOther = true;
