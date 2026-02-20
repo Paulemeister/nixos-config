@@ -13,7 +13,7 @@
         which "$1" | xargs realpath
       '';
     })
-    inputs.pdfcat.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.pdfcat.packages.${pkgs.stdenv.hostPlatform.system}.unstable
   ];
   programs = {
     bat.enable = true;

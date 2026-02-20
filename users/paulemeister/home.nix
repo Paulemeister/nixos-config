@@ -112,6 +112,7 @@
   #   enable = true;
   #   defaultFonts.monospace = ["Fira Code"];
   # };
+  home.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Add programs through modules
   programs = {

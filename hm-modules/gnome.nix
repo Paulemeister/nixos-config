@@ -190,6 +190,14 @@
       "org/gnome/settings-daemon/plugins/housekeeping" = {
         donation-reminder-enabled = lib.mkDefault false;
       };
+      # Fractional Scaling
+      "org/gnome/mutter" = {
+        experimental-features = lib.mkDefault [
+          "scale-monitor-framebuffer"
+          "xwayland-native-scaling"
+        ];
+      };
+
       # Enable window snapping
       # "org/gnome/mutter" = {
       #   edge-tiling = lib.mkDefault true;

@@ -287,6 +287,22 @@
         "type": "github"
       }
     },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1771423359,
+        "narHash": "sha256-yRKJ7gpVmXbX2ZcA8nFi6CMPkJXZGjie2unsiMzj3Ig=",
+        "owner": "NixOs",
+        "repo": "nixos-hardware",
+        "rev": "740a22363033e9f1bb6270fbfb5a9574067af15b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOs",
+        "ref": "master",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1768564909,
@@ -348,19 +364,37 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
-        ]
+        ],
+        "pdfcat-src": "pdfcat-src"
       },
       "locked": {
-        "lastModified": 1769708354,
-        "narHash": "sha256-de+xFWuC54Qe1NoaHq5n7D7JZKgcNLMUsoXvMXkCXZg=",
+        "lastModified": 1771602265,
+        "narHash": "sha256-GP0lETMgLfbaZyiQmtM3ejK44Ll/GmHqeOObt6zvZI8=",
         "owner": "paulemeister",
         "repo": "pdfcat-nix",
-        "rev": "3a5089adc11c3f6d4429a4cb2b9ec3d909dac227",
+        "rev": "c69aa69f089962bcd99f3d844cb72b9201be6db5",
         "type": "github"
       },
       "original": {
         "owner": "paulemeister",
         "repo": "pdfcat-nix",
+        "type": "github"
+      }
+    },
+    "pdfcat-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1771433458,
+        "narHash": "sha256-LrQNj0bXl5fDLQr9z/AA51NzZGEfflccXMU6yZE44qQ=",
+        "owner": "pdfcat",
+        "repo": "pdfcat",
+        "rev": "f376bd4c7cfd7b73f242c30b410390c467822a16",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pdfcat",
+        "ref": "main",
+        "repo": "pdfcat",
         "type": "github"
       }
     },
@@ -371,6 +405,7 @@
         "hyprcorners": "hyprcorners",
         "impermanence": "impermanence",
         "lan-mouse": "lan-mouse",
+        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "pdfcat": "pdfcat",
         "sidewinderd": "sidewinderd",
