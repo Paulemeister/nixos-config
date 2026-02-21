@@ -53,6 +53,7 @@
         ".local/share/keyrings"
 
         ".mozilla"
+        ".config/mozilla"
         ".thunderbird"
         ".cache"
         ".config/eduvpn"
