@@ -28,7 +28,11 @@
   ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/NixOS-Encrypted";
+
+  boot.initrd.luks.devices."cryptroot" = {
+    device = "/dev/disk/by-uuid/5f9431fb-0f34-4f2a-a2f1-21fdcceabb17";
+    preLVM = true;
+  };
 
   fileSystems."/" = {
     device = "none";
@@ -50,13 +54,13 @@
   };
 
   fileSystems."/persist" = {
-    device = "/dev/disk/by-label/NixOS-Persist";
+    device = "/dev/disk/by-uuid/1745a6bf-d73e-4b49-a6fa-4f55aa1687fa";
     fsType = "ext4";
     neededForBoot = true;
   };
 
   swapDevices = [
-    { device = "/dev/disk/by-label/NixOS-Swap"; }
+    { device = "/dev/disk/by-uuid/9e66fdb6-aa07-4836-9c6f-d8d2ccd2626d"; }
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
