@@ -2,9 +2,36 @@
   self,
   inputs,
   pkgs,
+  lib,
   ...
 }:
 let
+  monitorsxml = pkgs.writeText "monitorsxml" ''
+    <monitors version="2">
+      <configuration>
+        <layoutmode>logical</layoutmode>
+        <logicalmonitor>
+          <x>0</x>
+          <y>0</y>
+          <scale>1.3333333730697632</scale>
+          <primary>yes</primary>
+          <monitor>
+            <monitorspec>
+              <connector>eDP-1</connector>
+              <vendor>BOE</vendor>
+              <product>0x0bca</product>
+              <serial>0x00000000</serial>
+            </monitorspec>
+            <mode>
+              <width>2256</width>
+              <height>1504</height>
+              <rate>59.999</rate>
+            </mode>
+          </monitor>
+        </logicalmonitor>
+      </configuration>
+    </monitors>
+  '';
 in
 {
   imports = [
@@ -17,6 +44,23 @@ in
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
   ];
+
+  boot.initrd.systemd.enable = true;
+  boot.plymouth = {
+    enable = true;
+    extraConfig = ''
+      DeviceScale=1
+    '';
+  };
+
+  systemd.tmpfiles.rules = [
+    "L /run/gdm/.config/monitors.xml - - - - ${monitorsxml}"
+  ];
+
+  services.desktopManager.gnome.extraGSettingsOverrides = ''
+    [org.gnome.mutter]
+    experimental-features=['scale-monitor-framebuffer']
+  '';
 
   services.power-profiles-daemon.enable = true;
   services.logind.settings.Login = {
