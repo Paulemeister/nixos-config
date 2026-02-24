@@ -49,6 +49,9 @@ in
           "/var/lib/bluetooth"
           "/var/lib/nixos"
           "/var/lib/systemd/coredump"
+          "/var/lib/fprint"
+          "/var/lib/power-profiles-daemon"
+          "/var/lib/fwupd"
           "/etc/NetworkManager/system-connections"
           {
             directory = "/var/lib/colord";
