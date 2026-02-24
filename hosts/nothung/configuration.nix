@@ -56,6 +56,7 @@ in
       DeviceScale=1
     '';
   };
+  boot.consoleLogLevel = 3;
 
   systemd.tmpfiles.rules = [
     "L /run/gdm/.config/monitors.xml - - - - ${monitorsxml}"
