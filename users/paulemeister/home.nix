@@ -5,6 +5,7 @@
   config,
   pkgs,
   self,
+  lib,
   ...
 }:
 {
@@ -15,6 +16,9 @@
     "${self}/users/common/home.nix"
     inputs.lan-mouse.homeManagerModules.default
   ];
+
+  stylix.targets.qt.platform = lib.mkForce "qtct";
+  qt.platformTheme.name = lib.mkForce "adwaita";
 
   programs.lan-mouse = {
     enable = true;
