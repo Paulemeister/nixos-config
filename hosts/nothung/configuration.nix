@@ -2,7 +2,6 @@
   self,
   inputs,
   pkgs,
-  lib,
   ...
 }:
 let
@@ -45,6 +44,11 @@ in
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
   ];
 
+  pm-modules = {
+    hm = true;
+    usePersistence = true;
+  };
+
   boot.initrd.systemd.enable = true;
   boot.plymouth = {
     enable = true;
@@ -70,26 +74,11 @@ in
   };
   systemd.sleep.extraConfig = "HibernateDelaySec=1h";
 
-  environment.localBinInPath = true;
-
-  services.fwupd.enable = true;
-
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  services.scx.enable = true;
 
   networking.firewall.checkReversePath = false;
 
   services.flatpak.enable = true;
-
-  # Prerequisite for allowOther for impermanence in home-manager for root acces to mounts
-  programs.fuse.userAllowOther = true;
-
-  # Don't lecture on first usage of sudo
-  security.sudo.extraConfig = "Defaults lecture = never";
-
-  security.polkit.enable = true;
-
-  virtualisation.virtualbox.host.enable = true;
 
   services.journald = {
     extraConfig = "SystemMaxUse=1G";
@@ -109,11 +98,6 @@ in
   boot.loader.systemd-boot.consoleMode = "max";
 
   networking.hostName = "nothung";
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -148,35 +132,7 @@ in
   security.rtkit.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  environment.persistence."/persist" = {
-    hideMounts = true;
-    directories = [
-      "/nix"
-      "/var/tmp"
-      "/var/log"
-      "/var/lib/bluetooth"
-      "/var/lib/nixos"
-      "/var/lib/systemd/coredump"
-      "/var/lib/fprint"
-      "/var/lib/power-profiles-daemon"
-      "/etc/NetworkManager/system-connections"
-      {
-        directory = "/var/lib/colord";
-        user = "colord";
-        group = "colord";
-        mode = "u=rwx,g=rx,o=";
-      }
-
-    ];
-    files = [
-      # used by journald, regenerating doesn't assosiate logs
-      # from previous boots together, even if the logs are
-      # persistent
-      "/etc/machine-id"
-    ];
-  };
+  services.xserver.libinput.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -1,23 +1,43 @@
 {
+  config,
+  lib,
   ...
 }:
+let
+  cfg = config.pm-modules;
+  inherit (lib)
+    mkIf
+    mkMerge
+    mkOption
+    ;
+  inherit (lib.types) bool;
+in
 {
-  environment.persistence."/persist".directories = [
+  config = mkIf cfg.ai.enable (mkMerge [
+    (mkIf cfg.usePersistence {
+      environment.persistence."/persist".directories = [
+        {
+          directory = "/var/lib/private/ollama";
+          mode = "0700";
+        }
+        "/var/lib/private/open-webui"
+      ];
+    })
     {
-      directory = "/var/lib/private/ollama";
-      mode = "0700";
+      services = {
+        open-webui.enable = true;
+        ollama = {
+          enable = true;
+        };
+      };
     }
-    "/var/lib/private/open-webui"
-  ];
+  ]);
 
-  services.open-webui = {
-    enable = true;
+  options.pm-modules.ai.enable = mkOption {
+    type = bool;
+    default = false;
+    description = ''
+      ollama and openwebui
+    '';
   };
-  services.ollama = {
-    enable = true;
-    acceleration = "rocm";
-    # package = pkgs.ollama-rocm;
-    rocmOverrideGfx = "10.3.0";
-  };
-
 }

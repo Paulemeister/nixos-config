@@ -2,9 +2,13 @@
   self,
   inputs,
   pkgs,
+  lib,
+  config,
   ...
 }:
 let
+  cfg = config.pm-modules;
+  inherit (lib) mkIf;
 in
 {
   imports = [
@@ -17,30 +21,22 @@ in
     ./hardware-configuration.nix
   ];
 
-  environment.localBinInPath = true;
-
-  services.fwupd.enable = true;
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  services.scx.enable = true;
-
-  networking.firewall.checkReversePath = false;
-
-  services.flatpak.enable = true;
-
-  # Prerequisite for allowOther for impermanence in home-manager for root acces to mounts
-  programs.fuse.userAllowOther = true;
-
-  # Don't lecture on first usage of sudo
-  security.sudo.extraConfig = "Defaults lecture = never";
-
-  security.polkit.enable = true;
-
-  virtualisation.virtualbox.host.enable = true;
-
-  services.journald = {
-    extraConfig = "SystemMaxUse=1G";
+  pm-modules = {
+    phoneControl.enable = true;
+    gaming.enable = true;
+    rgb.enable = true;
+    hm = true;
+    usePersistence = true;
+    theseusPeripherals.enable = true;
   };
+
+  services.ollama = mkIf cfg.ai.enable {
+    acceleration = "rocm";
+    # package = pkgs.ollama-rocm;
+    rocmOverrideGfx = "10.3.0";
+  };
+
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   hardware.graphics = {
     enable = true;
@@ -49,6 +45,13 @@ in
     extraPackages = with pkgs; [ rocmPackages.clr.icd ];
   };
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # what does this do?
+  networking.firewall.checkReversePath = false;
+
+  services.flatpak.enable = true;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -56,11 +59,6 @@ in
   boot.loader.systemd-boot.consoleMode = "max";
 
   networking.hostName = "theseus";
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -96,32 +94,6 @@ in
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
-  environment.persistence."/persist" = {
-    hideMounts = true;
-    directories = [
-      "/nix"
-      "/var/tmp"
-      "/var/log"
-      "/var/lib/bluetooth"
-      "/var/lib/nixos"
-      "/var/lib/systemd/coredump"
-      "/etc/NetworkManager/system-connections"
-      {
-        directory = "/var/lib/colord";
-        user = "colord";
-        group = "colord";
-        mode = "u=rwx,g=rx,o=";
-      }
-
-    ];
-    files = [
-      # used by journald, regenerating doesn't assosiate logs
-      # from previous boots together, even if the logs are
-      # persistent
-      "/etc/machine-id"
-    ];
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
