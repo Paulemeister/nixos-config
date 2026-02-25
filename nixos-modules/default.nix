@@ -21,6 +21,7 @@ in
     ./theseus-peripherals.nix
     ./virtualization.nix
     ./appimages.nix
+    ./flatpak.nix
   ];
 
   options.pm-modules = {

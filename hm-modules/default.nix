@@ -14,5 +14,6 @@
     ./office.nix
     # ./openrgb.nix
     ./distrobox.nix
+    ./flatpak.nix
   ];
 }
