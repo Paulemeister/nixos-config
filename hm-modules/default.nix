@@ -1,19 +1,46 @@
-{ ... }:
+{
+  lib,
+  osConfig,
+  ...
+}:
+let
+  osCfg = osConfig.pm-modules;
+  inherit (lib) mkOption;
+  inherit (lib.types) bool;
+in
 {
   imports = [
-    # ./cosmic-manager-settings.nix
-    ./gnome.nix
-    ./easyeffects.nix
-    ./daw.nix
-    ./gaming.nix
-    ./programming.nix
-    ./hyprland.nix
     ./cli-tools.nix
     ./cosmic-epoch.nix
+    ./daw.nix
+    ./de.nix
+    ./distrobox.nix
+    ./easyeffects.nix
+    ./flatpak.nix
+    ./gaming.nix
+    ./gnome.nix
+    ./hyprland.nix
+    ./kitty.nix
     ./nix-tools.nix
     ./office.nix
-    # ./openrgb.nix
-    ./distrobox.nix
-    ./flatpak.nix
+    ./openrgb.nix
+    ./programming.nix
   ];
+
+  options.pm-modules = {
+    enableDefault = mkOption {
+      type = bool;
+      default = true;
+      description = ''
+        enable default home-manager modules (random)
+      '';
+    };
+    usePersistence = mkOption {
+      type = bool;
+      default = osCfg.usePersistence;
+      description = ''
+        use persistence
+      '';
+    };
+  };
 }

@@ -1,14 +1,16 @@
 {
   osConfig,
   lib,
+  config,
   ...
 }:
 let
-  cfg = osConfig.pm-modules;
+  osCfg = osConfig.pm-modules;
+  cfg = config.pm-modules;
   inherit (lib) mkIf mkMerge;
 in
 {
-  config = mkIf cfg.flatpak.enable (mkMerge [
+  config = mkIf osCfg.flatpak.enable (mkMerge [
     (mkIf cfg.usePersistence {
       home.persistence."/persist".directories = [
         ".local/share/flatpak"

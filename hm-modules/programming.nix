@@ -1,82 +1,110 @@
-{ pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    python312
-    godot
-    uv
-    gh
-    nixd # nix language server
-    #alejandra # nix formatter
-    nixfmt # nix formatter
-  ];
-  home.persistence."/persist".directories = [
-    ".local/share/uv"
-    ".config/gh"
-    ".local/bin" # make uv binaries persistent
-    ".vscode"
-    ".config/Code"
-  ];
-  programs = {
-    vscode = {
-      enable = true;
-      # package = pkgs.vscodium-fhs;
-      package = pkgs.vscode;
-      # package = pkgs.vscode.fhsWithPackages (ps:
-      #   with ps; [
-      #     zstd
-      #     libGL
-      #     fontconfig
-      #     freetype
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+let
+  cfg = config.pm-modules;
+  inherit (lib)
+    mkIf
+    mkOption
+    mkMerge
+    ;
+  inherit (lib.types) bool;
+in
+{
+  config = mkIf cfg.programming.enable (mkMerge [
+    (mkIf cfg.usePersistence {
+      home.persistence."/persist".directories = [
+        ".local/share/uv"
+        ".config/gh"
+        ".local/bin" # make uv binaries persistent
+        ".vscode"
+        ".config/Code"
+      ];
+    })
+    {
+      home.packages = with pkgs; [
+        python312
+        godot
+        uv
+        gh
+        nixd # nix language server
+        #alejandra # nix formatter
+        nixfmt # nix formatter
+      ];
 
-      #     libxkbcommon # libxkbcommon.so.0
-      #     xorg.libX11 # libX11.so.6
-      #     wayland
-      #   ]);
-      profiles.default = {
-        extensions = with pkgs.vscode-extensions; [
-          ms-python.python
-          ms-python.vscode-pylance
-          ms-python.debugpy
-          ms-python.black-formatter
-          ms-toolsai.jupyter
-          jnoortheen.nix-ide
-          rust-lang.rust-analyzer
-          vadimcn.vscode-lldb
-          arrterian.nix-env-selector
-          tamasfe.even-better-toml
-        ];
-        enableExtensionUpdateCheck = false;
-        enableUpdateCheck = false;
-        userSettings = {
-          # "python.languageServer" = "Pylance";
-          # "jupyter.enableExtendedPythonKernelCompletions" = true;
-          "workbench.settings.showAISearchToggle" = false;
-          "chat.disableAIFeatures" = true;
-          "explorer.confirmDelete" = false;
-          "explorer.confirmDragAndDrop" = false;
+      programs = {
+        vscode = {
+          enable = true;
+          # package = pkgs.vscodium-fhs;
+          package = pkgs.vscode;
+          # package = pkgs.vscode.fhsWithPackages (ps:
+          #   with ps; [
+          #     zstd
+          #     libGL
+          #     fontconfig
+          #     freetype
 
-          "editor.formatOnSave" = true;
+          #     libxkbcommon # libxkbcommon.so.0
+          #     xorg.libX11 # libX11.so.6
+          #     wayland
+          #   ]);
+          profiles.default = {
+            extensions = with pkgs.vscode-extensions; [
+              ms-python.python
+              ms-python.vscode-pylance
+              ms-python.debugpy
+              ms-python.black-formatter
+              ms-toolsai.jupyter
+              jnoortheen.nix-ide
+              rust-lang.rust-analyzer
+              vadimcn.vscode-lldb
+              arrterian.nix-env-selector
+              tamasfe.even-better-toml
+            ];
+            enableExtensionUpdateCheck = false;
+            enableUpdateCheck = false;
+            userSettings = {
+              # "python.languageServer" = "Pylance";
+              # "jupyter.enableExtendedPythonKernelCompletions" = true;
+              "workbench.settings.showAISearchToggle" = false;
+              "chat.disableAIFeatures" = true;
+              "explorer.confirmDelete" = false;
+              "explorer.confirmDragAndDrop" = false;
+
+              "editor.formatOnSave" = true;
+            };
+          };
+        };
+        helix = {
+          enable = true;
+          defaultEditor = true;
+          settings = {
+            editor.line-number = "relative";
+          };
+          languages.language = [
+            {
+              name = "nix";
+              language-servers = [
+                "nixd"
+                "nil"
+              ];
+              formatter.command = "nixfmt";
+              auto-format = true;
+            }
+          ];
         };
       };
-    };
-    helix = {
-      enable = true;
-      defaultEditor = true;
-      settings = {
-        editor.line-number = "relative";
-      };
-      languages.language = [
-        {
-          name = "nix";
-          language-servers = [
-            "nixd"
-            "nil"
-          ];
-          formatter.command = "nixfmt";
-          auto-format = true;
-        }
-      ];
-    };
-  };
+    }
+  ]);
 
+  options.pm-modules.programming.enable = mkOption {
+    type = bool;
+    default = cfg.enableDefault;
+    description = ''
+      programming tools: hx, code, rust, python, nix, godot
+    '';
+  };
 }

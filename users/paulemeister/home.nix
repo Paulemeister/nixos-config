@@ -17,6 +17,10 @@
     inputs.lan-mouse.homeManagerModules.default
   ];
 
+  pm-modules = {
+    daw.enable = true;
+  };
+
   stylix.targets.qt.platform = lib.mkForce "qtct";
   qt.platformTheme.name = lib.mkForce "adwaita";
 
