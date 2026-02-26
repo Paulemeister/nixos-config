@@ -43,6 +43,8 @@ in
           # "cloudflare"
           "quad9-dnscrypt-ip4-nofilter-pri"
           "quad9-dnscrypt-ip6-nofilter-pri"
+          "quad9-doh-ip4-port443-nofilter-pri"
+          "quad9-doh-ip6-port443-nofilter-pri"
         ];
       };
     };

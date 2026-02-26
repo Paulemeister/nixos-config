@@ -76,6 +76,7 @@ in
         epiphany
         geary
         simple-scan
+        papers
       ];
     })
   ]);

@@ -15,6 +15,8 @@
     }))
 
     moodle-dl
+    # evince
+    papers
   ];
 
   home.persistence."/persist".directories = [

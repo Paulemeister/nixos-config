@@ -106,9 +106,20 @@
     enable = true;
     mimeApps = {
       enable = true;
-      defaultApplications = {
-        "application/zip" = [ "org.gnome.FileRoller.desktop" ];
-      };
+      defaultApplications =
+        let
+          pdf = "org.gnome.Evince.desktop";
+        in
+        {
+          "application/zip" = [ "org.gnome.FileRoller.desktop" ];
+          # "application/illustrator" = [ pdf ];
+          # "application/pdf" = [ pdf ];
+          # "application/x-bzpdf" = [ pdf ];
+          # "application/x-ext-pdf" = [ pdf ];
+          # "application/x-gzpdf" = [ pdf ];
+          # "application/x-xzpdf" = [ pdf ];
+          # "image/vnd.djvu" = [ pdf ];
+        };
     };
     configFile."cosmic-initial-setup-done".text = "";
   };
