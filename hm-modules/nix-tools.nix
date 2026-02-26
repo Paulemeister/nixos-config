@@ -29,7 +29,7 @@ in
     type = bool;
     default = cfg.enableDefault;
     description = ''
-      nixfmt,nom,nh
+      nixfmt, nom, nh
     '';
   };
 }

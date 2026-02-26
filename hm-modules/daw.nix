@@ -24,7 +24,7 @@ in
     type = bool;
     default = false;
     description = ''
-      random cli tools
+      daw
     '';
   };
 }

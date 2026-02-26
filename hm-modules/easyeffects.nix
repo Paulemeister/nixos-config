@@ -81,7 +81,7 @@ in
     type = bool;
     default = cfg.enableDefault;
     description = ''
-      distrobox
+      easyeffects
     '';
   };
 }

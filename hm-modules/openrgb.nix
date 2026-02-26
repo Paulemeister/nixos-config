@@ -66,7 +66,7 @@ in
     type = bool;
     default = false;
     description = ''
-      distrobox
+      openrgb
     '';
   };
 }
