@@ -208,6 +208,10 @@ in
               "xwayland-native-scaling"
             ];
           };
+          # Nautilus folder view
+          "org/gnome/nautilus/preferences" = {
+            default-folder-viewer = "list-view";
+          };
 
           # Enable window snapping
           # "org/gnome/mutter" = {
