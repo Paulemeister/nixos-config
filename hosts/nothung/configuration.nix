@@ -39,7 +39,7 @@ in
     inputs.impermanence.nixosModules.impermanence
     inputs.sidewinderd.nixosModules.sidewinderd
     inputs.stylix.nixosModules.stylix
-    "${self}/overlays/kgx-stylix-patch.nix"
+    # "${self}/overlays/kgx-stylix-patch.nix"
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
   ];

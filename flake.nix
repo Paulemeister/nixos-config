@@ -42,16 +42,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    impermanence.url = "github:nix-community/impermanence";
-
-    cosmic-manager = {
-      url = "github:HeitorAugustoLN/cosmic-manager";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
+    impermanence = {
+      url = "github:nix-community/impermanence";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+    # cosmic-manager = {
+    #   url = "github:HeitorAugustoLN/cosmic-manager";
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs";
+    #     home-manager.follows = "home-manager";
+    #   };
+    # };
     nixos-hardware.url = "github:NixOs/nixos-hardware/master";
+
   };
 
   outputs =
@@ -98,6 +101,12 @@
 
           modules = [
             ./hosts/theseus/configuration.nix
+            {
+              nixpkgs.overlays = [
+                inputs.sidewinderd.overlays.default
+                inputs.hyprcorners.overlays.default
+              ];
+            }
           ];
         };
         nothung = nixpkgs.lib.nixosSystem {
