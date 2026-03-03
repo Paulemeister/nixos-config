@@ -243,8 +243,8 @@ in
           };
           # Configure pop-shell
           "org/gnome/shell/extensions/pop-shell" = {
-            gap-inner = lib.mkDefault 1;
-            gap-outer = lib.mkDefault 1;
+            gap-inner = lib.mkDefault osCfg.de.gnome.popBorderSize;
+            gap-outer = lib.mkDefault osCfg.de.gnome.popBorderSize;
             tile-by-default = lib.mkDefault true;
           };
           # Configure vertical workspaces

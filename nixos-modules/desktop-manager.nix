@@ -12,7 +12,7 @@ let
     mkMerge
     mkOption
     ;
-  inherit (lib.types) bool;
+  inherit (lib.types) bool ints;
 in
 {
   config = mkIf cfg.gui (mkMerge [
@@ -82,12 +82,21 @@ in
   ]);
 
   options.pm-modules.de = {
-    gnome.enable = mkOption {
-      type = bool;
-      default = cfg.enableDefault;
-      description = ''
-        enable gnome
-      '';
+    gnome = {
+      enable = mkOption {
+        type = bool;
+        default = cfg.enableDefault;
+        description = ''
+          enable gnome
+        '';
+      };
+      popBorderSize = mkOption {
+        type = ints.unsigned;
+        default = 1;
+        description = ''
+          border used by pop shell
+        '';
+      };
     };
 
     hyprland.enable = mkOption {

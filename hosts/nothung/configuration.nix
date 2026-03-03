@@ -47,6 +47,7 @@ in
   pm-modules = {
     hm = true;
     usePersistence = true;
+    de.gnome.popBorderSize = 0;
   };
 
   boot.initrd.systemd.enable = true;
