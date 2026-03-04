@@ -45,7 +45,7 @@ in
       systemd.user.services.hotcorner = {
         Unit = {
           Description = "Service for the hotcorner on cosmic-epoch";
-          After = [ "graphical-session-post.target" ];
+          After = [ "cosmic-session.target" ];
           BindsTo = [ "cosmic-session.target" ];
         };
         Service = {
