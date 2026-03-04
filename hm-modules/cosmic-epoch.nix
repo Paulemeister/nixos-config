@@ -58,7 +58,7 @@ in
           # Type = "oneshot";
         };
         Install = {
-          WantedBy = [ "default.target" ];
+          WantedBy = [ "cosmic-session.target" ];
         };
       };
 
