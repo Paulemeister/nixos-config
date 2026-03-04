@@ -102,7 +102,10 @@ in
   networking.hostName = "nothung";
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    plugins = with pkgs; [ networkmanager-openconnect ];
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
