@@ -26,6 +26,7 @@ in
         '';
       })
       inputs.pdfcat.packages.${pkgs.stdenv.hostPlatform.system}.unstable
+      wget
     ];
     programs = {
       bat.enable = true;
