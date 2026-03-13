@@ -47,7 +47,11 @@ in
   pm-modules = {
     hm = true;
     usePersistence = true;
-    de.gnome.popBorderSize = 0;
+    de = {
+      gnome.popBorderSize = 0;
+      hyprland.enable = false;
+      cosmic.enable = false;
+    };
   };
 
   boot.initrd.systemd.enable = true;
