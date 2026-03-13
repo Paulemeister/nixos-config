@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  inputs,
   ...
 }:
 let
@@ -10,7 +11,11 @@ let
   inherit (lib.types) bool;
 in
 {
+  imports = [ inputs.nix-index-database.homeModules.default ];
   config = mkIf cfg.nix-tools.enable {
+
+    programs.nix-index-database.comma.enable = true;
+    programs.nix-index.enable = true;
 
     home.packages = with pkgs; [
       nixfmt
