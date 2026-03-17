@@ -97,6 +97,14 @@ in
           border used by pop shell
         '';
       };
+
+      switchAudioMedia = mkOption {
+        type = bool;
+        default = false;
+        description = ''
+          make XF86AudioMedia open calculator
+        '';
+      };
     };
 
     hyprland.enable = mkOption {

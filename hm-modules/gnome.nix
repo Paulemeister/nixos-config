@@ -284,5 +284,13 @@ in
         force = true;
       };
     }
+    (mkIf osCfg.de.gnome.switchAudioMedia {
+      dconf.settings = {
+        "org/gnome/settings-daemon/plugins/media-keys" = {
+          media-static = lib.mkDefault [ ];
+          calculator = lib.mkDefault [ "XF86AudioMedia" ];
+        };
+      };
+    })
   ]);
 }

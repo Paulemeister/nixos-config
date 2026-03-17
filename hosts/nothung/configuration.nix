@@ -48,7 +48,10 @@ in
     hm = true;
     usePersistence = true;
     de = {
-      gnome.popBorderSize = 0;
+      gnome = {
+        popBorderSize = 0;
+        switchAudioMedia = true;
+      };
       hyprland.enable = false;
       cosmic.enable = false;
     };
