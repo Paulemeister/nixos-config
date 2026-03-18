@@ -326,53 +326,35 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "pdfcat-paulemeister-src": "pdfcat-paulemeister-src",
         "pdfcat-src": "pdfcat-src"
       },
       "locked": {
-        "lastModified": 1773779083,
-        "narHash": "sha256-3mU6VjkZYPFUrRKt1H7mHo+SKqs5rndWI3+EV0c9R20=",
+        "lastModified": 1773860287,
+        "narHash": "sha256-rUvdhkp200YKuWRHCbC/R7GPZlAVeD1mvv03HhGLP5c=",
         "owner": "paulemeister",
         "repo": "pdfcat-nix",
-        "rev": "b269faf6fe9a49c46d06ec4825140b1e449fdda0",
+        "rev": "230c9888b7b708d093f336e2f960f02d09f0a65f",
         "type": "github"
       },
       "original": {
         "owner": "paulemeister",
         "repo": "pdfcat-nix",
-        "type": "github"
-      }
-    },
-    "pdfcat-paulemeister-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1773778241,
-        "narHash": "sha256-d/T/1v3sQ52CrSv3sdaIeAMEnETYZb6Ra71WViUp02Q=",
-        "owner": "Paulemeister",
-        "repo": "pdfcat",
-        "rev": "e1583cedc504ae0e3706a6bb24393e29885bc9c1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Paulemeister",
-        "ref": "dev",
-        "repo": "pdfcat",
         "type": "github"
       }
     },
     "pdfcat-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1771433458,
-        "narHash": "sha256-LrQNj0bXl5fDLQr9z/AA51NzZGEfflccXMU6yZE44qQ=",
-        "owner": "pdfcat",
+        "lastModified": 1773778241,
+        "narHash": "sha256-d/T/1v3sQ52CrSv3sdaIeAMEnETYZb6Ra71WViUp02Q=",
+        "owner": "paulemeister",
         "repo": "pdfcat",
-        "rev": "f376bd4c7cfd7b73f242c30b410390c467822a16",
+        "rev": "e1583cedc504ae0e3706a6bb24393e29885bc9c1",
         "type": "github"
       },
       "original": {
-        "owner": "pdfcat",
-        "ref": "main",
+        "owner": "paulemeister",
+        "ref": "dev",
         "repo": "pdfcat",
         "type": "github"
       }

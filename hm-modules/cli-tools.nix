@@ -25,7 +25,7 @@ in
           which "$1" | xargs realpath
         '';
       })
-      inputs.pdfcat.packages.${pkgs.stdenv.hostPlatform.system}.dev
+      inputs.pdfcat.packages.${pkgs.stdenv.hostPlatform.system}.unstable
       wget
       pdfgrep
       rnr

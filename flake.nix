@@ -34,6 +34,7 @@
     pdfcat = {
       url = "github:paulemeister/pdfcat-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.pdfcat-src.url = "github:paulemeister/pdfcat/dev";
     };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
