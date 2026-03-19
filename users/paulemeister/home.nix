@@ -117,6 +117,7 @@
         in
         {
           "application/zip" = [ "org.gnome.FileRoller.desktop" ];
+          "text/markdown" = [ "org.gnome.TextEditor.desktop" ];
           # "application/illustrator" = [ pdf ];
           # "application/pdf" = [ pdf ];
           # "application/x-bzpdf" = [ pdf ];

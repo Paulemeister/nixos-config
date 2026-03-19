@@ -28,8 +28,6 @@ in
 
       services.fwupd.enable = true;
 
-      services.scx.enable = true;
-
       # Prerequisite for allowOther for impermanence in home-manager for root acces to mounts
       programs.fuse.userAllowOther = true;
 

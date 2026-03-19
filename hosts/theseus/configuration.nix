@@ -36,6 +36,8 @@ in
     rocmOverrideGfx = "10.3.0";
   };
 
+  services.scx.enable = true;
+
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   hardware.graphics = {
