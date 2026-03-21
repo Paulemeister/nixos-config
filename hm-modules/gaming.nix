@@ -15,6 +15,7 @@ in
     {
       home.packages = with pkgs; [
         prismlauncher
+        bottles
       ];
 
       programs = {
@@ -34,6 +35,7 @@ in
           directory = ".local/share/Steam";
           # method = "symlink";
         }
+        ".local/share/bottles"
       ];
     })
   ]);

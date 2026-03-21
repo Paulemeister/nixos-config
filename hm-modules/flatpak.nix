@@ -14,6 +14,7 @@ in
     (mkIf cfg.usePersistence {
       home.persistence."/persist".directories = [
         ".local/share/flatpak"
+        ".var/app"
       ];
     })
   ]);
