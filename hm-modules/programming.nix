@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  osConfig,
   ...
 }:
 let
@@ -33,6 +34,7 @@ in
         nixd # nix language server
         #alejandra # nix formatter
         nixfmt # nix formatter
+        clang-tools
       ];
 
       programs = {
@@ -94,7 +96,29 @@ in
               formatter.command = "nixfmt";
               auto-format = true;
             }
+            {
+              name = "c";
+              formatter = {
+                command = "clang-format";
+                args = [ "--style=file" ];
+              };
+
+            }
           ];
+          languages.language-server.nixd.config.nixd =
+            let
+              myFlake = ''(builtins.getFlake "${config.programs.nh.flake}")'';
+              nixosOpts = "${myFlake}.nixosConfigurations.${osConfig.networking.hostName}.options";
+            in
+            {
+              nixpkgs.expr = "import ${myFlake}.inputs.nixpkgs { }";
+              # formatting.command = [ "${lib.getExe pkgs.nixfmt-rfc-style}" ];
+              options = {
+                nixos.expr = nixosOpts;
+                home-manager.expr = "${nixosOpts}.home-manager.users.type.getSubOptions []";
+              };
+            };
+
         };
       };
     }
