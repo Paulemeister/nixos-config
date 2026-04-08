@@ -34,6 +34,7 @@ in
         nixd # nix language server
         #alejandra # nix formatter
         nixfmt # nix formatter
+        clang
         clang-tools
       ];
 
@@ -102,7 +103,7 @@ in
                 command = "clang-format";
                 args = [ "--style=file" ];
               };
-
+              auto-format = true;
             }
           ];
           languages.language-server.nixd.config.nixd =

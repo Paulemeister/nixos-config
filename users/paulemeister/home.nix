@@ -185,6 +185,7 @@
         # use ble.sh
         source ${pkgs.blesh}/share/blesh/ble.sh
         bleopt term_index_colors='0'
+        export NIXPKGS_ALLOW_UNFREE=1
       '';
     };
     # SSH

@@ -33,6 +33,7 @@ in
         moodle-dl
         # evince
         papers
+        celluloid
       ];
     }
     (mkIf cfg.usePersistence {
