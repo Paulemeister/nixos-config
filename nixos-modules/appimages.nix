@@ -17,7 +17,7 @@ in
       package = pkgs.appimage-run.override {
         extraPkgs = pkgs: [
           pkgs.openssl
-          pkgs.openssl_1_1
+          # pkgs.openssl_1_1
 
         ];
       };

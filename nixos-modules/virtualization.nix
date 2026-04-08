@@ -26,7 +26,7 @@ in
         dockerCompat = true;
       };
 
-      virtualisation.virtualbox.host.enable = true;
+      # virtualisation.virtualbox.host.enable = true;
     }
     (mkIf cfg.usePersistence {
       environment.persistence."/persist".directories = [
