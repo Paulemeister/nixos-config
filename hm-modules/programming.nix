@@ -38,6 +38,7 @@ in
         clang-tools
       ];
 
+      stylix.targets.vscode.enable = false;
       programs = {
         vscode = {
           enable = true;
@@ -66,6 +67,7 @@ in
               vadimcn.vscode-lldb
               arrterian.nix-env-selector
               tamasfe.even-better-toml
+              ms-vscode-remote.remote-ssh
             ];
             enableExtensionUpdateCheck = false;
             enableUpdateCheck = false;

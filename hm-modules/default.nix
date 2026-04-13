@@ -25,6 +25,7 @@ in
     ./office.nix
     ./openrgb.nix
     ./programming.nix
+    ./simulation-tools.nix
   ];
 
   options.pm-modules = {

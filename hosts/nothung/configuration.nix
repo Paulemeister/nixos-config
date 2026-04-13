@@ -55,6 +55,7 @@ in
       hyprland.enable = false;
       cosmic.enable = false;
     };
+    simulation-tools.enable = true;
   };
 
   boot.initrd.systemd.enable = true;

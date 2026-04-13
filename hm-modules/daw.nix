@@ -1,30 +1,19 @@
 {
   lib,
   pkgs,
-  config,
+  osConfig,
   ...
 }:
 let
-  cfg = config.pm-modules;
-  inherit (lib)
-    mkIf
-    mkOption
-    ;
-  inherit (lib.types) bool;
+  osCfg = osConfig.pm-modules;
+  inherit (lib) mkIf;
 in
 {
-  config = mkIf cfg.daw.enable {
+  config = mkIf osCfg.daw.enable {
     home.packages = with pkgs; [
       yabridge
       yabridgectl
     ];
   };
 
-  options.pm-modules.daw.enable = mkOption {
-    type = bool;
-    default = false;
-    description = ''
-      daw
-    '';
-  };
 }

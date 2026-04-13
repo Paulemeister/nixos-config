@@ -17,9 +17,6 @@
     inputs.lan-mouse.homeManagerModules.default
   ];
 
-  pm-modules = {
-    daw.enable = true;
-  };
   services.kdeconnect.enable = true;
 
   stylix.targets.qt.platform = lib.mkForce "qtct";
@@ -197,6 +194,29 @@
           user = "git";
           hostname = "github.com";
           identityFile = "~/.ssh/id_ed25519";
+          extraOptions = {
+            "AddKeysToAgent" = "yes";
+          };
+        };
+        "rwth" = {
+          user = "ap472322";
+          hostname = "login23-1.hpc.itc.rwth-aachen.de";
+          identityFile = "~/.ssh/id_ed25519";
+          setEnv = {
+            TERM = "xterm-256color";
+          };
+          extraOptions = {
+            "AddKeysToAgent" = "yes";
+          };
+          proxyJump = "rwth-x";
+        };
+        "rwth-x" = {
+          user = "ap472322";
+          hostname = "login23-x-1.hpc.itc.rwth-aachen.de";
+          identityFile = "~/.ssh/id_ed25519";
+          setEnv = {
+            TERM = "xterm-256color";
+          };
           extraOptions = {
             "AddKeysToAgent" = "yes";
           };

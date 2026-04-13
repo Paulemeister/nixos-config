@@ -42,5 +42,20 @@ in
       '';
     };
     hm = mkEnableOption "home-manager";
+    simulation-tools.enable = mkOption {
+      type = bool;
+      default = false;
+      description = ''
+        paraview
+      '';
+    };
+
+    daw.enable = mkOption {
+      type = bool;
+      default = false;
+      description = ''
+        daw
+      '';
+    };
   };
 }

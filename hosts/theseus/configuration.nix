@@ -28,6 +28,7 @@ in
     hm = true;
     usePersistence = true;
     theseusPeripherals.enable = true;
+    daw.enable = true;
   };
 
   services.ollama = mkIf cfg.ai.enable {
