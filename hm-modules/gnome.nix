@@ -283,6 +283,16 @@ in
         source = "${self}/misc/dotfiles/forge/windows.json";
         force = true;
       };
+      # xdg.configFile."pop-shell/config.json".text = builtins.toJSON {
+      #   float = [
+      #     {
+      #       class = "org.gnome.Calculator";
+      #     }
+      #   ];
+      #   skiptaskbarhidden = [ ];
+      #   log_on_focus = false;
+
+      # };
     }
     (mkIf osCfg.de.gnome.switchAudioMedia {
       dconf.settings = {
