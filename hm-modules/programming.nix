@@ -32,7 +32,6 @@ in
         uv
         gh
         nixd # nix language server
-        #alejandra # nix formatter
         nixfmt # nix formatter
         clang
         clang-tools
@@ -57,17 +56,22 @@ in
           #   ]);
           profiles.default = {
             extensions = with pkgs.vscode-extensions; [
+              # Python
               ms-python.python
               ms-python.vscode-pylance
               ms-python.debugpy
               ms-python.black-formatter
               ms-toolsai.jupyter
+              # Nix
+              arrterian.nix-env-selector
               jnoortheen.nix-ide
+              # Rust
               rust-lang.rust-analyzer
               vadimcn.vscode-lldb
-              arrterian.nix-env-selector
               tamasfe.even-better-toml
+              # RWTH
               ms-vscode-remote.remote-ssh
+              fortran-lang.linter-gfortran
             ];
             enableExtensionUpdateCheck = false;
             enableUpdateCheck = false;

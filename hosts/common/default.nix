@@ -2,6 +2,7 @@
   self,
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -37,6 +38,12 @@ in
         extraConfig = "SystemMaxUse=1G";
       };
     }
+    (mkIf cfg.gui {
+      fonts.enableDefaultPackages = true;
+      fonts.enableGhostscriptFonts = true;
+      fonts.fontconfig.enable = true;
+      fonts.fontDir.enable = true;
+    })
     (mkIf cfg.usePersistence {
       environment.persistence."/persist" = {
         hideMounts = true;
