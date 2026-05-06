@@ -16,13 +16,11 @@
       "nix-command"
       "flakes"
     ];
-    # Does this even do anything? lan-mouse rebuilds anyway
+    # Does this even do anything?
     substituters = [
-      "https://lan-mouse.cachix.org/"
       "https://cache.nixos.org/"
     ];
     trusted-public-keys = [
-      "lan-mouse.cachix.org-1:KlE2AEZUgkzNKM7BIzMQo8w9yJYqUpor1CAUNRY6OyM="
     ];
   };
   # Enable dynamic linking fix

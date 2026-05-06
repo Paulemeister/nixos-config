@@ -22,11 +22,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    lan-mouse = {
-      url = "github:feschber/lan-mouse";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     hyprcorners = {
       url = "github:paulemeister/hyprcorners-nix";
       inputs.nixpkgs.follows = "nixpkgs";

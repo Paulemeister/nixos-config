@@ -18,12 +18,11 @@ in
       openFirewall = true;
     };
 
-    # Open port for packet (quick share), lan-mouse
+    # Open port for packet (quick share)
     networking.firewall = {
       allowedTCPPorts = [
         9300 # Quick Share
       ];
-      allowedUDPPorts = [ 4242 ]; # Lan-Mouse
     };
   };
 

@@ -1,7 +1,6 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
-  inputs,
   config,
   pkgs,
   self,
@@ -14,18 +13,12 @@
     # inputs.cosmic-manager.homeManagerModules.cosmic-manager
     # inputs.sidewinderd.homeManagerModules.sidewinderd
     "${self}/users/common/home.nix"
-    inputs.lan-mouse.homeManagerModules.default
   ];
 
   services.kdeconnect.enable = true;
 
   stylix.targets.qt.platform = lib.mkForce "qtct";
   qt.platformTheme.name = lib.mkForce "adwaita";
-
-  programs.lan-mouse = {
-    enable = true;
-    package = pkgs.lan-mouse;
-  };
 
   xdg.terminal-exec = {
     enable = true;

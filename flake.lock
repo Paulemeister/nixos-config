@@ -223,27 +223,6 @@
         "type": "github"
       }
     },
-    "lan-mouse": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "rust-overlay": "rust-overlay"
-      },
-      "locked": {
-        "lastModified": 1777496383,
-        "narHash": "sha256-mebY9G6bvaP7F312eZZh9CFlBxwj/LfeEXVuId85x/w=",
-        "owner": "feschber",
-        "repo": "lan-mouse",
-        "rev": "3e7b04c1848afb2d77f802c7ddf1f5f3720c1b47",
-        "type": "github"
-      },
-      "original": {
-        "owner": "feschber",
-        "repo": "lan-mouse",
-        "type": "github"
-      }
-    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -380,7 +359,6 @@
         "home-manager": "home-manager",
         "hyprcorners": "hyprcorners",
         "impermanence": "impermanence",
-        "lan-mouse": "lan-mouse",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
@@ -388,27 +366,6 @@
         "pdfcat": "pdfcat",
         "sidewinderd": "sidewinderd",
         "stylix": "stylix"
-      }
-    },
-    "rust-overlay": {
-      "inputs": {
-        "nixpkgs": [
-          "lan-mouse",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1773025773,
-        "narHash": "sha256-Wik8+xApNfldpUFjPmJkPdg0RrvUPSWGIZis+A/0N1w=",
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "rev": "3c06fdbbd36ff60386a1e590ee0cd52dcd1892bf",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "type": "github"
       }
     },
     "sidewinderd": {
