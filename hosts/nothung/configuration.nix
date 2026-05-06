@@ -56,6 +56,7 @@ in
       cosmic.enable = false;
     };
     simulation-tools.enable = true;
+    easyeffects.enable = false;
   };
 
   boot.initrd.systemd.enable = true;

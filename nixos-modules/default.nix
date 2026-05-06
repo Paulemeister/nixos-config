@@ -1,8 +1,10 @@
 {
   lib,
+  config,
   ...
 }:
 let
+  cfg = config.pm-modules;
   inherit (lib) mkOption mkEnableOption;
   inherit (lib.types) bool;
 in
@@ -57,5 +59,14 @@ in
         daw
       '';
     };
+
+    easyeffects.enable = mkOption {
+      type = bool;
+      default = cfg.enableDefault;
+      description = ''
+        easyeffects
+      '';
+    };
+
   };
 }

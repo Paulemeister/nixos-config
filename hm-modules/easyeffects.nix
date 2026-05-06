@@ -1,10 +1,12 @@
 {
   lib,
   config,
+  osConfig,
   ...
 }:
 let
   cfg = config.pm-modules;
+  osCfg = osConfig.pm-modules;
   inherit (lib) mkIf mkOption;
   inherit (lib.types) bool;
 in
@@ -79,7 +81,7 @@ in
   };
   options.pm-modules.easyeffects.enable = mkOption {
     type = bool;
-    default = cfg.enableDefault;
+    default = osCfg.easyeffects.enable;
     description = ''
       easyeffects
     '';
