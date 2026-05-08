@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -21,6 +22,15 @@ in
 
   config = mkMerge [
     {
+
+      # nixpkgs.overlays = [
+      #   (final: prev: {
+      #     unstable = import inputs.nixpkgs-unstable {
+      #       system = prev.system;
+      #       config.allowUnfree = true;
+      #     };
+      #   })
+      # ];
 
       # Don't lecture on first usage of sudo
       security.sudo.extraConfig = "Defaults lecture = never";
