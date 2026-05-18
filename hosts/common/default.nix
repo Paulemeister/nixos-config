@@ -24,12 +24,9 @@ in
     {
 
       nixpkgs.overlays = [
-        (final: prev: {
-          unstable = import inputs.nixpkgs-unstable {
-            system = prev.system;
-            config.allowUnfree = true;
-          };
-        })
+        (import ../../overlays/unstable.nix inputs)
+        (import ../../overlays/custom.nix)
+        (import ../../overlays/popshell.nix)
       ];
 
       # Don't lecture on first usage of sudo

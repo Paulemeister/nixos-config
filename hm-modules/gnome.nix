@@ -34,6 +34,8 @@ in
         # forge
         dash-to-dock
         appindicator
+        junk-notification-cleaner
+        # quick-sound-switcher
 
         pop-shell # add dconf editor
 
@@ -239,6 +241,8 @@ in
               dash-to-dock.extensionUuid
               appindicator.extensionUuid
               pop-shell.extensionUuid
+              junk-notification-cleaner.extensionUuid
+              # quick-sound-switcher.extensionUuid
             ];
           };
           # Configure pop-shell
