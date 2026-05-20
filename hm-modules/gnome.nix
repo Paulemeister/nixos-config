@@ -34,7 +34,10 @@ in
         # forge
         dash-to-dock
         appindicator
+        junk-notification-cleaner
+        quick-settings-audio-panel
 
+        touchpad-gesture-customization
         pop-shell # add dconf editor
 
         pkgs.dconf-editor
@@ -235,10 +238,12 @@ in
             disable-user-extensions = lib.mkDefault false;
             enabled-extensions = with pkgs.gnomeExtensions; [
               vertical-workspaces.extensionUuid
-              # forge.extensionUuid
               dash-to-dock.extensionUuid
               appindicator.extensionUuid
               pop-shell.extensionUuid
+              junk-notification-cleaner.extensionUuid
+              quick-settings-audio-panel.extensionUuid
+              touchpad-gesture-customization.extensionUuid
             ];
           };
           # Configure pop-shell
@@ -256,29 +261,76 @@ in
             startup-state = lib.mkDefault 1;
             wst-position-adjust = lib.mkDefault 0;
           };
-          # Configure forge (auto tiling)
-          # "org/gnome/shell/extensions/forge" = {
-          #   dns-center-layout = lib.mkDefault "tabbed";
-          #   stacked-tiling-mode-enabled = lib.mkDefault false;
-          #   window-gap-size = lib.mkDefault 0;
-          # };
           # Configure dash to dock
           "org/gnome/shell/extensions/dash-to-dock" = {
             show-trash = lib.mkDefault false;
             shortcut = lib.mkDefault [ ];
           };
+          # Configure Quick Settings Audio Panel
+          "org/gnome/shell/extensions/quick-settings-audio-panel" = {
+            always-show-input-volume-slider = true;
+            autohide-profile-switcher = false;
+            create-profile-switcher = true;
+            panel-type = "merged-panel";
+          };
+          # Configure Touchpad Gesture Costumization
+          "org/gnome/shell/extensions/touchpad-gesture-customization" = {
+            enable-forward-back-gesture = true;
+            # nixfmt: ignore
+            forward-back-application-keyboard-shortcuts =
+              with lib.gvariant;
+              mkArray [
+                (mkDictionaryEntry "org.mozilla.firefox.desktop" (mkTuple [
+                  (mkInt32 5)
+                  false
+                ]))
+                (mkDictionaryEntry "firefox.desktop" (mkTuple [
+                  (mkInt32 5)
+                  false
+                ]))
+                (mkDictionaryEntry "org.chromium.Chromium.desktop" (mkTuple [
+                  (mkInt32 5)
+                  false
+                ]))
+                (mkDictionaryEntry "microsoft-edge.desktop" (mkTuple [
+                  (mkInt32 5)
+                  false
+                ]))
+                (mkDictionaryEntry "google-chrome.desktop" (mkTuple [
+                  (mkInt32 5)
+                  false
+                ]))
+                (mkDictionaryEntry "brave-browser.desktop" (mkTuple [
+                  (mkInt32 5)
+                  false
+                ]))
+                (mkDictionaryEntry "org.gnome.gThumb.desktop" (mkTuple [
+                  (mkInt32 2)
+                  false
+                ]))
+                (mkDictionaryEntry "org.gnome.eog.desktop" (mkTuple [
+                  (mkInt32 3)
+                  false
+                ]))
+                (mkDictionaryEntry "org.gnome.Photos.desktop" (mkTuple [
+                  (mkInt32 3)
+                  false
+                ]))
+                (mkDictionaryEntry "org.gnome.Nautilus.desktop" (mkTuple [
+                  (mkInt32 5)
+                  false
+                ]))
+              ];
+            hold-swipe-delay-duration = 0;
+            horizontal-swipe-3-fingers-gesture = "NONE";
+            horizontal-swipe-4-fingers-gesture = "OVERVIEW_NAVIGATION";
+            pinch-3-finger-gesture = "NONE";
+            vertical-swipe-3-fingers-gesture = "NONE";
+            vertical-swipe-4-fingers-gesture = "WORKSPACE_SWITCHING";
+
+          };
         };
       };
-      # Add styling for forge
-      # xdg.configFile."forge/stylesheet/forge/stylesheet.css" = {
-      #   source = ./dotfiles/forge/stylesheet.css;
-      #   force = true;
-      # onChange = ''
-      #   rm -f ${config.xdg.configHome}/forge/stylesheet/forge/stylesheet.css
-      #   cp ${config.xdg.configHome}/forge/stylesheet/forge/stylesheet_init.css ${config.xdg.configHome}/forge/stylesheet/forge/stylesheet.css
-      #   chmod 0666 ${config.xdg.configHome}/forge/stylesheet/forge/stylesheet.css
-      # '';
-      # };
       xdg.configFile."forge/config/windows.json" = {
         source = "${self}/misc/dotfiles/forge/windows.json";
         force = true;

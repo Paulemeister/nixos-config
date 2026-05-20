@@ -23,14 +23,11 @@ in
   config = mkMerge [
     {
 
-      # nixpkgs.overlays = [
-      #   (final: prev: {
-      #     unstable = import inputs.nixpkgs-unstable {
-      #       system = prev.system;
-      #       config.allowUnfree = true;
-      #     };
-      #   })
-      # ];
+      nixpkgs.overlays = [
+        (import ../../overlays/unstable.nix inputs)
+        (import ../../overlays/custom.nix)
+        (import ../../overlays/popshell.nix)
+      ];
 
       # Don't lecture on first usage of sudo
       security.sudo.extraConfig = "Defaults lecture = never";
