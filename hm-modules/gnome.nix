@@ -37,6 +37,7 @@ in
         junk-notification-cleaner
         quick-settings-audio-panel
 
+        touchpad-gesture-customization
         pop-shell # add dconf editor
 
         pkgs.dconf-editor
@@ -242,6 +243,7 @@ in
               pop-shell.extensionUuid
               junk-notification-cleaner.extensionUuid
               quick-settings-audio-panel.extensionUuid
+              touchpad-gesture-customization.extensionUuid
             ];
           };
           # Configure pop-shell
@@ -270,6 +272,62 @@ in
             autohide-profile-switcher = false;
             create-profile-switcher = true;
             panel-type = "merged-panel";
+          };
+          # Configure Touchpad Gesture Costumization
+          "org/gnome/shell/extensions/touchpad-gesture-customization" = {
+            enable-forward-back-gesture = true;
+            # nixfmt: ignore
+            forward-back-application-keyboard-shortcuts =
+              with lib.gvariant;
+              mkArray [
+                (mkDictionaryEntry "org.mozilla.firefox.desktop" (mkTuple [
+                  (mkInt32 5)
+                  false
+                ]))
+                (mkDictionaryEntry "firefox.desktop" (mkTuple [
+                  (mkInt32 5)
+                  false
+                ]))
+                (mkDictionaryEntry "org.chromium.Chromium.desktop" (mkTuple [
+                  (mkInt32 5)
+                  false
+                ]))
+                (mkDictionaryEntry "microsoft-edge.desktop" (mkTuple [
+                  (mkInt32 5)
+                  false
+                ]))
+                (mkDictionaryEntry "google-chrome.desktop" (mkTuple [
+                  (mkInt32 5)
+                  false
+                ]))
+                (mkDictionaryEntry "brave-browser.desktop" (mkTuple [
+                  (mkInt32 5)
+                  false
+                ]))
+                (mkDictionaryEntry "org.gnome.gThumb.desktop" (mkTuple [
+                  (mkInt32 2)
+                  false
+                ]))
+                (mkDictionaryEntry "org.gnome.eog.desktop" (mkTuple [
+                  (mkInt32 3)
+                  false
+                ]))
+                (mkDictionaryEntry "org.gnome.Photos.desktop" (mkTuple [
+                  (mkInt32 3)
+                  false
+                ]))
+                (mkDictionaryEntry "org.gnome.Nautilus.desktop" (mkTuple [
+                  (mkInt32 5)
+                  false
+                ]))
+              ];
+            hold-swipe-delay-duration = 0;
+            horizontal-swipe-3-fingers-gesture = "NONE";
+            horizontal-swipe-4-fingers-gesture = "OVERVIEW_NAVIGATION";
+            pinch-3-finger-gesture = "NONE";
+            vertical-swipe-3-fingers-gesture = "NONE";
+            vertical-swipe-4-fingers-gesture = "WORKSPACE_SWITCHING";
+
           };
         };
       };
