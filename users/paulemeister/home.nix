@@ -201,7 +201,6 @@
           extraOptions = {
             "AddKeysToAgent" = "yes";
           };
-          proxyJump = "rwth-x";
         };
         "rwth-x" = {
           user = "ap472322";

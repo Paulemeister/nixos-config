@@ -37,7 +37,7 @@ in
         junk-notification-cleaner
         quick-settings-audio-panel
 
-        touchpad-gesture-customization
+        pkgs.unstable.gnomeExtensions.touchpad-gesture-customization
         pop-shell # add dconf editor
 
         pkgs.dconf-editor
@@ -243,7 +243,7 @@ in
               pop-shell.extensionUuid
               junk-notification-cleaner.extensionUuid
               quick-settings-audio-panel.extensionUuid
-              touchpad-gesture-customization.extensionUuid
+              pkgs.unstable.gnomeExtensions.touchpad-gesture-customization.extensionUuid
             ];
           };
           # Configure pop-shell
@@ -325,6 +325,7 @@ in
             horizontal-swipe-3-fingers-gesture = "NONE";
             horizontal-swipe-4-fingers-gesture = "OVERVIEW_NAVIGATION";
             pinch-3-finger-gesture = "NONE";
+            pinch-4-finger-gesture = "NONE";
             vertical-swipe-3-fingers-gesture = "NONE";
             vertical-swipe-4-fingers-gesture = "WORKSPACE_SWITCHING";
 
