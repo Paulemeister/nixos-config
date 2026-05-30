@@ -56,7 +56,8 @@ in
 
         moodle-dl
         # evince
-        mypapers
+        # mypapers
+        papers
         celluloid
       ];
     }

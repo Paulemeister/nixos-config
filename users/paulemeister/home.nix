@@ -15,6 +15,8 @@
     "${self}/users/common/home.nix"
   ];
 
+  gtk.gtk4.theme = null;
+
   services.kdeconnect.enable = true;
 
   stylix.targets.qt.platform = lib.mkForce "qtct";
@@ -182,38 +184,29 @@
     ssh = {
       enable = true;
       enableDefaultConfig = false;
-      matchBlocks = {
+      settings = {
         "github" = {
           user = "git";
           hostname = "github.com";
           identityFile = "~/.ssh/id_ed25519";
-          extraOptions = {
-            "AddKeysToAgent" = "yes";
-          };
+          "AddKeysToAgent" = "yes";
         };
         "rwth" = {
           user = "ap472322";
           hostname = "login23-1.hpc.itc.rwth-aachen.de";
           identityFile = "~/.ssh/id_ed25519";
-          setEnv = {
-            TERM = "xterm-256color";
-          };
-          extraOptions = {
-            "AddKeysToAgent" = "yes";
-          };
+          setEnv = "TERM=xterm-256color";
+          "AddKeysToAgent" = "yes";
+          proxyJump = "rwth-x";
         };
         "rwth-x" = {
           user = "ap472322";
           hostname = "login23-x-1.hpc.itc.rwth-aachen.de";
           identityFile = "~/.ssh/id_ed25519";
-          setEnv = {
-            TERM = "xterm-256color";
-          };
-          extraOptions = {
-            "AddKeysToAgent" = "yes";
-          };
+          setEnv = "TERM=xterm-256color";
+          "AddKeysToAgent" = "yes";
         };
-        "*" = {
+        "Host *" = {
           # Default Values
           forwardAgent = false;
           addKeysToAgent = "yes"; # Not Default

@@ -18,7 +18,7 @@ in
       waybar
       hyprcorners
       wiremix
-      blueberry
+      # blueberry
       pavucontrol
     ];
 
@@ -26,6 +26,7 @@ in
       enable = true;
       package = pkgs.hyprland;
       xwayland.enable = true;
+      configType = "hyprlang";
       plugins = with pkgs.hyprlandPlugins; [
         hyprexpo
         hyprbars
@@ -141,13 +142,13 @@ in
             "wireplumber"
           ];
 
-          bluetooth = {
-            format = "󰂯";
-            format-disabled = "󰂲";
-            format-connected = "󰂯";
-            tooltip-format = "Devices connected: {num_connections}";
-            on-click = "${pkgs.blueberry}/bin/blueberry";
-          };
+          # bluetooth = {
+          #   format = "󰂯";
+          #   format-disabled = "󰂲";
+          #   format-connected = "󰂯";
+          #   tooltip-format = "Devices connected: {num_connections}";
+          #   on-click = "${pkgs.blueberry}/bin/blueberry";
+          # };
           network = {
             format-icons = [
               "󰤯"

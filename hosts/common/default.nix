@@ -27,6 +27,7 @@ in
         (import ../../overlays/unstable.nix inputs)
         (import ../../overlays/custom.nix)
         (import ../../overlays/popshell.nix)
+        (import ../../overlays/nixpkgs.nix)
       ];
 
       # Don't lecture on first usage of sudo

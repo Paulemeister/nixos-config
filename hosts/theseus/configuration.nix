@@ -29,13 +29,14 @@ in
     usePersistence = true;
     theseusPeripherals.enable = true;
     daw.enable = true;
+    de.hyprland.enable = true;
   };
 
-  services.ollama = mkIf cfg.ai.enable {
-    acceleration = "rocm";
-    # package = pkgs.ollama-rocm;
-    rocmOverrideGfx = "10.3.0";
-  };
+  # services.ollama = mkIf cfg.ai.enable {
+  # acceleration = "rocm";
+  # package = pkgs.ollama-rocm;
+  # rocmOverrideGfx = "10.3.0";
+  # };
 
   services.scx.enable = true;
 

@@ -2,7 +2,7 @@
   description = "Paulemeisters Flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs-master.url = "github:nixos/nixpkgs/master";
@@ -11,7 +11,7 @@
     # chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     stylix = {
-      url = "github:nix-community/stylix/release-25.11";
+      url = "github:nix-community/stylix";
       # url = "github:nix-community/stylix/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -27,6 +27,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprexpo = {
+      url = "github:colonelpanic8/hyprexpo";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     pdfcat = {
       url = "github:paulemeister/pdfcat-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,7 +44,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       # url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -107,6 +112,7 @@
               nixpkgs.overlays = [
                 inputs.sidewinderd.overlays.default
                 inputs.hyprcorners.overlays.default
+                inputs.hyprexpo.overlays.default
               ];
             }
           ];

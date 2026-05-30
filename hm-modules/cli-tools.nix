@@ -34,7 +34,10 @@ in
       bat.enable = true;
       fd.enable = true;
       ripgrep.enable = true;
-      yazi.enable = true;
+      yazi = {
+        enable = true;
+        shellWrapperName = "yy";
+      };
       btop = {
         enable = true;
         settings = {

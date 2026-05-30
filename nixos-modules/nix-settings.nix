@@ -32,7 +32,7 @@
     freetype # libfreetype.so.6
     libGL # libGL.so.1
     libxkbcommon # libxkbcommon.so.0
-    xorg.libX11 # libX11.so.6
+    libX11 # libX11.so.6
     wayland
 
     glib # libglib-2.0.so.0

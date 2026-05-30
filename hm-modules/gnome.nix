@@ -23,7 +23,10 @@ in
           #   # method = "symlink";
           # }
         ];
-        directories = [ ".config/gtk-4.0" ];
+        directories = [
+          ".config/gtk-4.0"
+          ".local/share/nautilus/tags"
+        ];
       };
     })
     {
@@ -254,12 +257,13 @@ in
           };
           # Configure vertical workspaces
           "org/gnome/shell/extensions/vertical-workspaces" = {
-            center-dash-to-ws = lib.mkDefault false;
-            dash-position = lib.mkDefault 2;
-            dash-position-adjust = lib.mkDefault 0;
-            show-app-icon-position = lib.mkDefault 2;
+            # center-dash-to-ws = lib.mkDefault false;
+            # dash-position = lib.mkDefault 2;
+            # dash-position-adjust = lib.mkDefault 0;
+            # show-app-icon-position = lib.mkDefault 2;
             startup-state = lib.mkDefault 1;
             wst-position-adjust = lib.mkDefault 0;
+            ws-thumbnails-position = lib.mkDefault 0;
           };
           # Configure dash to dock
           "org/gnome/shell/extensions/dash-to-dock" = {
