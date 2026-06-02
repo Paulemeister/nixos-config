@@ -15,7 +15,7 @@ in
     stylix = {
       enable = true;
       polarity = "dark";
-      image = "${self}/misc/wallpaper.jpg";
+      image = cfg.stylix.wallpaper;
       # base16Scheme = "${pkgs-unstable.base16-schemes}/share/themes/0x96f.yaml";
       base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
       # base16Scheme = ../misc/dark_plus_custom.yaml;
@@ -72,11 +72,20 @@ in
       };
     };
   };
-  options.pm-modules.stylix.enable = mkOption {
-    type = bool;
-    default = cfg.enableDefault;
-    description = ''
-      use stylix to style the system
-    '';
+  options.pm-modules.stylix = {
+    enable = mkOption {
+      type = bool;
+      default = cfg.enableDefault;
+      description = ''
+        use stylix to style the system
+      '';
+    };
+    wallpaper = mkOption {
+      type = lib.types.str;
+      default = "${self}/misc/wallpaper.jpg";
+      description = ''
+        wallpaper
+      '';
+    };
   };
 }
