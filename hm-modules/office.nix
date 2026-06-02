@@ -11,30 +11,6 @@ let
     mkOption
     mkMerge
     ;
-  mypapers = pkgs.unstable.papers.overrideAttrs (oldAttrs: {
-    src = pkgs.fetchFromGitLab {
-      domain = "gitlab.gnome.org";
-      owner = "balooii";
-      repo = "papers";
-      rev = "wip/balooii/improve_page_rendering_quality_for_fractional_scales";
-      # The hash must be updated. Setting a dummy hash forces Nix to
-      # report the correct one on the first attempt.
-      hash = "sha256-ANU5/0zDz7L00i+nW2xOOGUnhlP6cCPasUaSrsfHgsE=";
-    };
-    cargoDeps = pkgs.unstable.rustPlatform.fetchCargoVendor {
-      src = pkgs.fetchFromGitLab {
-        domain = "gitlab.gnome.org";
-        owner = "balooii";
-        repo = "papers";
-        rev = "wip/balooii/improve_page_rendering_quality_for_fractional_scales";
-        # The hash must be updated. Setting a dummy hash forces Nix to
-        # report the correct one on the first attempt.
-        hash = "sha256-ANU5/0zDz7L00i+nW2xOOGUnhlP6cCPasUaSrsfHgsE=";
-      };
-      version = oldAttrs.version;
-      hash = "sha256-gdxkaLMI9kh6vPTjmDEc1G8b/fPLdX2GidtRuum7xvA=";
-    };
-  });
   inherit (lib.types) bool;
 in
 {
@@ -56,7 +32,6 @@ in
 
         moodle-dl
         # evince
-        # mypapers
         papers
         celluloid
       ];
