@@ -15,8 +15,6 @@
     "${self}/users/common/home.nix"
   ];
 
-  gtk.gtk4.theme = null;
-
   services.kdeconnect.enable = true;
 
   stylix.targets.qt.platform = lib.mkForce "qtct";
