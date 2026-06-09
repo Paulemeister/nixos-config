@@ -22,6 +22,7 @@ in
         ".config/gh"
         ".local/bin" # make uv binaries persistent
         ".vscode"
+        ".vscode-shared"
         ".config/Code"
       ];
     })
@@ -62,6 +63,8 @@ in
               ms-python.debugpy
               ms-python.black-formatter
               ms-toolsai.jupyter
+              ms-toolsai.jupyter-renderers
+              mechatroner.rainbow-csv
               # Nix
               arrterian.nix-env-selector
               jnoortheen.nix-ide
