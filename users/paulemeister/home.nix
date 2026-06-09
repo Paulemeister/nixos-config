@@ -187,22 +187,18 @@
           user = "git";
           hostname = "github.com";
           identityFile = "~/.ssh/id_ed25519";
-          "AddKeysToAgent" = "yes";
         };
         "rwth" = {
           user = "ap472322";
           hostname = "login23-1.hpc.itc.rwth-aachen.de";
           identityFile = "~/.ssh/id_ed25519";
           setEnv = "TERM=xterm-256color";
-          "AddKeysToAgent" = "yes";
-          proxyJump = "rwth-x";
         };
         "rwth-x" = {
           user = "ap472322";
           hostname = "login23-x-1.hpc.itc.rwth-aachen.de";
           identityFile = "~/.ssh/id_ed25519";
           setEnv = "TERM=xterm-256color";
-          "AddKeysToAgent" = "yes";
         };
         "Host *" = {
           # Default Values
