@@ -47,12 +47,15 @@ in
         paraview-5-13
         paraview
         octaveFull
+        freecad
       ];
     }
     (mkIf cfg.usePersistence {
       home.persistence."/persist".directories = [
         ".config/octave"
         ".local/share/octave"
+        ".config/FreeCAD"
+        ".local/share/FreeCAD"
       ];
     })
   ]);
