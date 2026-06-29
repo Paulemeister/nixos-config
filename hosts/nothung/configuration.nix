@@ -59,6 +59,7 @@ in
     easyeffects.enable = false;
     stylix.wallpaper = "${self}/misc/nothung_wallpaper.jpg";
     tailscale.enable = true;
+    rgb.enable = false;
   };
 
   boot.initrd.systemd.enable = true;

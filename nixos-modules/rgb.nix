@@ -16,6 +16,11 @@ in
 
     hardware.i2c.enable = true;
     services.udev.packages = [ pkgs.openrgb ];
+
+    hardware.openrazer = {
+      enable = true;
+      users = [ "paulemeister" ];
+    };
   };
 
   options.pm-modules.rgb.enable = mkOption {
