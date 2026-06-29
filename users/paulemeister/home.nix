@@ -57,6 +57,7 @@
         ".cache"
         ".config/eduvpn"
         ".local/state/syncthing"
+        ".local/state/wireplumber"
         # ".config/sidewinderd"
         ".config/easyeffects"
 
