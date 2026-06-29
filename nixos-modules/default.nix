@@ -20,6 +20,7 @@ in
     ./rgb.nix
     ./sound.nix
     ./stylix.nix
+    ./tailscale.nix
     ./theseus-peripherals.nix
     ./virtualization.nix
     ./appimages.nix

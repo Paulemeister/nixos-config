@@ -26,6 +26,7 @@ in
     ./openrgb.nix
     ./programming.nix
     ./simulation-tools.nix
+    ./tailscale.nix
   ];
 
   options.pm-modules = {

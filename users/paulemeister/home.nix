@@ -66,6 +66,7 @@
         ".local/share/applications" # persist custom .desktop entries (quick-webapps)
         ".local/share/icons/QuickWebApps"
         ".local/share/quick-webapps"
+        ".config/Moonlight Game Streaming Project/"
 
       ];
       # allowOther = true;
@@ -94,6 +95,7 @@
     spotify
     # nerd-fonts.fira-code
     # fira-co
+    moonlight-qt
   ];
 
   # set default app for .zip
