@@ -64,7 +64,10 @@ in
               ms-python.black-formatter
               ms-toolsai.jupyter
               ms-toolsai.jupyter-renderers
+              # misc
               mechatroner.rainbow-csv
+              streetsidesoftware.code-spell-checker
+              myriad-dreamin.tinymist
               # Nix
               arrterian.nix-env-selector
               jnoortheen.nix-ide
@@ -87,6 +90,19 @@ in
               "explorer.confirmDragAndDrop" = false;
 
               "editor.formatOnSave" = true;
+
+              "cSpell.enabledFileTypes" = {
+                "md" = true;
+                "typst" = true;
+                "*" = false;
+              };
+
+              "python.analysis.typeCheckingMode" = "strict";
+              "python.analysis.diagnosticSeverityOverrides" = {
+                "reportUnknownMemberType" = "none";
+                "reportUnknownArgumentType" = "none";
+              };
+
             };
           };
         };

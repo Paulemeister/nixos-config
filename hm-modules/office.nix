@@ -35,7 +35,6 @@ in
         # evince
         papers
         celluloid
-        typst
       ];
     }
     (mkIf cfg.usePersistence {
