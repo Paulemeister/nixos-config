@@ -146,6 +146,7 @@
         email = "annanas6800i@gmail.com";
         name = "Paulemeister";
       };
+      lfs.enable = true;
     };
     # Bash aliases
     bash = {
