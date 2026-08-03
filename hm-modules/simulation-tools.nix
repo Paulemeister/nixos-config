@@ -46,7 +46,8 @@ in
       home.packages = with pkgs; [
         paraview-5-13
         paraview
-        octaveFull
+        (octaveFull.withPackages (opkgs: with opkgs; [ control ]))
+        gnuplot
         freecad
       ];
     }

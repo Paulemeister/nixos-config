@@ -36,6 +36,7 @@ in
         papers
         celluloid
       ];
+      programs.anki.enable = true;
     }
     (mkIf cfg.usePersistence {
 
