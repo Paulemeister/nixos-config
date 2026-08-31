@@ -65,14 +65,14 @@ in
         };
       };
     })
-    (mkIf osCfg.rgb.enable {
-      home.packages = [ pkgs.polychromatic ];
-      home.persistence."/persist".directories = [
-        ".config/polychromatic"
-        ".config/openrazer"
-      ];
+    # (mkIf osCfg.rgb.enable {
+    #   home.packages = [ pkgs.polychromatic ];
+    #   home.persistence."/persist".directories = [
+    #     ".config/polychromatic"
+    #     ".config/openrazer"
+    #   ];
 
-    })
+    # })
 
   ];
   options.pm-modules.openrgb.enable = mkOption {

@@ -64,7 +64,6 @@
         ".config/AusweisApp"
         ".config/OpenRGB"
         ".config/spotify"
-        ".config/Psst"
         ".local/share/applications" # persist custom .desktop entries (quick-webapps)
         ".local/share/icons/QuickWebApps"
         ".local/share/quick-webapps"
@@ -95,7 +94,6 @@
     # gnome-terminal
     quick-webapps
     spotify
-    psst
     # nerd-fonts.fira-code
     # fira-co
     moonlight-qt
