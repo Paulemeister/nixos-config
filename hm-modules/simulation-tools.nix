@@ -11,6 +11,9 @@ let
   cfg = config.pm-modules;
   inherit (lib) mkIf mkMerge;
 
+  system = pkgs.stdenv.hostPlatform.system;
+  paraview-5-13-pkg = inputs.multiverse.multiverse.${system}.version "paraview" "5.13.2";
+
   paraview-5-13 =
     pkgs.runCommand "paraview-5-13"
       {
@@ -22,15 +25,11 @@ let
 
         # 1. Create a symlink for the main binary with the new name
         # This points directly to the real binary in the original store path
-        ln -s ${
-          inputs.nixpkgs-paraview-5-13-2.legacyPackages.${pkgs.stdenv.hostPlatform.system}.paraview
-        }/bin/paraview $out/bin/paraview-5-13
+        ln -s ${paraview-5-13-pkg}/bin/paraview $out/bin/paraview-5-13
 
         # 2. Copy and edit the desktop file
         # We find the desktop file in the original package
-        DESKTOP_SRC="${
-          inputs.nixpkgs-paraview-5-13-2.legacyPackages.${pkgs.stdenv.hostPlatform.system}.paraview
-        }/share/applications/org.paraview.ParaView.desktop"
+        DESKTOP_SRC="${paraview-5-13-pkg}/share/applications/org.paraview.ParaView.desktop"
 
         cp "$DESKTOP_SRC" $out/share/applications/paraview-5-13.desktop
         chmod +w $out/share/applications/paraview-5-13.desktop

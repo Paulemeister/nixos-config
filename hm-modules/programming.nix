@@ -36,7 +36,11 @@ in
         nixfmt # nix formatter
         clang
         clang-tools
+        rustc
+        cargo
       ];
+
+      programs.antigravity.enable = false;
 
       stylix.targets.vscode.enable = false;
       programs = {
