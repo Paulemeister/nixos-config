@@ -29,7 +29,12 @@ in
     usePersistence = true;
     theseusPeripherals.enable = true;
     daw.enable = true;
-    de.hyprland.enable = true;
+    de = {
+      gnome = {
+        popBorderSize = 0;
+      };
+      hyprland.enable = true;
+    };
   };
 
   # services.ollama = mkIf cfg.ai.enable {
