@@ -26,7 +26,7 @@ jobs:
     - name: Configure Cachix
       uses: cachix/cachix-action@v15
       with:
-        name: '<your-cache-name>'
+        name: 'paulemeister'
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 
     - name: Update Flake Inputs
