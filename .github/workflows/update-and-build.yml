@@ -45,14 +45,14 @@ jobs:
           echo "HAS_UPDATES=true" >> $GITHUB_ENV
         fi
 
-    - name: Build Host 1
+    - name: Build Theseus
       run: |
-        echo "Building Host A..."
+        echo "Building Theseus..."
         nix build .#nixosConfigurations.theseus.config.system.build.toplevel
 
-    - name: Build Host 2
+    - name: Build Nothung
       run: |
-        echo "Building Host B..."
+        echo "Building Nothung..."
         nix build .#nixosConfigurations.nothung.config.system.build.toplevel
 
     - name: Push Updates to Repository
