@@ -1,0 +1,63 @@
+name: "Update, Build, and Cache NixOS"
+
+on:
+  schedule:
+    # Runs every Monday at 02:00 UTC (adjust cron as needed)
+    - cron: '0 2 * * 1'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  update-and-build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to push flake.lock updates back to repo
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install Nix
+      uses: cachix/install-nix-action@v27
+      with:
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+    - name: Configure Cachix
+      uses: cachix/cachix-action@v15
+      with:
+        name: '<your-cache-name>'
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+    - name: Update Flake Inputs
+      run: |
+        nix flake update
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        
+        # Check if flake.lock actually changed
+        if git diff --quiet flake.lock; then
+          echo "No updates available for flake inputs."
+          echo "HAS_UPDATES=false" >> $GITHUB_ENV
+        else
+          git add flake.lock
+          git commit -m "chore(flake): weekly automated input updates"
+          echo "HAS_UPDATES=true" >> $GITHUB_ENV
+        fi
+
+    - name: Build Host 1
+      run: |
+        echo "Building Host A..."
+        nix build .#nixosConfigurations.theseus.config.system.build.toplevel
+
+    - name: Build Host 2
+      run: |
+        echo "Building Host B..."
+        nix build .#nixosConfigurations.nothung.config.system.build.toplevel
+
+    - name: Push Updates to Repository
+      if: env.HAS_UPDATES == 'true'
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
