@@ -11,6 +11,7 @@ in
 {
   imports = [
     ./bluetooth.nix
+    ./cachix.nix
     ./desktop-manager.nix
     ./dns.nix
     ./gaming.nix

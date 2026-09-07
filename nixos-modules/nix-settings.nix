@@ -18,9 +18,11 @@
     ];
     # Does this even do anything?
     substituters = [
-      "https://cache.nixos.org/"
+      "https://cache.nixos.org"
+      "https://paulemeister.cachix.org"
     ];
     trusted-public-keys = [
+      "paulemeister.cachix.org-1:mL+VLlWr/Nj8/4VfODO4vM4iuzLF6bGOVSShn28WA04="
     ];
   };
   # Enable dynamic linking fix

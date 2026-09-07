@@ -10,6 +10,7 @@ let
 in
 {
   imports = [
+    ./cachix.nix
     ./cli-tools.nix
     ./cosmic-epoch.nix
     ./daw.nix
