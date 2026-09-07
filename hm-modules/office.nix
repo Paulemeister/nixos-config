@@ -35,6 +35,7 @@ in
         # evince
         papers
         celluloid
+        xournalpp
       ];
       programs.anki.enable = true;
     }
