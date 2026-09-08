@@ -16,6 +16,7 @@ in
       home.packages = with pkgs; [
         prismlauncher
         bottles
+        r2modman
       ];
 
       programs = {
