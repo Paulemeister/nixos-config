@@ -169,16 +169,24 @@
         bind -s 'set completion-ignore-case on'
 
         # fix for cosmic: get right socket (uses  /1000/keyring/ssh which doesnt exist)
-        if command -v systemctl >/dev/null 2>&1; then
-          sock="$(systemctl --user show-environment | grep '^SSH_AUTH_SOCK=' | cut -d= -f2-)"
-          if [ -n "$sock" ]; then
-            export SSH_AUTH_SOCK="$sock"
+        if [ "$XDG_CURRENT_DESKTOP" = "COSMIC" ]; then
+          if command -v systemctl >/dev/null 2>&1; then
+            sock="$(systemctl --user show-environment | grep '^SSH_AUTH_SOCK=' | cut -d= -f2-)"
+            if [ -n "$sock" ]; then
+              export SSH_AUTH_SOCK="$sock"
+            fi
           fi
         fi
 
-        # use ble.sh
-        source ${pkgs.blesh}/share/blesh/ble.sh
-        bleopt term_index_colors='0'
+        if [ "$TERM" != "dumb" ] && [ "$TERM" != "linux" ]; then
+          # use ble.sh
+          source ${pkgs.blesh}/share/blesh/ble.sh
+          bleopt term_index_colors='0'
+
+          # use starship
+          eval "$(${lib.getExe config.programs.starship.package} init bash --print-full-init)"
+        fi
+
         export NIXPKGS_ALLOW_UNFREE=1
       '';
     };

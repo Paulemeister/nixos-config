@@ -47,7 +47,7 @@ in
 
       starship = {
         enable = true;
-        enableBashIntegration = true;
+        enableBashIntegration = false;
         settings = {
           add_newline = false;
           command_timeout = 1300;
