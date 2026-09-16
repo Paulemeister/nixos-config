@@ -56,6 +56,7 @@ in
 
       # Enable the GNOME Desktop Environment.
       services.displayManager.gdm.enable = true;
+      security.pam.services.gdm.enableGnomeKeyring = true;
       services.desktopManager.gnome.enable = true;
       environment.gnome.excludePackages = with pkgs; [
         gnome-maps
