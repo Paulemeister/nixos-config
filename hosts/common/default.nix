@@ -45,6 +45,7 @@ in
       services.journald = {
         extraConfig = "SystemMaxUse=1G";
       };
+      boot.loader.systemd-boot.configurationLimit = 10;
     }
     (mkIf cfg.gui {
       fonts.enableDefaultPackages = true;

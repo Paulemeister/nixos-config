@@ -38,7 +38,7 @@ in
         clang-tools
         rustc
         cargo
-
+        rustfmt
       ];
 
       programs.dbeaver.enable = true;
