@@ -38,7 +38,10 @@ in
         clang-tools
         rustc
         cargo
+
       ];
+
+      programs.dbeaver.enable = true;
 
       programs.antigravity.enable = false;
 

@@ -24,7 +24,9 @@ in
       virtualisation.podman = {
         enable = true;
         dockerCompat = true;
+
       };
+      environment.systemPackages = [ pkgs.podman-compose ];
 
       # virtualisation.virtualbox.host.enable = true;
     }
