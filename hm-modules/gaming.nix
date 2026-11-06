@@ -37,6 +37,7 @@ in
           # method = "symlink";
         }
         ".local/share/bottles"
+        ".local/share/PrismLauncher"
       ];
     })
   ]);
