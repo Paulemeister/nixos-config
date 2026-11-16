@@ -40,6 +40,12 @@ in
       # (Optional but recommended for faster boot with VPNs)
       systemd.network.wait-online.enable = false;
       boot.initrd.systemd.network.wait-online.enable = false;
+
+      # disable service by default
+      systemd.services.tailscaled = {
+        wantedBy = lib.mkForce [ ];
+        before = lib.mkForce [ "shutdown.target" ];
+      };
     }
 
   ]);
