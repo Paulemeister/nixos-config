@@ -46,6 +46,12 @@ in
           "quad9-doh-ip4-port443-nofilter-pri"
           "quad9-doh-ip6-port443-nofilter-pri"
         ];
+        bootstrap_resolvers = [
+          "9.9.9.11:53"
+          "8.8.8.8:53"
+        ];
+
+        ignore_system_dns = false;
       };
     };
   };
