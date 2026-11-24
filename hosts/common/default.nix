@@ -24,6 +24,7 @@ in
     {
 
       nixpkgs.overlays = [
+        inputs.nix-vscode-extensions.overlays.default
         (import ../../overlays/unstable.nix inputs)
         (import ../../overlays/custom.nix)
         (import ../../overlays/popshell.nix)

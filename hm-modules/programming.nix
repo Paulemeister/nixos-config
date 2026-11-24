@@ -67,6 +67,7 @@ in
               # Python
               ms-python.python
               ms-python.vscode-pylance
+              ms-python.mypy-type-checker
               ms-python.debugpy
               ms-python.black-formatter
               ms-toolsai.jupyter
@@ -75,6 +76,8 @@ in
               mechatroner.rainbow-csv
               streetsidesoftware.code-spell-checker
               myriad-dreamin.tinymist
+              tomoki1207.pdf
+              redhat.vscode-yaml
               # Nix
               arrterian.nix-env-selector
               jnoortheen.nix-ide
@@ -82,9 +85,12 @@ in
               rust-lang.rust-analyzer
               vadimcn.vscode-lldb
               tamasfe.even-better-toml
+              fill-labs.dependi
               # RWTH
               ms-vscode-remote.remote-ssh
               fortran-lang.linter-gfortran
+              # SQL
+              pkgs.nix-vscode-extensions.vscode-marketplace.renesaarsoo.sql-formatter-vsc
             ];
             enableExtensionUpdateCheck = false;
             enableUpdateCheck = false;
@@ -108,6 +114,10 @@ in
               "python.analysis.diagnosticSeverityOverrides" = {
                 "reportUnknownMemberType" = "none";
                 "reportUnknownArgumentType" = "none";
+              };
+
+              "rust-analyzer.server.extraEnv" = {
+                RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
               };
 
             };
